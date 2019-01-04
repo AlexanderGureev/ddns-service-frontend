@@ -1,16 +1,19 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import Header from "./blocks/Header";
+import Content from "./blocks/Content";
 
 import "antd/dist/antd.css";
 
-
 const App = () => {
   return (
-    <Header>
-      <Header.LeftPart />
-      <Header.RightPart />
-    </Header>
+    <Fragment>
+      <Header>
+        <Header.LeftPart />
+        <Header.RightPart />
+      </Header>
+      <Content />
+    </Fragment>
   );
 };
 
