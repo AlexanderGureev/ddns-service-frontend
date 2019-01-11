@@ -1,19 +1,23 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import Header from "./blocks/Header";
-import Content from "./blocks/Content";
+import React, { useRef } from "react";
+import Header from "./components/Header";
+import Content from "./components/Content";
+import Footer from "./components/Footer";
+import { Parallax } from "react-spring/addons";
+import { AppContext } from "./Context";
 
 import "antd/dist/antd.css";
 
 const App = () => {
+  let parallaxLayer = useRef(null);
+
   return (
-    <Fragment>
-      <Header>
-        <Header.LeftPart />
-        <Header.RightPart />
-      </Header>
-      <Content />
-    </Fragment>
+    <AppContext.Provider value={{ parallaxLayer }}>
+      <Parallax pages={3.2} scrolling={true} ref={parallaxLayer}>
+        <Header />
+        <Content />
+        <Footer />
+      </Parallax>
+    </AppContext.Provider>
   );
 };
 
