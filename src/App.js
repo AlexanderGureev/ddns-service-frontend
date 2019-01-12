@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <AppContext.Provider value={{ parallaxLayer }}>
-      <Parallax pages={3.2} scrolling={true} ref={parallaxLayer}>
+      <Parallax pages={3.2} ref={parallaxLayer}>
         <Header />
         <Content />
         <Footer />

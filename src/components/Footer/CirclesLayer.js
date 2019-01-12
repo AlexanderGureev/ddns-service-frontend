@@ -5,8 +5,8 @@ const CirclesLayer = () => {
   return (
     <>
       <StyledParallaxLayerCircle
-        size={321}
-        top={10}
+        size={300}
+        top={15}
         left={90}
         offset={1.6}
         speed={0.2}
@@ -23,14 +23,14 @@ const CirclesLayer = () => {
         top={15}
         left={65}
         offset={1.6}
-        speed={0.2}
+        speed={0.3}
       />
       <StyledParallaxLayerCircle
         size={34}
         top={25}
         left={75}
         offset={1.6}
-        speed={0.1}
+        speed={0.15}
       />
     </>
   );
