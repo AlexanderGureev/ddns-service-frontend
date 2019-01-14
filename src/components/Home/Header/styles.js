@@ -68,6 +68,10 @@ export const TopMenu = styled.div`
   align-items: center;
   height: 100%;
   margin-right: 80px;
+
+  @media (max-width: 1300px) {
+    margin-right: 40px;
+  }
 `;
 const TopMenuItem = styled.p`
   a {
@@ -77,6 +81,10 @@ const TopMenuItem = styled.p`
     &:hover {
       color: ${props =>
         props.btn ? "rgba(0,0,0, .9)" : "rgba(255,255,255, .3)"};
+    }
+
+    @media (max-width: 1300px) {
+      padding: 5px 10px;
     }
   }
   position: relative;
@@ -96,13 +104,10 @@ const TopMenuItem = styled.p`
 
   @media (max-width: 1600px) {
     font-size: 16px;
-    margin-right: 0px;
   }
 
   @media (max-width: 1200px) {
     font-size: 14px;
-    margin-right: 0px;
-    padding: 5px 10px;
   }
 `;
 TopMenu.Item = TopMenuItem;
@@ -204,7 +209,7 @@ export const HeaderButton = styled.button`
 
 export const ScrollBtn = styled.div`
   position: absolute;
-  bottom: 20px;
+  bottom: ${props => props.bottom ? "80px" : "20px" };
   left: 48.5%;
   border-radius: 50%;
   background: linear-gradient(180deg, #2c3d89, #3b51b2);
@@ -222,7 +227,7 @@ export const ScrollBtn = styled.div`
     left: 10px;
     top: 10px;
     position: absolute;
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.25));
+    transform: rotate(${props => props.bottom ? "180deg" : 0});
     @media (max-width: 1200px) {
       width: 30px;
       height: 30px;

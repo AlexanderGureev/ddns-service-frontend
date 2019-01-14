@@ -11,7 +11,7 @@ const Header = () => {
       <Menu />
       <LeftPart />
       <RightPart />
-      <ScrollButton />
+      <ScrollButton anchor={"formSection"}/>
     </HeaderWrapper>
   );
 };

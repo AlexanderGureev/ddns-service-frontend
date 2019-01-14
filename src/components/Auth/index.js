@@ -9,6 +9,7 @@ import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import ResetPasswordForm from "./ResetPasswordForm";
 import CircleLayer from "./CircleLayer";
+import GoToHomeBtn from "./GoToHomeBtn";
 
 const Auth = () => {
   let parallaxLayer = useRef();
@@ -16,7 +17,7 @@ const Auth = () => {
   return (
     <Parallax
       pages={3}
-      scrolling={true}
+      scrolling={false}
       horizontal={true}
       ref={parallaxLayer}
       style={{ height: "100vh", minHeight: "620px" }}
@@ -46,18 +47,22 @@ const Auth = () => {
       />
 
       <ParallaxPositioningLayer offset={0} speed={0}>
-        <SignUpForm />
+        <SignUpForm parallaxLayer={parallaxLayer} />
       </ParallaxPositioningLayer>
 
       <ParallaxPositioningLayer offset={1} speed={0}>
-        <SignInForm />
+        <SignInForm parallaxLayer={parallaxLayer} />
       </ParallaxPositioningLayer>
 
       <ParallaxPositioningLayer offset={2} speed={0}>
-        <ResetPasswordForm />
+        <ResetPasswordForm parallaxLayer={parallaxLayer} />
       </ParallaxPositioningLayer>
 
       <CircleLayer />
+
+      <ParallaxPositioningLayer width={160} height={160} offset={0} speed={-1} order={2}>
+        <GoToHomeBtn />
+      </ParallaxPositioningLayer>
     </Parallax>
   );
 };

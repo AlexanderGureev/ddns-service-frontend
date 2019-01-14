@@ -10,7 +10,8 @@ import {
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
 
-const ResetPasswordForm = () => {
+const ResetPasswordForm = (props) => {
+  const { parallaxLayer } = props;
   let isLarge = useMedia("(min-width: 860px)");
   let isBig = useMedia("(min-width: 1500px)");
  
@@ -33,8 +34,8 @@ const ResetPasswordForm = () => {
               <Form.Input placeholder="Email" />
               <Form.Button>Reset password</Form.Button>
               <Form.TextContainer>
-                <Form.TextContainer.Text>Sign in</Form.TextContainer.Text>
-                <Form.TextContainer.Text>
+                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(1) }>Sign in</Form.TextContainer.Text>
+                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(0) }>
                   Not a member? Sign up
                 </Form.TextContainer.Text>
               </Form.TextContainer>

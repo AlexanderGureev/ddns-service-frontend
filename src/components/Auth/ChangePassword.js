@@ -4,6 +4,7 @@ import { StyledParallaxLayer, ParallaxPositioningLayer } from "./styles";
 import layerBg from "./img/layer-bg.svg";
 import ChangePasswordForm from "./ChangePasswordForm";
 import CircleLayer from "./CircleLayer";
+import GoToHomeBtn from "./GoToHomeBtn";
 
 const Auth = () => {
   let parallaxLayer = useRef();
@@ -11,7 +12,7 @@ const Auth = () => {
   return (
     <Parallax
       pages={1}
-      scrolling={true}
+      scrolling={false}
       horizontal={true}
       ref={parallaxLayer}
       style={{ height: "100vh", minHeight: "620px" }}
@@ -29,6 +30,10 @@ const Auth = () => {
       </ParallaxPositioningLayer>
 
       <CircleLayer />
+
+      <ParallaxPositioningLayer width={160} height={160} offset={0} speed={-1} order={2}>
+        <GoToHomeBtn />
+      </ParallaxPositioningLayer>
     </Parallax>
   );
 };

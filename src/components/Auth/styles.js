@@ -1,9 +1,12 @@
 import { Checkbox } from "antd";
 import styled from "styled-components";
 import { ParallaxLayer } from "react-spring/addons";
+import { Link } from "react-router-dom";
 
 export const ParallaxPositioningLayer = styled(ParallaxLayer)`
   z-index: ${props => props.order || 1 };
+  width: ${props => `${props.width}px !important`};
+  height: ${props => `${props.width}px !important`};
 `;
 
 export const StyledParallaxLayer = styled(ParallaxLayer)`
@@ -369,6 +372,64 @@ const Text = styled.p`
   }
 `;
 
+export const BtnContainer = styled.div`
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  left: -50%;
+  top: -50%;
+  box-shadow: 5px 5px 25px rgba(0,0,0, .3);
+  background: linear-gradient(
+    140deg,
+    #BDB2F8,
+    #100689
+  );
+  position: relative;
+  transition: .3s linear;
+  cursor: pointer;
+
+  @media (max-width: 560px) {
+    width: 140px;
+    height: 140px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    transform: translate(10px, 10px);
+
+    > img {
+      transform: scale(1.1);
+      
+    }
+  }
+`;
+const Icon = styled.img.attrs(( props ) => ({
+  src: props.src
+}))`
+  width: 46px;
+    height: auto;
+    position: absolute;
+    top: 56%;
+    left: 55%;
+    transition: .3s ease;
+    filter: drop-shadow(0px 5px 15px rgba(0,0,0,1));
+
+    @media (max-width: 560px) {
+    width: 32px;
+    top: 63%;
+    left: 62%;
+  }
+`;
+
+const BtnContainerLink = styled(Link)`
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+BtnContainer.Icon = Icon;
+BtnContainer.Link = BtnContainerLink;
 FormHeader.Caption = Caption;
 Caption.Text = CaptionText;
 TextContainer.Text = Text;

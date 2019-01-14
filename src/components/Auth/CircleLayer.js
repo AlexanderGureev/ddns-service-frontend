@@ -2,24 +2,27 @@ import React from "react";
 import {
   StyledParallaxLayerCircle,
 } from "./styles";
+import { useMedia } from "react-use";
 
 const CircleLayer = () => {
+  let isSmall = useMedia("(min-width: 760px)");
+
   return (
     <>
-      <StyledParallaxLayerCircle
+      {isSmall && <StyledParallaxLayerCircle
         color1={"#6EE8FD"}
         color2={"rgba(44,166,187, .55)"}
         size={160}
         top={5}
-        offset={0.1}
+        offset={0.12}
         speed={-1}
-      />
+      /> }
       <StyledParallaxLayerCircle
         color1={"#6EE8FD"}
         color2={"rgba(44,166,187, .55)"}
         size={50}
-        top={5}
-        offset={0.05}
+        top={6}
+        offset={0.07}
         speed={-1}
       />
       <StyledParallaxLayerCircle
@@ -27,7 +30,7 @@ const CircleLayer = () => {
         color2={"rgba(44,166,187, .55)"}
         size={15}
         top={2}
-        offset={0.1}
+        offset={0.2}
         speed={-1}
       />
 
@@ -48,14 +51,14 @@ const CircleLayer = () => {
         speed={-1}
       />
 
-      <StyledParallaxLayerCircle
+      {isSmall && <StyledParallaxLayerCircle
         color1={"#6EE8FD"}
         color2={"rgba(44,166,187, .55)"}
         size={40}
         top={7}
         offset={0.62}
         speed={-1}
-      />
+      /> }
       <StyledParallaxLayerCircle
         color1={"#6EE8FD"}
         color2={"rgba(44,166,187, .55)"}
@@ -64,22 +67,22 @@ const CircleLayer = () => {
         offset={0.55}
         speed={-1}
       />
-      <StyledParallaxLayerCircle
+      {isSmall && <StyledParallaxLayerCircle
         color1={"#6EE8FD"}
         color2={"rgba(44,166,187, .55)"}
         size={15}
         top={2}
         offset={0.65}
         speed={-1}
-      />
-      <StyledParallaxLayerCircle
+      /> }
+      {isSmall && <StyledParallaxLayerCircle
         color1={"#6EE8FD"}
         color2={"rgba(44,166,187, .55)"}
         size={25}
         top={5}
         offset={0.67}
         speed={-1}
-      />
+      /> }
 
       <StyledParallaxLayerCircle
         color1={"#6EE8FD"}

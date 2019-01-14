@@ -7,6 +7,7 @@ import {
   FooterBottomContainer
 } from "./styles";
 import { useMedia } from "react-use";
+import ScrollButton from "../Header/ScrollButton";
 
 const FooterMid = () => {
   let isLarge = useMedia("(min-width: 1200px)");
@@ -29,6 +30,7 @@ const FooterMid = () => {
             </MiniLogo>
           </Col>
         </Row>
+        <ScrollButton bottom />
       </FooterBottomContainer>
   );
 };
