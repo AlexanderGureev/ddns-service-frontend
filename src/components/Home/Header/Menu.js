@@ -25,7 +25,7 @@ const Menu = () => {
         visible={visible}
       >
         <Link to="/">Home</Link>
-        <Link to="/auth/">Sign up</Link>
+        <Link to="/login/">Sign up</Link>
         <p>Log in</p>
         <p>Dynamic DNS</p>
         <p>Managed DNS</p>
@@ -49,7 +49,7 @@ const Menu = () => {
             <Link to="/">Services</Link>
           </TopMenu.Item>
           <TopMenu.Item btn>
-            <Link to="/auth/">Sign up</Link>
+            <Link to="/login/">Sign up</Link>
           </TopMenu.Item>
         </TopMenu>
       )}
