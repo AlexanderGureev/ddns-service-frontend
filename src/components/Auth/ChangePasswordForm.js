@@ -1,4 +1,6 @@
 import React from "react";
+import { ParallaxLayer } from "react-spring/addons";
+import { useMedia } from "react-use";
 import changeFormBg from "./img/bg-form-change.svg";
 import {
   LayerContainer,
@@ -7,12 +9,10 @@ import {
   RightPartForm,
   Form
 } from "./styles";
-import { ParallaxLayer } from "react-spring/addons";
-import { useMedia } from "react-use";
 
 const ResetPassword = () => {
-  let isLarge = useMedia("(min-width: 860px)");
-  let isBig = useMedia("(min-width: 1500px)");
+  const isLarge = useMedia("(min-width: 860px)");
+  const isBig = useMedia("(min-width: 1500px)");
 
   return (
     <ParallaxLayer offset={0} speed={0}>

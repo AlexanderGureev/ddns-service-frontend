@@ -1,4 +1,6 @@
 import React from "react";
+import { ParallaxLayer } from "react-spring/addons";
+import { useMedia } from "react-use";
 import resetFormBg from "./img/bg-form-reset.svg";
 import {
   LayerContainer,
@@ -7,14 +9,12 @@ import {
   RightPartForm,
   Form
 } from "./styles";
-import { ParallaxLayer } from "react-spring/addons";
-import { useMedia } from "react-use";
 
-const ResetPasswordForm = (props) => {
+const ResetPasswordForm = props => {
   const { parallaxLayer } = props;
-  let isLarge = useMedia("(min-width: 860px)");
-  let isBig = useMedia("(min-width: 1500px)");
- 
+  const isLarge = useMedia("(min-width: 860px)");
+  const isBig = useMedia("(min-width: 1500px)");
+
   return (
     <ParallaxLayer offset={0.6} speed={0.3}>
       <LayerContainer>
@@ -34,8 +34,14 @@ const ResetPasswordForm = (props) => {
               <Form.Input placeholder="Email" />
               <Form.Button>Reset password</Form.Button>
               <Form.TextContainer>
-                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(1) }>Sign in</Form.TextContainer.Text>
-                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(0) }>
+                <Form.TextContainer.Text
+                  onClick={() => parallaxLayer.current.scrollTo(1)}
+                >
+                  Sign in
+                </Form.TextContainer.Text>
+                <Form.TextContainer.Text
+                  onClick={() => parallaxLayer.current.scrollTo(0)}
+                >
                   Not a member? Sign up
                 </Form.TextContainer.Text>
               </Form.TextContainer>

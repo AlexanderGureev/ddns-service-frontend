@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { Drawer } from "antd";
 
 export const HeaderWrapper = styled.div`
@@ -31,7 +31,7 @@ export const MenuWrapper = styled.div`
   z-index: 1;
 `;
 
-export const СollapseMenuWrapper = styled(Drawer)`
+export const CollapseMenuWrapper = styled(Drawer)`
   .ant-drawer-content {
     background: url(${props => props.src}) no-repeat center top;
     background-size: cover;
@@ -209,7 +209,7 @@ export const HeaderButton = styled.button`
 
 export const ScrollBtn = styled.div`
   position: absolute;
-  bottom: ${props => props.bottom ? "80px" : "20px" };
+  bottom: ${props => (props.bottom ? "80px" : "20px")};
   left: 48.5%;
   border-radius: 50%;
   background: linear-gradient(180deg, #2c3d89, #3b51b2);
@@ -227,7 +227,7 @@ export const ScrollBtn = styled.div`
     left: 10px;
     top: 10px;
     position: absolute;
-    transform: rotate(${props => props.bottom ? "180deg" : 0});
+    transform: rotate(${props => (props.bottom ? "180deg" : 0)});
     @media (max-width: 1200px) {
       width: 30px;
       height: 30px;

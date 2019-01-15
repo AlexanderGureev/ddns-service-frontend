@@ -4,14 +4,12 @@ import FooterMid from "./FooterMid";
 import FooterBottom from "./FooterBottom";
 import { FooterContainer } from "./styles";
 
-const Footer = props => {
-  return (
-    <FooterContainer>
-      <FooterTop />
-      <FooterMid />
-      <FooterBottom />
-    </FooterContainer>
-  );
-};
+const Footer = props => (
+  <FooterContainer>
+    <FooterTop />
+    <FooterMid />
+    <FooterBottom />
+  </FooterContainer>
+);
 
 export default Footer;

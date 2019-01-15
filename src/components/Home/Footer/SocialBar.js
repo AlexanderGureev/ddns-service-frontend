@@ -5,15 +5,13 @@ import telegramIcon from "./img/telegram.svg";
 import vkIcon from "./img/vk.svg";
 import facebookIcom from "./img/facebook.svg";
 
-const SocialBar = () => {
-  return (
-    <SocialContainer>
-      <SocialContainer.Icon src={vkIcon} />
-      <SocialContainer.Icon src={facebookIcom} />
-      <SocialContainer.Icon src={twitterIcon} />
-      <SocialContainer.Icon src={telegramIcon} />
-    </SocialContainer>
-  )
-}
+const SocialBar = () => (
+  <SocialContainer>
+    <SocialContainer.Icon src={vkIcon} />
+    <SocialContainer.Icon src={facebookIcom} />
+    <SocialContainer.Icon src={twitterIcon} />
+    <SocialContainer.Icon src={telegramIcon} />
+  </SocialContainer>
+);
 
 export default SocialBar;

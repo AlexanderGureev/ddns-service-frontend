@@ -1,10 +1,10 @@
 import { Layout, Menu, Icon } from "antd";
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
 import sideMenuBg from "./img/sidemenu-bg.svg";
 import logo from "./img/sidemenu-logo.svg";
 import miniLogo from "./img/sidemenu-mini-logo.svg";
-import { Link } from "react-router-dom";
 import dashboardIcon from "./img/dashboard.svg";
 import dnsIcon from "./img/dns.svg";
 import settingsIcon from "./img/settings.svg";

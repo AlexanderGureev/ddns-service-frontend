@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContentWrapper = styled.div`
-  background: #2868D7 url(${props => props.src}) no-repeat center bottom;
+  background: #2868d7 url(${props => props.src}) no-repeat center bottom;
   width: 100%;
   min-height: 1150px;
   z-index: 10;

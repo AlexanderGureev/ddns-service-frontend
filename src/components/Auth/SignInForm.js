@@ -1,4 +1,6 @@
 import React from "react";
+import { ParallaxLayer } from "react-spring/addons";
+import { useMedia } from "react-use";
 import signInFormBg from "./img/bg-form-signin.svg";
 import twitterIcon from "./img/soc-twitter.svg";
 import vkIcon from "./img/soc-vk.svg";
@@ -10,19 +12,17 @@ import {
   RightPartForm,
   Form
 } from "./styles";
-import { ParallaxLayer } from "react-spring/addons";
-import { useMedia } from "react-use";
 
-const SignInForm = (props) => {
+const SignInForm = props => {
   const { parallaxLayer } = props;
-  let isLarge = useMedia("(min-width: 860px)");
-  let isSmall = useMedia("(min-width: 560px)");
+  const isLarge = useMedia("(min-width: 860px)");
+  const isSmall = useMedia("(min-width: 560px)");
 
   return (
     <ParallaxLayer offset={0.3} speed={0.3}>
       <LayerContainer>
         <FormWrapper width={isSmall ? 65 : 80}>
-          {isLarge && <LeftPartForm src={signInFormBg} /> }
+          {isLarge && <LeftPartForm src={signInFormBg} />}
           <RightPartForm>
             <Form>
               <Form.Header>Sign in</Form.Header>
@@ -41,10 +41,14 @@ const SignInForm = (props) => {
               <Form.Input placeholder="Password" />
               <Form.Button>Sign in</Form.Button>
               <Form.TextContainer>
-                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(0) }>
+                <Form.TextContainer.Text
+                  onClick={() => parallaxLayer.current.scrollTo(0)}
+                >
                   Not a member? Sign up
                 </Form.TextContainer.Text>
-                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(2) }>
+                <Form.TextContainer.Text
+                  onClick={() => parallaxLayer.current.scrollTo(2)}
+                >
                   Recover my password
                 </Form.TextContainer.Text>
               </Form.TextContainer>

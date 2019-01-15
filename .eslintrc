@@ -1,0 +1,18 @@
+{
+  "extends": ["airbnb", "react-app", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "no-param-reassign": 0,
+    "no-nested-ternary": 0,
+    "react/jsx-pascal-case": 2,
+    "react/prop-types": 0,
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error"
+  }
+}

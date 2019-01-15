@@ -1,22 +1,22 @@
 import React, { useState } from "react";
+import { useMedia } from "react-use";
+import { Link } from "react-router-dom";
+import { MenuBtn, CollapseMenuWrapper, MenuWrapper, TopMenu } from "./styles";
 import btnBlack from "./img/menu-black.svg";
 import btnWhite from "./img/menu-white.svg";
 import menuImg from "./img/menu-bg.svg";
-import { СollapseMenuWrapper, MenuBtn, MenuWrapper, TopMenu } from "./styles";
-import { useMedia } from "react-use";
-import { Link } from "react-router-dom";
 
 const Menu = () => {
   const [visible, setVisible] = useState(false);
   const changeStateMenu = () => setVisible(!visible);
   const closeMenu = () => setVisible(false);
 
-  let isSmall = useMedia("(max-width: 900px)");
-  let isMedium = useMedia("(min-width: 1100px)");
+  const isSmall = useMedia("(max-width: 900px)");
+  const isMedium = useMedia("(min-width: 1100px)");
 
   return (
     <MenuWrapper>
-      <СollapseMenuWrapper
+      <CollapseMenuWrapper
         width={350}
         src={menuImg}
         placement="left"
@@ -32,7 +32,7 @@ const Menu = () => {
         <Link to="/managed/">Domains</Link>
         <Link to="/managed/">Services</Link>
         <Link to="/managed/">Support</Link>
-      </СollapseMenuWrapper>
+      </CollapseMenuWrapper>
       <MenuBtn src={isSmall ? btnWhite : btnBlack} onClick={changeStateMenu} />
       {isMedium && (
         <TopMenu>

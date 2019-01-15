@@ -8,7 +8,7 @@ import ContentColumn from "./Column";
 import { ContentContainer } from "./styles";
 
 const Description = () => {
-  let isWide = useMedia("(min-width: 816px)");
+  const isWide = useMedia("(min-width: 816px)");
   return (
     <ContentContainer>
       <Row type="flex" justify="center">

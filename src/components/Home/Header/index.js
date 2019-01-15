@@ -5,15 +5,13 @@ import Menu from "./Menu";
 import { HeaderWrapper } from "./styles";
 import ScrollButton from "./ScrollButton";
 
-const Header = () => {
-  return (
-    <HeaderWrapper>
-      <Menu />
-      <LeftPart />
-      <RightPart />
-      <ScrollButton anchor={"formSection"}/>
-    </HeaderWrapper>
-  );
-};
+const Header = () => (
+  <HeaderWrapper>
+    <Menu />
+    <LeftPart />
+    <RightPart />
+    <ScrollButton anchor="formSection" />
+  </HeaderWrapper>
+);
 
 export default Header;

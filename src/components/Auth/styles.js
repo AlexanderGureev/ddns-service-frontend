@@ -4,7 +4,7 @@ import { ParallaxLayer } from "react-spring/addons";
 import { Link } from "react-router-dom";
 
 export const ParallaxPositioningLayer = styled(ParallaxLayer)`
-  z-index: ${props => props.order || 1 };
+  z-index: ${props => props.order || 1};
   width: ${props => `${props.width}px !important`};
   height: ${props => `${props.width}px !important`};
 `;
@@ -57,11 +57,12 @@ export const FormWrapper = styled.div`
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
   width: ${props => `${props.width}%`};
   background: white;
-  position: relative; 
+  position: relative;
 `;
 
 export const LeftPartForm = styled.div`
-  background: rgb(39,37,116)	url(${props => props.src}) no-repeat center center;
+  background: rgb(39, 37, 116) url(${props => props.src}) no-repeat center
+    center;
   background-size: cover;
   position: absolute;
   width: 50%;
@@ -204,7 +205,7 @@ const FooterSocial = styled(HeaderSocial)`
     }
     @media (max-width: 860px) {
       width: 40%;
-      right: 30px
+      right: 30px;
     }
     @media (max-width: 560px) {
       width: 35%;
@@ -276,12 +277,12 @@ const CheckBoxContainer = styled.div`
 `;
 const FormCheckBox = styled(Checkbox)`
   .ant-checkbox {
-    filter: drop-shadow(0 5px 5px rgba(0,0,0, .2));
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
   }
   .ant-checkbox-inner {
     border: none;
     border-radius: 5px;
-    box-shadow: 0px 0px 0px 4px rgba(0,0,0,.1);
+    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
 
     &::after {
       left: 5.57142857px;
@@ -308,7 +309,6 @@ const Label = styled.p`
 
   @media (max-width: 560px) {
     font-size: 10px;
-    
   }
 `;
 
@@ -335,7 +335,6 @@ const Button = styled.button`
     padding: 10px 0px;
   }
 `;
-
 
 const TextContainer = styled.div`
   display: flex;
@@ -378,14 +377,10 @@ export const BtnContainer = styled.div`
   border-radius: 50%;
   left: -50%;
   top: -50%;
-  box-shadow: 5px 5px 25px rgba(0,0,0, .3);
-  background: linear-gradient(
-    140deg,
-    #BDB2F8,
-    #100689
-  );
+  box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(140deg, #bdb2f8, #100689);
   position: relative;
-  transition: .3s linear;
+  transition: 0.3s linear;
   cursor: pointer;
 
   @media (max-width: 560px) {
@@ -399,22 +394,21 @@ export const BtnContainer = styled.div`
 
     > img {
       transform: scale(1.1);
-      
     }
   }
 `;
-const Icon = styled.img.attrs(( props ) => ({
+const Icon = styled.img.attrs(props => ({
   src: props.src
 }))`
   width: 46px;
-    height: auto;
-    position: absolute;
-    top: 56%;
-    left: 55%;
-    transition: .3s ease;
-    filter: drop-shadow(0px 5px 15px rgba(0,0,0,1));
+  height: auto;
+  position: absolute;
+  top: 56%;
+  left: 55%;
+  transition: 0.3s ease;
+  filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 1));
 
-    @media (max-width: 560px) {
+  @media (max-width: 560px) {
     width: 32px;
     top: 63%;
     left: 62%;

@@ -1,4 +1,6 @@
 import React from "react";
+import { ParallaxLayer } from "react-spring/addons";
+import { useMedia } from "react-use";
 import signUpFormBg from "./img/bg-form-signup.svg";
 import twitterIcon from "./img/soc-twitter.svg";
 import vkIcon from "./img/soc-vk.svg";
@@ -10,21 +12,18 @@ import {
   RightPartForm,
   Form
 } from "./styles";
-import { ParallaxLayer } from "react-spring/addons";
-import { useMedia } from "react-use";
 
-
-const SignUpForm = (props) => {
+const SignUpForm = props => {
   const { parallaxLayer } = props;
 
-  let isLarge = useMedia("(min-width: 860px)");
-  let isSmall = useMedia("(min-width: 560px)");
+  const isLarge = useMedia("(min-width: 860px)");
+  const isSmall = useMedia("(min-width: 560px)");
 
   return (
     <ParallaxLayer offset={0} speed={0.3}>
       <LayerContainer>
         <FormWrapper width={isSmall ? 70 : 90}>
-          {isLarge && <LeftPartForm src={signUpFormBg} /> }
+          {isLarge && <LeftPartForm src={signUpFormBg} />}
           <RightPartForm>
             <Form>
               <Form.Header>Create Your Account</Form.Header>
@@ -57,7 +56,9 @@ const SignUpForm = (props) => {
               </Form.CheckBoxContainer>
               <Form.Button>Sign up</Form.Button>
               <Form.TextContainer>
-                <Form.TextContainer.Text onClick={ () => parallaxLayer.current.scrollTo(1) }>
+                <Form.TextContainer.Text
+                  onClick={() => parallaxLayer.current.scrollTo(1)}
+                >
                   Already registered? Sign in
                 </Form.TextContainer.Text>
               </Form.TextContainer>

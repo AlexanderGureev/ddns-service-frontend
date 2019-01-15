@@ -1,10 +1,6 @@
 import React from "react";
 import Panel from "./Panel";
 
-const Managed = () => {
-  return (
-    <Panel />
-  )
-}
+const Managed = () => <Panel />;
 
 export default Managed;

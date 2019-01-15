@@ -1,11 +1,16 @@
 import React from "react";
+import { useMedia } from "react-use";
 import logoHeader from "./img/header-logo.svg";
 import logoHeaderWhite from "./img/header-logo-white.svg";
-import { ContentWrapper, HeaderContentText, HeaderButton, Logo } from "./styles";
-import { useMedia } from "react-use";
+import {
+  ContentWrapper,
+  HeaderContentText,
+  HeaderButton,
+  Logo
+} from "./styles";
 
 const HeaderContent = () => {
-  let isSmall = useMedia("(max-width: 900px)");
+  const isSmall = useMedia("(max-width: 900px)");
 
   return (
     <ContentWrapper>
