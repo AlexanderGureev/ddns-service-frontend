@@ -26,27 +26,27 @@ const Menu = () => {
       >
         <Link to="/">Home</Link>
         <Link to="/login/">Sign up</Link>
-        <p>Log in</p>
-        <p>Dynamic DNS</p>
-        <p>Managed DNS</p>
-        <p>Domains</p>
-        <p>Services</p>
-        <p>Support</p>
+        <Link to="/login/">Log in</Link>
+        <Link to="/managed/">Dynamic DNS</Link>
+        <Link to="/managed/">Managed DNS</Link>
+        <Link to="/managed/">Domains</Link>
+        <Link to="/managed/">Services</Link>
+        <Link to="/managed/">Support</Link>
       </СollapseMenuWrapper>
       <MenuBtn src={isSmall ? btnWhite : btnBlack} onClick={changeStateMenu} />
       {isMedium && (
         <TopMenu>
           <TopMenu.Item>
-            <Link to="/">Dynamic DNS</Link>
+            <Link to="/managed/">Dynamic DNS</Link>
           </TopMenu.Item>
           <TopMenu.Item>
-            <Link to="/">Managed DNS</Link>
+            <Link to="/managed/">Managed DNS</Link>
           </TopMenu.Item>
           <TopMenu.Item>
-            <Link to="/">Domains</Link>
+            <Link to="/managed/">Domains</Link>
           </TopMenu.Item>
           <TopMenu.Item>
-            <Link to="/">Services</Link>
+            <Link to="/managed/">Services</Link>
           </TopMenu.Item>
           <TopMenu.Item btn>
             <Link to="/login/">Sign up</Link>

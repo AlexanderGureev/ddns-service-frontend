@@ -1,8 +1,9 @@
 import React from "react";
+import Panel from "./Panel";
 
 const Managed = () => {
   return (
-    <div>AUTH</div>
+    <Panel />
   )
 }
 
