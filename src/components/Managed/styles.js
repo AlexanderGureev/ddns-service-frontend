@@ -166,7 +166,7 @@ export const StyledHeader = styled(Header)`
   background: #fff;
   padding: 0;
   position: relative;
-  height: 75px;
+  height: 7vh;
 `;
 const HeaderContainer = styled.div`
   display: flex;
@@ -211,6 +211,9 @@ export const Search = styled(Input.Search)`
 `;
 
 export const SideMenuContainer = styled(Sider)`
+  overflow: auto;
+  position: fixed;
+  left: 0;
   height: 100vh;
   min-height: 600px;
   background: url(${props => props.src}) no-repeat center top !important;
@@ -230,7 +233,8 @@ export const SideMenuContainer = styled(Sider)`
 export const StyledContent = styled(Content)`
   background: #eeeeee url(${props => props.src}) no-repeat center center;
   background-size: cover;
-  min-height: 280px;
+  height: 93vh;
+  min-height: 700px;
 `;
 
 LogoContainer.Text = Text;
@@ -251,3 +255,164 @@ ShortProfile.Container = Container;
 ShortProfile.Avatar = ProfileAvatar;
 ShortProfile.Name = ProfileName;
 ShortProfile.Email = ProfileEmail;
+
+export const Main = styled.div`
+  padding: 20px;
+`;
+
+export const ActiveHostnamesWrapper = styled.div`
+  background: linear-gradient(135deg, #586cc4, #7343c7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 20px 50px;
+  border-radius: 5px;
+  margin: 20px 0;
+  filter: drop-shadow(5px 15px 15px rgba(0, 0, 0, 0.2));
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: url(${props => props.src}) no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  @media (max-width: 560px) {
+    padding: 20px;
+  }
+`;
+
+export const UpdatedHostnamesWrapper = styled(ActiveHostnamesWrapper)`
+  background: linear-gradient(135deg, #4e8bbc, #3e2ba7);
+`;
+
+export const ActiveHostnameContainer = styled.div``;
+
+export const UpdatedHostnameContainer = styled(ActiveHostnameContainer)``;
+
+const BlockCount = styled.span`
+  display: block;
+  color: #fff;
+  font-weight: 800;
+  font-size: 25px;
+  font-family: "Montserrat";
+  margin-bottom: 10px;
+
+  @media (max-width: 560px) {
+    font-size: 18px;
+  }
+`;
+const BlockTitle = styled.p`
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  font-family: "Montserrat";
+  margin: 0;
+
+  @media (max-width: 560px) {
+    font-size: 16px;
+  }
+`;
+
+const BlockText = styled(BlockTitle)`
+  font-weight: 400;
+  font-size: 16px;
+
+  @media (max-width: 560px) {
+    font-size: 14px;
+  }
+`;
+
+ActiveHostnameContainer.Title = BlockTitle;
+ActiveHostnameContainer.Text = BlockText;
+ActiveHostnameContainer.Count = BlockCount;
+
+UpdatedHostnameContainer.Title = BlockTitle;
+UpdatedHostnameContainer.Text = BlockText;
+UpdatedHostnameContainer.Count = BlockCount;
+
+export const AccountOverviewWrapper = styled.div`
+  border-radius: 5px;
+  background: linear-gradient(to right top, #348eb4, #255bc7);
+  filter: drop-shadow(5px 15px 15px rgba(0, 0, 0, 0.2));
+  margin: 20px 0;
+  padding: 20px 50px;
+  text-align: center;
+
+  @media (max-width: 560px) {
+    padding: 20px;
+  }
+`;
+
+export const AccountOverviewTitle = styled(BlockCount)``;
+
+export const ContentBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+`;
+
+const ContentBlockTitle = styled(BlockText)``;
+const ContentBlockText = styled(BlockTitle)``;
+
+export const Footer = styled.div`
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  padding: 10px 0;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Montserrat";
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.32);
+  }
+
+  @media (max-width: 560px) {
+    font-size: 12px;
+  }
+`;
+
+ContentBlock.Title = ContentBlockTitle;
+ContentBlock.Text = ContentBlockText;
+
+export const InfoBlock = styled.div`
+  padding: 20px 50px;
+  background: white;
+  filter: drop-shadow(5px 15px 15px rgba(0, 0, 0, 0.2));
+  border-radius: 5px;
+
+  @media (max-width: 560px) {
+    padding: 20px;
+  }
+`;
+
+const InfoBlockTitle = styled.p`
+  color: #707070;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Montserrat";
+`;
+const InfoBlockText = styled(InfoBlockTitle)`
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+
+  @media (max-width: 376px) {
+    font-size: 12px;
+  }
+`;
+
+InfoBlock.Title = InfoBlockTitle;
+InfoBlock.Text = InfoBlockText;
