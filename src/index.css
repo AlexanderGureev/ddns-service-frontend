@@ -26,3 +26,16 @@ body {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15) !important;
   border-radius: 5px !important;
 }
+
+.ant-form-item {
+  margin-bottom: 0px !important;
+  width: 100% !important;
+}
+.ant-form-item-control {
+  line-height: none;
+}
+.ant-form-item input,
+.ant-input,
+.ant-btn {
+  height: auto !important;
+}

@@ -3,7 +3,6 @@ import { Row, Col } from "antd";
 import { useMedia } from "react-use";
 import miniLogo from "./img/mini-logo.svg";
 import { MiniLogo, Copyright, FooterBottomContainer } from "./styles";
-import ScrollButton from "../Header/ScrollButton";
 
 const FooterMid = () => {
   const isLarge = useMedia("(min-width: 1200px)");
@@ -26,7 +25,6 @@ const FooterMid = () => {
           </MiniLogo>
         </Col>
       </Row>
-      <ScrollButton bottom />
     </FooterBottomContainer>
   );
 };

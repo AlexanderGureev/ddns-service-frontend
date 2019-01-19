@@ -25,31 +25,31 @@ const Menu = () => {
         visible={visible}
       >
         <Link to="/">Home</Link>
-        <Link to="/login/">Sign up</Link>
-        <Link to="/login/">Log in</Link>
-        <Link to="/managed/">Dynamic DNS</Link>
-        <Link to="/managed/">Managed DNS</Link>
-        <Link to="/managed/">Domains</Link>
-        <Link to="/managed/">Services</Link>
-        <Link to="/managed/">Support</Link>
+        <Link to="/login">Sign up</Link>
+        <Link to="/login">Log in</Link>
+        <Link to="/managed">Dynamic DNS</Link>
+        <Link to="/managed">Managed DNS</Link>
+        <Link to="/managed">Domains</Link>
+        <Link to="/managed">Services</Link>
+        <Link to="/managed">Support</Link>
       </CollapseMenuWrapper>
       <MenuBtn src={isSmall ? btnWhite : btnBlack} onClick={changeStateMenu} />
       {isMedium && (
         <TopMenu>
           <TopMenu.Item>
-            <Link to="/managed/">Dynamic DNS</Link>
+            <Link to="/managed">Dynamic DNS</Link>
           </TopMenu.Item>
           <TopMenu.Item>
-            <Link to="/managed/">Managed DNS</Link>
+            <Link to="/managed">Managed DNS</Link>
           </TopMenu.Item>
           <TopMenu.Item>
-            <Link to="/managed/">Domains</Link>
+            <Link to="/managed">Domains</Link>
           </TopMenu.Item>
           <TopMenu.Item>
-            <Link to="/managed/">Services</Link>
+            <Link to="/managed">Services</Link>
           </TopMenu.Item>
           <TopMenu.Item btn>
-            <Link to="/login/">Sign up</Link>
+            <Link to="/login">Sign up</Link>
           </TopMenu.Item>
         </TopMenu>
       )}

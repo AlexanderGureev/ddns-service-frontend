@@ -9,14 +9,13 @@ const Panel = props => {
   const [visible, setVisible] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [margin, setMargin] = useState(300);
+  const isMedium = useMedia("(max-width: 920px)");
 
   const toggleVisible = () => {
     setVisible(!visible);
     setMargin(visible ? 300 : 80);
   };
   const toggleClicked = () => setClicked(!clicked);
-
-  const isMedium = useMedia("(max-width: 920px)");
 
   if (isMedium && !visible && !clicked) {
     setVisible(true);
@@ -25,8 +24,8 @@ const Panel = props => {
 
   return (
     <Layout>
-      <SideMenu visible={visible} />
-      <Layout style={{ marginLeft: margin, transition: ".2s ease" }}>
+      <SideMenu visible={visible} {...props} />
+      <Layout style={{ marginLeft: margin }}>
         <Header toggleVisible={toggleVisible} toggleClicked={toggleClicked} />
         <Content {...props} />
       </Layout>

@@ -56,11 +56,11 @@ const MenuIcon = styled.img.attrs(props => ({
   height: auto;
 `;
 
-const MenuText = styled.span`
+const MenuLink = styled(Link)`
   font-size: 18px;
   font-family: "Montserrat";
   font-weight: 500;
-  color: #fff;
+  color: #fff !important;
   padding-left: 25px;
 `;
 export const MenuItem = styled(Menu.Item)`
@@ -80,7 +80,11 @@ export const StyledBtn = styled.div`
   filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.25));
   background: #fff;
   margin: 0 20px;
+  transition: 0.3s ease;
 
+  &:hover {
+    background: #449ceeb0;
+  }
   @media (max-width: 400px) {
     margin: 0 10px;
   }
@@ -92,6 +96,7 @@ const BtnIcon = styled.div`
   color: #707070;
   background: url(${props => props.src}) no-repeat center center;
   background-size: cover;
+  transition: 0.3s ease;
 `;
 const BtnText = styled.span`
   font-size: 14px;
@@ -102,6 +107,11 @@ const BtnText = styled.span`
   display: flex;
   align-items: center;
   padding: 0 10px;
+  transition: 0.3s ease;
+
+  &:hover {
+    color: white;
+  }
 `;
 
 export const ShortProfile = styled.div`
@@ -203,6 +213,10 @@ export const Search = styled(Input.Search)`
       font-size: 18px !important;
       line-height: 2.7 !important;
     }
+
+    &:hover {
+      background: #449ceeb0;
+    }
   }
 
   @media (max-width: 1200px) {
@@ -211,6 +225,7 @@ export const Search = styled(Input.Search)`
 `;
 
 export const SideMenuContainer = styled(Sider)`
+  transition: none;
   overflow: auto;
   position: fixed;
   left: 0;
@@ -246,7 +261,7 @@ StyledBtn.Icon = BtnIcon;
 StyledBtn.Text = BtnText;
 
 MenuItem.Icon = MenuIcon;
-MenuItem.Text = MenuText;
+MenuItem.Link = MenuLink;
 
 StyledHeader.Container = HeaderContainer;
 

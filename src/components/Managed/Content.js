@@ -1,14 +1,22 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { StyledContent } from "./styles";
 import MainPage from "./MainPage";
+import ProfilePage from "./ProfilePage";
 import contentBg from "./img/content-bg-managed.svg";
 
 const Content = props => {
+  const {
+    match: { url }
+  } = props;
+
   console.log(props);
   return (
     <StyledContent src={contentBg}>
-      <MainPage />
+      <Switch>
+        <Route path={url} exact component={MainPage} />
+        <Route path={`${url}/account`} component={ProfilePage} />
+      </Switch>
     </StyledContent>
   );
 };

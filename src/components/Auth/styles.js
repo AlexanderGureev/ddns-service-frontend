@@ -1,4 +1,9 @@
-import { Checkbox } from "antd";
+import {
+  Checkbox,
+  Form as AntdForm,
+  Input as AntdInput,
+  Button as AntdButton
+} from "antd";
 import styled from "styled-components";
 import { ParallaxLayer } from "react-spring/addons";
 import { Link } from "react-router-dom";
@@ -81,7 +86,7 @@ export const RightPartForm = styled.div`
   }
 `;
 
-export const Form = styled.div`
+export const Form = styled(AntdForm)`
   padding: 30px 50px;
   display: flex;
   align-items: center;
@@ -121,7 +126,7 @@ const FormHeader = styled.p`
   }
 `;
 
-const Caption = styled.p`
+const Caption = styled.div`
   margin: 0;
   padding: 10px 0 5px 0;
 `;
@@ -239,7 +244,7 @@ const SocialIcon = styled.img.attrs(props => ({
   }
 `;
 
-const Input = styled.input`
+const Input = styled(AntdInput)`
   border-radius: 5px;
   color: #6a6a6a;
   font-size: 16px;
@@ -280,9 +285,13 @@ const FormCheckBox = styled(Checkbox)`
     filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
   }
   .ant-checkbox-inner {
+    transition: 0.5s ease;
     border: none;
     border-radius: 5px;
-    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: ${({ isError = false }) =>
+      isError
+        ? "0px 0px 0px 4px rgba(252, 7, 7, .35)"
+        : "0px 0px 0px 4px rgba(0, 0, 0, 0.1)"};
 
     &::after {
       left: 5.57142857px;
@@ -312,7 +321,7 @@ const Label = styled.p`
   }
 `;
 
-const Button = styled.button`
+const Button = styled(AntdButton)`
   background: linear-gradient(140deg, #0d52df, #562685);
   border-radius: 10px;
   filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.25));
@@ -327,6 +336,17 @@ const Button = styled.button`
   width: 100%;
   margin-top: 10px;
 
+  &:hover {
+    background: linear-gradient(140deg, #0d52df, #562685) !important;
+    color: #fff !important;
+  }
+  &:focus {
+    background: linear-gradient(140deg, #0d52df, #562685) !important;
+    color: #fff !important;
+  }
+  &:disabled {
+    background: rgba(0, 0, 0, 0.3) !important;
+  }
   @media (max-width: 1200px) {
     font-size: 16px;
   }
@@ -424,8 +444,6 @@ const BtnContainerLink = styled(Link)`
 
 BtnContainer.Icon = Icon;
 BtnContainer.Link = BtnContainerLink;
-FormHeader.Caption = Caption;
-Caption.Text = CaptionText;
 TextContainer.Text = Text;
 CheckBoxContainer.Label = Label;
 CheckBoxContainer.CheckBox = FormCheckBox;
@@ -436,6 +454,9 @@ SocialBlock.Icon = SocialIcon;
 SocialBlock.Footer = FooterSocial;
 
 Form.Header = FormHeader;
+Form.Caption = Caption;
+Caption.Text = CaptionText;
+
 Form.SocialBlock = SocialBlock;
 Form.Input = Input;
 Form.CheckBoxContainer = CheckBoxContainer;
