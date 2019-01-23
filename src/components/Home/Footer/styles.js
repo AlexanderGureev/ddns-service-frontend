@@ -1,5 +1,12 @@
 import styled from "styled-components";
+import { ReactComponent as FooterCircles } from "./img/footer-bg-circles.svg";
+import { ReactComponent as MiniLogoIcon } from "../Header/img/header-logo-white.svg";
 
+export const FooterCircleLayer = styled(FooterCircles)`
+  width: 100%;
+  position: relative;
+  top: 200px;
+`;
 export const FooterContainer = styled.div`
   position: relative;
 `;
@@ -27,7 +34,7 @@ export const FooterMidContainer = styled.div`
 
 export const FooterBottomContainer = styled.div`
   position: relative;
-  top: 1125px;
+  top: 1150px;
 `;
 
 export const ShortForm = styled.form`
@@ -191,51 +198,14 @@ const SocialBarIcon = styled.div`
 
 SocialContainer.Icon = SocialBarIcon;
 
-export const MiniLogo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 320px;
-  height: 100px;
-  position: relative;
-  top: 40px;
-
-  @media (max-width: 1200px) {
-    top: 55px;
-    width: 300px;
-    height: 90px;
-  }
-  @media (max-width: 760px) {
-    width: 240px;
-    left: -15px;
-  }
-`;
-
-const Logo = styled.img.attrs(({ src }) => ({ src }))`
+export const MiniLogo = styled(MiniLogoIcon)`
   height: 120px;
-
-  @media (max-width: 1200px) {
-    height: 90px;
-  }
-  @media (max-width: 760px) {
-    width: 100px;
-  }
-`;
-
-const Text = styled.p`
-  text-transform: uppercase;
-  color: #fff;
-  font-size: 30px;
-  font-family: "Montserrat";
-  font-weight: 800;
+  width: 300px;
 
   @media (max-width: 760px) {
-    font-size: 23px;
+    height: 100px;
   }
 `;
-
-MiniLogo.Logo = Logo;
-MiniLogo.Text = Text;
 
 export const Copyright = styled.p`
   color: #fff;
@@ -243,7 +213,6 @@ export const Copyright = styled.p`
   font-family: "Montserrat";
   font-weight: 500;
   margin: 0;
-  padding-top: 80px;
 
   @media (max-width: 960px) {
     font-size: 14px;

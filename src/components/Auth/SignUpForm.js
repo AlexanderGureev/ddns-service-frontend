@@ -2,6 +2,7 @@ import React from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, Icon, Input, Button, Checkbox, Popover } from "antd";
+import DecoratedFormItem from "./DecoratedFormItem";
 import signUpFormBg from "./img/bg-form-signup.svg";
 import twitterIcon from "./img/soc-twitter.svg";
 import vkIcon from "./img/soc-vk.svg";
@@ -17,7 +18,6 @@ import {
 const SignUpForm = props => {
   const { parallaxLayer, form } = props;
   const isLarge = useMedia("(min-width: 860px)");
-  const isSmall = useMedia("(min-width: 560px)");
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -55,10 +55,40 @@ const SignUpForm = props => {
     }
   };
 
+  const inputs = {
+    email: {
+      rules: [
+        {
+          type: "email",
+          message: "The input is not valid E-mail!"
+        },
+        { required: true, message: "Please input your email." }
+      ]
+    },
+    password: {
+      rules: [{ required: true, message: "Please input your password." }]
+    },
+    confirm: {
+      rules: [
+        {
+          required: true,
+          message: "Please confirm your password."
+        },
+        { validator: compareToFirstPassword }
+      ]
+    },
+    hostname: {
+      rules: [{ validator: hostnameValidate }],
+      hidden: form.getFieldValue("createLater")
+    },
+    policyConfirm: { rules: [{ validator: policyConfirmValidate }] },
+    createLater: { initialValue: false }
+  };
+
   return (
     <ParallaxLayer offset={0} speed={0.3}>
       <LayerContainer>
-        <FormWrapper width={isSmall ? 70 : 90}>
+        <FormWrapper width={isLarge ? 80 : 90}>
           {isLarge && <LeftPartForm src={signUpFormBg} />}
           <RightPartForm>
             <Form onSubmit={handleSubmit}>
@@ -76,42 +106,23 @@ const SignUpForm = props => {
               </Form.SocialBlock>
 
               <Form.Item>
-                {form.getFieldDecorator("email", {
-                  rules: [
-                    {
-                      type: "email",
-                      message: "The input is not valid E-mail!"
-                    },
-                    { required: true, message: "Please input your email." }
-                  ]
-                })(<Form.Input placeholder="Email" type="text" />)}
+                {form.getFieldDecorator("email", inputs.email)(
+                  <Form.Input placeholder="Email" type="text" />
+                )}
               </Form.Item>
 
               <Form.Item>
-                {form.getFieldDecorator("password", {
-                  rules: [
-                    { required: true, message: "Please input your password." }
-                  ]
-                })(<Form.Input placeholder="Password" type="password" />)}
+                {form.getFieldDecorator("password", inputs.password)(
+                  <Form.Input placeholder="Password" type="password" />
+                )}
               </Form.Item>
               <Form.Item>
-                {form.getFieldDecorator("confirm", {
-                  rules: [
-                    {
-                      required: true,
-                      message: "Please confirm your password."
-                    },
-                    { validator: compareToFirstPassword }
-                  ]
-                })(
+                {form.getFieldDecorator("confirm", inputs.confirm)(
                   <Form.Input placeholder="Confirm password" type="password" />
                 )}
               </Form.Item>
               <Form.Item>
-                {form.getFieldDecorator("hostname", {
-                  rules: [{ validator: hostnameValidate }],
-                  hidden: form.getFieldValue("createLater")
-                })(
+                {form.getFieldDecorator("hostname", inputs.hostname)(
                   <Form.Input
                     disabled={form.getFieldValue("createLater")}
                     placeholder="Hostname"
@@ -120,9 +131,7 @@ const SignUpForm = props => {
                 )}
               </Form.Item>
               <Form.CheckBoxContainer>
-                {form.getFieldDecorator("createLater", {
-                  initialValue: false
-                })(
+                {form.getFieldDecorator("createLater", inputs.createLater)(
                   <Form.CheckBoxContainer.CheckBox
                     onChange={() => {
                       form.setFields({ hostname: { value: "" } });
@@ -134,9 +143,7 @@ const SignUpForm = props => {
                 </Form.CheckBoxContainer.Label>
               </Form.CheckBoxContainer>
               <Form.CheckBoxContainer>
-                {form.getFieldDecorator("policyСonfirm", {
-                  rules: [{ validator: policyConfirmValidate }]
-                })(
+                {form.getFieldDecorator("policyСonfirm", inputs.policyConfirm)(
                   <Form.CheckBoxContainer.CheckBox
                     isError={form.getFieldError("policyСonfirm")}
                   />

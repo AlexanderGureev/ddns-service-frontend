@@ -17,7 +17,7 @@ const Auth = () => {
       scrolling={false}
       horizontal
       ref={parallaxLayer}
-      style={{ height: "100vh", minHeight: "620px" }}
+      style={{ height: "100vh", minHeight: "760px" }}
     >
       <StyledParallaxLayer
         color1="#392A9F"

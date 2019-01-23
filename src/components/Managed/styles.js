@@ -1,6 +1,11 @@
 import { Layout, Menu, Icon, Input } from "antd";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+import React from "react";
+import { ReactComponent as SideMenuCircles } from "./img/side-menu-circles.svg";
+import { ReactComponent as LogoIcon } from "./img/side-menu-logo.svg";
+import { ReactComponent as MiniLogoIcon } from "./img/managed-mini-logo.svg";
+import { ReactComponent as CirclesIcon } from "./img/info-block-bg.svg";
 
 const { Header, Sider, Content } = Layout;
 
@@ -14,19 +19,15 @@ const logoShow = keyframes`
 `;
 
 export const LogoContainer = styled.div`
-  height: 160px;
   width: 100%;
-  display: flex;
-  align-items: center;
+  height: 160px;
+  position: relative;
 `;
 
-const Logo = styled.div`
-  background: url(${props => props.src}) no-repeat center center;
-  background-size: cover;
-  width: 125px;
-  height: 120px;
+const Logo = styled(LogoIcon)`
+  width: 97%;
+  height: 100%;
   animation: ${logoShow} 2s ease;
-  filter: drop-shadow(5px 10px 25px rgba(0, 0, 0, 0.4));
 `;
 const Text = styled.p`
   font-size: 28px;
@@ -44,10 +45,13 @@ const LogoLink = styled(Link)`
   position: absolute;
   top: 0;
   width: 100%;
-  height: 160px;
+  height: 100%;
 `;
 
-const MiniLogo = styled(Logo)``;
+const MiniLogo = styled(MiniLogoIcon)`
+  width: 77px;
+  animation: ${logoShow} 2s ease;
+`;
 
 const MenuIcon = styled.img.attrs(props => ({
   src: props.src
@@ -176,7 +180,6 @@ export const StyledHeader = styled(Header)`
   background: #fff;
   padding: 0;
   position: relative;
-  height: 7vh;
 `;
 const HeaderContainer = styled.div`
   display: flex;
@@ -202,7 +205,7 @@ export const Search = styled(Input.Search)`
     height: auto;
   }
   button {
-    height: 100%;
+    height: 100% !important;
     background: white;
     filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
     border: none;
@@ -224,15 +227,32 @@ export const Search = styled(Input.Search)`
   }
 `;
 
-export const SideMenuContainer = styled(Sider)`
-  transition: none;
-  overflow: auto;
-  position: fixed;
-  left: 0;
+export const FixedLayout = styled(Layout)`
+  position: relative;
   height: 100vh;
-  min-height: 600px;
-  background: url(${props => props.src}) no-repeat center top !important;
-  background-size: cover !important;
+  min-height: 560px;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  .ant-layout {
+    overflow-x: visible !important;
+  }
+`;
+
+const SideMenuCirclesLayer = styled(SideMenuCircles)`
+  width: 130%;
+  left: -30%;
+  bottom: 10%;
+  position: absolute;
+`;
+
+export const MenuContainer = styled(Sider)`
+  transition: none;
+  background: linear-gradient(
+    to right bottom,
+    #1f5ad1,
+    rgba(23, 56, 122, 0.85)
+  );
   width: 300px;
   .ant-menu {
     background: transparent;
@@ -244,12 +264,19 @@ export const SideMenuContainer = styled(Sider)`
     padding: 0 25px !important;
   }
 `;
+export const SideMenuContainer = props => (
+  <MenuContainer {...props}>
+    <SideMenuCirclesLayer />
+    {props.children}
+  </MenuContainer>
+);
 
 export const StyledContent = styled(Content)`
-  background: #eeeeee url(${props => props.src}) no-repeat center center;
+  background: #eee url(${props => props.src}) no-repeat center center;
   background-size: cover;
-  height: 93vh;
-  min-height: 700px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 `;
 
 LogoContainer.Text = Text;
@@ -275,6 +302,12 @@ export const Main = styled.div`
   padding: 20px;
 `;
 
+export const CircleLayer = styled(CirclesIcon)`
+  position: absolute;
+  width: 90%;
+  right: 0;
+  z-index: -1;
+`;
 export const ActiveHostnamesWrapper = styled.div`
   background: linear-gradient(135deg, #586cc4, #7343c7);
   display: flex;
@@ -286,18 +319,6 @@ export const ActiveHostnamesWrapper = styled.div`
   margin: 20px 0;
   filter: drop-shadow(5px 15px 15px rgba(0, 0, 0, 0.2));
   position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    background: url(${props => props.src}) no-repeat center center;
-    background-size: cover;
-    z-index: -1;
-  }
 
   @media (max-width: 560px) {
     padding: 20px;

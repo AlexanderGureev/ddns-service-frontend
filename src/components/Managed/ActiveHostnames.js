@@ -1,9 +1,13 @@
 import React from "react";
-import { ActiveHostnamesWrapper, ActiveHostnameContainer } from "./styles";
-import infoBlockBg from "./img/info-block-bg.svg";
+import {
+  ActiveHostnamesWrapper,
+  ActiveHostnameContainer,
+  CircleLayer
+} from "./styles";
 
 const ActiveHostnames = props => (
-  <ActiveHostnamesWrapper src={infoBlockBg}>
+  <ActiveHostnamesWrapper>
+    <CircleLayer />
     <ActiveHostnameContainer>
       <ActiveHostnameContainer.Count>0</ActiveHostnameContainer.Count>
       <ActiveHostnameContainer.Title>Active</ActiveHostnameContainer.Title>

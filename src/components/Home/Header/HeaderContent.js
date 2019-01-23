@@ -1,20 +1,23 @@
 import React from "react";
 import { useMedia } from "react-use";
-import logoHeader from "./img/header-logo.svg";
-import logoHeaderWhite from "./img/header-logo-white.svg";
+import { ReactComponent as LogoHeader } from "./img/header-logo.svg";
+import { ReactComponent as LogoHeaderWhite } from "./img/header-logo-white.svg";
 import {
   ContentWrapper,
   HeaderContentText,
   HeaderButton,
-  Logo
+  getStyledLogo
 } from "./styles";
 
 const HeaderContent = () => {
   const isSmall = useMedia("(max-width: 900px)");
+  const Logo = isSmall
+    ? getStyledLogo(LogoHeaderWhite)
+    : getStyledLogo(LogoHeader);
 
   return (
     <ContentWrapper>
-      <Logo src={isSmall ? logoHeaderWhite : logoHeader} />
+      <Logo />
       <HeaderContentText>
         It is a long established fact that a reader will be distracted by the
         readable content of a page when looking at its layout. The point of

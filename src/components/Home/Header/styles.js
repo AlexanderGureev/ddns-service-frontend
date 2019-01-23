@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Drawer } from "antd";
+import React from "react";
+import { ReactComponent as MenuBg } from "./img/menu-bg.svg";
 
 export const HeaderWrapper = styled.div`
   width: 100%;
@@ -31,18 +33,23 @@ export const MenuWrapper = styled.div`
   z-index: 1;
 `;
 
-export const CollapseMenuWrapper = styled(Drawer)`
+const Background = styled(MenuBg)`
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
+
+const CollapseMenu = styled(Drawer)`
   .ant-drawer-content {
-    background: url(${props => props.src}) no-repeat center top;
-    background-size: cover;
+    position: relative;
   }
 
   .ant-drawer-header {
     border-radius: 0;
   }
   .ant-drawer-body {
-    position: relative;
-    top: 150px;
+    margin-top: 150px;
 
     a,
     p {
@@ -62,6 +69,14 @@ export const CollapseMenuWrapper = styled(Drawer)`
     }
   }
 `;
+
+export const CollapseMenuWrapper = props => (
+  <CollapseMenu {...props}>
+    <Background />
+    {props.children}
+  </CollapseMenu>
+);
+
 export const TopMenu = styled.div`
   display: flex;
   justify-content: center;
@@ -155,7 +170,25 @@ export const Logo = styled.img.attrs(({ src }) => ({ src }))`
     width: 540px;
   }
   @media (max-width: 900px) {
-    margin-left: 50px;
+    width: 460px;
+  }
+  @media (max-width: 760px) {
+    width: 360px;
+  }
+  @media (max-width: 560px) {
+    width: 260px;
+  }
+`;
+
+export const getStyledLogo = Component => styled(Component)`
+  width: 640px;
+  height: auto;
+  filter: drop-shadow(5px 35px 15px rgba(0, 0, 0, 0.05));
+
+  @media (max-width: 1800px) {
+    width: 540px;
+  }
+  @media (max-width: 900px) {
     width: 460px;
   }
   @media (max-width: 760px) {
@@ -169,7 +202,7 @@ export const HeaderContentText = styled.div`
   font-size: 18px;
   font-family: "Montserrat";
   color: #707070;
-  padding: 30px 0;
+  padding: 20px 0 30px 0;
 
   @media (max-width: 1800px) {
     font-size: 16px;

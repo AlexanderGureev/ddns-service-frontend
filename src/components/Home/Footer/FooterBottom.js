@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col } from "antd";
 import { useMedia } from "react-use";
-import miniLogo from "./img/mini-logo.svg";
 import { MiniLogo, Copyright, FooterBottomContainer } from "./styles";
 
 const FooterMid = () => {
@@ -19,10 +18,7 @@ const FooterMid = () => {
           )}
         </Col>
         <Col offset={isLarge ? 5 : 1}>
-          <MiniLogo>
-            <MiniLogo.Logo src={miniLogo} />
-            <MiniLogo.Text>Fsr-ddns</MiniLogo.Text>
-          </MiniLogo>
+          <MiniLogo />
         </Col>
       </Row>
     </FooterBottomContainer>

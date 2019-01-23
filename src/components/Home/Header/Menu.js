@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { MenuBtn, CollapseMenuWrapper, MenuWrapper, TopMenu } from "./styles";
 import btnBlack from "./img/menu-black.svg";
 import btnWhite from "./img/menu-white.svg";
-import menuImg from "./img/menu-bg.svg";
 
 const Menu = () => {
   const [visible, setVisible] = useState(false);
@@ -18,7 +17,6 @@ const Menu = () => {
     <MenuWrapper>
       <CollapseMenuWrapper
         width={350}
-        src={menuImg}
         placement="left"
         closable={false}
         onClose={closeMenu}

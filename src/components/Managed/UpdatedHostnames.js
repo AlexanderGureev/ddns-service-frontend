@@ -1,9 +1,13 @@
 import React from "react";
-import { UpdatedHostnamesWrapper, UpdatedHostnameContainer } from "./styles";
-import infoBlockBg from "./img/info-block-bg.svg";
+import {
+  UpdatedHostnamesWrapper,
+  UpdatedHostnameContainer,
+  CircleLayer
+} from "./styles";
 
 const UpdatedHostnames = props => (
-  <UpdatedHostnamesWrapper src={infoBlockBg}>
+  <UpdatedHostnamesWrapper>
+    <CircleLayer />
     <UpdatedHostnameContainer>
       <UpdatedHostnameContainer.Count>0</UpdatedHostnameContainer.Count>
       <UpdatedHostnameContainer.Title>Hostname</UpdatedHostnameContainer.Title>

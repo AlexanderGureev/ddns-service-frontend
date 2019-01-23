@@ -93,6 +93,11 @@ export const Form = styled(AntdForm)`
   flex-direction: column;
   position: relative;
 
+  .ant-form-explain {
+    font-size: 12px;
+    font-family: "Montserrat";
+    font-weight: 500;
+  }
   @media (max-width: 1200px) {
     padding: 25px 30px 10px;
   }

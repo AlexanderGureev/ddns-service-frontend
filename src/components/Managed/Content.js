@@ -10,7 +10,6 @@ const Content = props => {
     match: { url }
   } = props;
 
-  console.log(props);
   return (
     <StyledContent src={contentBg}>
       <Switch>
