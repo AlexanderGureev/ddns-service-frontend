@@ -8,6 +8,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
+    "no-useless-escape": 0,
     "no-shadow": 1,
     "react/destructuring-assignment": 0,
     "no-param-reassign": 0,

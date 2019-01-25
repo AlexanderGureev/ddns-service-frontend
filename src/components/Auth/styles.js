@@ -4,9 +4,18 @@ import {
   Input as AntdInput,
   Button as AntdButton
 } from "antd";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ParallaxLayer } from "react-spring/addons";
 import { Link } from "react-router-dom";
+
+const showLoadingCircle = keyframes`
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1
+  }
+`;
 
 export const ParallaxPositioningLayer = styled(ParallaxLayer)`
   z-index: ${props => props.order || 1};
@@ -93,10 +102,41 @@ export const Form = styled(AntdForm)`
   flex-direction: column;
   position: relative;
 
+  .ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) {
+    padding: 10px 60px !important;
+  }
+
+  .ant-input-group-wrapper {
+    margin: 15px 0;
+
+    input {
+      margin: 0;
+    }
+
+    .ant-input-group-addon {
+      border: none;
+      background-color: #e2e2e2;
+
+      .ant-select {
+        width: 170px !important;
+        font-family: "Montserrat";
+        font-weight: 500;
+        font-size: 14px;
+
+        @media (max-width: 980px) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
   .ant-form-explain {
     font-size: 12px;
     font-family: "Montserrat";
     font-weight: 500;
+    margin-top: -5px !important;
+  }
+  .ant-form-item-control {
+    line-height: 1.7;
   }
   @media (max-width: 1200px) {
     padding: 25px 30px 10px;
@@ -255,7 +295,7 @@ const Input = styled(AntdInput)`
   font-size: 16px;
   font-family: "Montserrat";
   font-weight: 600;
-  padding: 15px 20px;
+  padding: 12px 20px;
   filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2));
   outline: none;
   width: 100%;
@@ -274,6 +314,10 @@ const Input = styled(AntdInput)`
     padding: 10px 15px;
   }
 `;
+
+const ContentWrapper = styled.div`
+  padding: 5px 0;
+`;
 const CheckBoxContainer = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -286,8 +330,25 @@ const CheckBoxContainer = styled.div`
   }
 `;
 const FormCheckBox = styled(Checkbox)`
+  color: #6a6a6a;
+  font-size: 14px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  margin: 0;
+
+  @media (max-width: 1200px) {
+    font-size: 12px !important;
+  }
+
+  @media (max-width: 560px) {
+    font-size: 10px !important;
+  }
   .ant-checkbox {
     filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.2));
+
+    + span {
+      padding-left: 12px !important;
+    }
   }
   .ant-checkbox-inner {
     transition: 0.5s ease;
@@ -308,24 +369,6 @@ const FormCheckBox = styled(Checkbox)`
   }
 `;
 
-const Label = styled.p`
-  color: #6a6a6a;
-  font-size: 14px;
-  font-family: "Montserrat";
-  font-weight: 600;
-  margin: 0;
-  padding: 0 0 0 20px;
-
-  @media (max-width: 1200px) {
-    font-size: 12px;
-    padding: 0 0 0 10px;
-  }
-
-  @media (max-width: 560px) {
-    font-size: 10px;
-  }
-`;
-
 const Button = styled(AntdButton)`
   background: linear-gradient(140deg, #0d52df, #562685);
   border-radius: 10px;
@@ -341,6 +384,13 @@ const Button = styled(AntdButton)`
   width: 100%;
   margin-top: 10px;
 
+  span {
+    transition: 0.5s ease;
+  }
+
+  i {
+    animation: ${showLoadingCircle} 0.5s ease;
+  }
   &:hover {
     background: linear-gradient(140deg, #0d52df, #562685) !important;
     color: #fff !important;
@@ -450,7 +500,6 @@ const BtnContainerLink = styled(Link)`
 BtnContainer.Icon = Icon;
 BtnContainer.Link = BtnContainerLink;
 TextContainer.Text = Text;
-CheckBoxContainer.Label = Label;
 CheckBoxContainer.CheckBox = FormCheckBox;
 
 SocialBlock.Head = HeaderSocial;
@@ -462,6 +511,7 @@ Form.Header = FormHeader;
 Form.Caption = Caption;
 Caption.Text = CaptionText;
 
+Form.ContentWrapper = ContentWrapper;
 Form.SocialBlock = SocialBlock;
 Form.Input = Input;
 Form.CheckBoxContainer = CheckBoxContainer;

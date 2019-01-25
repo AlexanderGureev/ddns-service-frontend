@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
-import { Form as AntdForm, Icon, Input, Button, Checkbox, Popover } from "antd";
-import DecoratedFormItem from "./DecoratedFormItem";
+import { Form as AntdForm, Select, message as messageBlock } from "antd";
+import { withCookies } from "react-cookie";
+import { registration, isAuth } from "../../services/api";
+import { DecoratedFormItem } from "./DecoratedFormItem";
 import signUpFormBg from "./img/bg-form-signup.svg";
 import twitterIcon from "./img/soc-twitter.svg";
 import vkIcon from "./img/soc-vk.svg";
@@ -15,74 +17,48 @@ import {
   Form
 } from "./styles";
 
-const SignUpForm = props => {
-  const { parallaxLayer, form } = props;
+const SignUpForm = ({ parallaxLayer, form, cookies }) => {
+  const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 860px)");
+
+  const showMessage = (text, type = "success") => {
+    const fn = {
+      success: messageBlock.success,
+      error: messageBlock.error
+    };
+    fn[type](text, 5);
+  };
+
+  const registerUser = async body => {
+    try {
+      setLoading(!loading);
+      const response = await registration(body);
+      setLoading(false);
+      showMessage(
+        "User created successfully. Data has been sent to your email to confirm registration."
+      );
+      const data = await isAuth();
+      console.log(data);
+    } catch ({ message }) {
+      setLoading(false);
+      showMessage(message, "error");
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
     form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        registerUser(values);
       }
-      console.log(err);
+      const [invalidField] = Object.keys(err);
+      form.getFieldInstance(invalidField).focus();
     });
   };
 
-  const compareToFirstPassword = (rule, value, callback) => {
-    if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
-    } else {
-      callback();
-    }
-  };
-  const hostnameValidate = (rule, value, callback) => {
-    if (form.getFieldValue("createLater")) {
-      callback();
-      return;
-    }
-    if (!value) {
-      callback("Please input your hostname.");
-    } else {
-      callback();
-    }
-  };
-  const policyConfirmValidate = (rule, value, callback) => {
-    if (!value) {
-      callback("Please accept the Privacy Policy.");
-    } else {
-      callback();
-    }
-  };
-
-  const inputs = {
-    email: {
-      rules: [
-        {
-          type: "email",
-          message: "The input is not valid E-mail!"
-        },
-        { required: true, message: "Please input your email." }
-      ]
-    },
-    password: {
-      rules: [{ required: true, message: "Please input your password." }]
-    },
-    confirm: {
-      rules: [
-        {
-          required: true,
-          message: "Please confirm your password."
-        },
-        { validator: compareToFirstPassword }
-      ]
-    },
-    hostname: {
-      rules: [{ validator: hostnameValidate }],
-      hidden: form.getFieldValue("createLater")
-    },
-    policyConfirm: { rules: [{ validator: policyConfirmValidate }] },
-    createLater: { initialValue: false }
+  const goToNextForm = () => {
+    form.resetFields();
+    parallaxLayer.current.scrollTo(1);
   };
 
   return (
@@ -105,59 +81,72 @@ const SignUpForm = props => {
                 <Form.SocialBlock.Footer>or</Form.SocialBlock.Footer>
               </Form.SocialBlock>
 
-              <Form.Item>
-                {form.getFieldDecorator("email", inputs.email)(
-                  <Form.Input placeholder="Email" type="text" />
-                )}
-              </Form.Item>
+              <DecoratedFormItem type="email" form={form}>
+                <Form.Input placeholder="Email" type="text" />
+              </DecoratedFormItem>
 
-              <Form.Item>
-                {form.getFieldDecorator("password", inputs.password)(
-                  <Form.Input placeholder="Password" type="password" />
-                )}
-              </Form.Item>
-              <Form.Item>
-                {form.getFieldDecorator("confirm", inputs.confirm)(
-                  <Form.Input placeholder="Confirm password" type="password" />
-                )}
-              </Form.Item>
-              <Form.Item>
-                {form.getFieldDecorator("hostname", inputs.hostname)(
-                  <Form.Input
-                    disabled={form.getFieldValue("createLater")}
-                    placeholder="Hostname"
-                    type="text"
-                  />
-                )}
-              </Form.Item>
-              <Form.CheckBoxContainer>
-                {form.getFieldDecorator("createLater", inputs.createLater)(
-                  <Form.CheckBoxContainer.CheckBox
-                    onChange={() => {
-                      form.setFields({ hostname: { value: "" } });
-                    }}
-                  />
-                )}
-                <Form.CheckBoxContainer.Label>
-                  Create my hostname later
-                </Form.CheckBoxContainer.Label>
-              </Form.CheckBoxContainer>
-              <Form.CheckBoxContainer>
-                {form.getFieldDecorator("policyСonfirm", inputs.policyConfirm)(
-                  <Form.CheckBoxContainer.CheckBox
-                    isError={form.getFieldError("policyСonfirm")}
-                  />
-                )}
-                <Form.CheckBoxContainer.Label>
-                  I agree to the Terms of Service and Privacy Policy. I also
-                  agree that I will only create one free account.
-                </Form.CheckBoxContainer.Label>
-              </Form.CheckBoxContainer>
-              <Form.Button htmlType="submit">Sign up</Form.Button>
+              <DecoratedFormItem type="password1" form={form}>
+                <Form.Input placeholder="Password" type="password" />
+              </DecoratedFormItem>
+
+              <DecoratedFormItem type="password2" form={form}>
+                <Form.Input placeholder="Confirm password" type="password" />
+              </DecoratedFormItem>
+
+              <DecoratedFormItem type="hostname" form={form}>
+                <Form.Input
+                  disabled={form.getFieldValue("createLater")}
+                  placeholder="Hostname"
+                  type="text"
+                  addonAfter={
+                    <DecoratedFormItem
+                      type="domain"
+                      form={form}
+                      decorate={false}
+                    >
+                      <Select disabled={form.getFieldValue("createLater")}>
+                        <Select.Option value=".best-service.online">
+                          .best-service.online
+                        </Select.Option>
+                        <Select.Option value=".shrt.zone">
+                          .shrt.zone
+                        </Select.Option>
+                      </Select>
+                    </DecoratedFormItem>
+                  }
+                />
+              </DecoratedFormItem>
+
+              <Form.ContentWrapper>
+                <DecoratedFormItem type="createLater" form={form}>
+                  <Form.CheckBoxContainer>
+                    <Form.CheckBoxContainer.CheckBox
+                      onChange={() => {
+                        form.setFields({ hostname: { value: "" } });
+                      }}
+                    >
+                      Create my hostname later
+                    </Form.CheckBoxContainer.CheckBox>
+                  </Form.CheckBoxContainer>
+                </DecoratedFormItem>
+
+                <DecoratedFormItem type="policyСonfirm" form={form}>
+                  <Form.CheckBoxContainer>
+                    <Form.CheckBoxContainer.CheckBox
+                      isError={form.getFieldError("policyСonfirm")}
+                    >
+                      I agree to the Terms of Service and Privacy Policy. I also
+                      agree that I will only create one free account.
+                    </Form.CheckBoxContainer.CheckBox>
+                  </Form.CheckBoxContainer>
+                </DecoratedFormItem>
+              </Form.ContentWrapper>
+              <Form.Button htmlType="submit" loading={loading}>
+                Sign up
+              </Form.Button>
+
               <Form.TextContainer>
-                <Form.TextContainer.Text
-                  onClick={() => parallaxLayer.current.scrollTo(1)}
-                >
+                <Form.TextContainer.Text onClick={goToNextForm}>
                   Already registered? Sign in
                 </Form.TextContainer.Text>
               </Form.TextContainer>
@@ -169,4 +158,4 @@ const SignUpForm = props => {
   );
 };
 
-export default AntdForm.create({ name: "register" })(SignUpForm);
+export default withCookies(AntdForm.create({ name: "register" })(SignUpForm));
