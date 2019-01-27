@@ -3,7 +3,7 @@ import { useStore } from "easy-peasy";
 import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuth } = useStore(state => state.user);
+  const { isAuth } = useStore(state => state.session);
   return (
     <Route
       {...rest}

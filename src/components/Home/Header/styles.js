@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Drawer } from "antd";
 import React from "react";
+import { useSpring, animated } from "react-spring/hooks";
 import { ReactComponent as MenuBg } from "./img/menu-bg.svg";
 
 export const HeaderWrapper = styled.div`
@@ -216,7 +217,7 @@ export const HeaderContentText = styled.div`
   }
 `;
 
-export const HeaderButton = styled.button`
+export const HeaderButton = styled(animated.div)`
   background: linear-gradient(140deg, #1194e8, #75acfd);
   color: white;
   text-transform: uppercase;
@@ -230,6 +231,8 @@ export const HeaderButton = styled.button`
   font-weight: 600;
   transition: 0.3s ease;
   outline: none;
+  text-align: center;
+  width: 270px;
 
   @media (max-width: 760px) {
     padding: 10px 40px;

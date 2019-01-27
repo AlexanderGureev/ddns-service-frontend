@@ -4,7 +4,6 @@ import { useMedia } from "react-use";
 import { Form as AntdForm, Select, message as messageBlock } from "antd";
 import { withCookies } from "react-cookie";
 import { useAction } from "easy-peasy";
-import { registrationApi } from "../../services/api";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 import signUpFormBg from "./img/bg-form-signup.svg";
@@ -18,9 +17,7 @@ import {
 } from "./styles";
 
 const SignUpForm = ({ parallaxLayer, form, cookies }) => {
-  const { authorizeUserAction, updateProfileAction } = useAction(
-    dispatch => dispatch.user
-  );
+  const { registerUserAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
 
@@ -34,20 +31,12 @@ const SignUpForm = ({ parallaxLayer, form, cookies }) => {
 
   const registerUser = async body => {
     try {
-      setLoading(!loading);
-      const {
-        username,
-        email,
-        first_name: firstName,
-        last_name: lastName
-      } = await registrationApi(body);
+      setLoading(true);
+      await registerUserAction(body);
       setLoading(false);
-
-      updateProfileAction({ username, email, firstName, lastName });
       showMessage(
         "User created successfully. Data has been sent to your email to confirm registration."
       );
-      await authorizeUserAction();
     } catch ({ message }) {
       setLoading(false);
       showMessage(message, "error");

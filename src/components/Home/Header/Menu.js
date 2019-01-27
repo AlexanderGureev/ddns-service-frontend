@@ -8,8 +8,8 @@ import btnWhite from "./img/menu-white.svg";
 
 const Menu = () => {
   const [visible, setVisible] = useState(false);
-  const { isAuth } = useStore(state => state.user);
-  const { logoutUserAction } = useAction(dispatch => dispatch.user);
+  const { isAuth } = useStore(state => state.session);
+  const { logoutUserAction } = useAction(dispatch => dispatch.session);
 
   const changeStateMenu = () => setVisible(!visible);
   const closeMenu = () => setVisible(false);

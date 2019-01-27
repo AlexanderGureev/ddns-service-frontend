@@ -4,7 +4,6 @@ import { useMedia } from "react-use";
 import { Form as AntdForm, message as messageBlock } from "antd";
 import { withCookies } from "react-cookie";
 import { useAction } from "easy-peasy";
-import { loginApi } from "../../services/api";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 import signInFormBg from "./img/bg-form-signin.svg";
@@ -17,9 +16,7 @@ import {
 } from "./styles";
 
 const SignInForm = ({ parallaxLayer, form, cookies }) => {
-  const { authorizeUserAction, updateProfileAction } = useAction(
-    dispatch => dispatch.user
-  );
+  const { loginUserAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
 
   const isLarge = useMedia("(min-width: 861px)");
@@ -36,16 +33,8 @@ const SignInForm = ({ parallaxLayer, form, cookies }) => {
   const loginUser = async body => {
     try {
       setLoading(!loading);
-      const {
-        username,
-        email,
-        first_name: firstName,
-        last_name: lastName
-      } = await loginApi(body);
+      await loginUserAction(body);
       setLoading(false);
-
-      updateProfileAction({ username, email, firstName, lastName });
-      await authorizeUserAction();
     } catch ({ message }) {
       setLoading(false);
       showMessage(message, "error");

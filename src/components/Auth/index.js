@@ -11,7 +11,7 @@ import CircleLayer from "./CircleLayer";
 import GoToHomeBtn from "./GoToHomeBtn";
 
 const Auth = () => {
-  const { isAuth } = useStore(state => state.user);
+  const { isAuth } = useStore(state => state.session);
   const parallaxLayer = useRef();
 
   return !isAuth ? (
