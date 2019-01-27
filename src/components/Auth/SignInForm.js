@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
+import { Form as AntdForm, message as messageBlock } from "antd";
+import { withCookies } from "react-cookie";
+import { useAction } from "easy-peasy";
+import { loginApi } from "../../services/api";
+import SocialBlock from "./SocialBlock";
+import { DecoratedFormItem } from "./DecoratedFormItem";
 import signInFormBg from "./img/bg-form-signin.svg";
-import twitterIcon from "./img/soc-twitter.svg";
-import vkIcon from "./img/soc-vk.svg";
-import facebookIcon from "./img/soc-facebook.svg";
 import {
   LayerContainer,
   FormWrapper,
@@ -13,33 +16,72 @@ import {
   Form
 } from "./styles";
 
-const SignInForm = props => {
-  const { parallaxLayer } = props;
-  const isLarge = useMedia("(min-width: 860px)");
-  const isSmall = useMedia("(min-width: 560px)");
+const SignInForm = ({ parallaxLayer, form, cookies }) => {
+  const { authorizeUserAction, updateProfileAction } = useAction(
+    dispatch => dispatch.user
+  );
+  const [loading, setLoading] = useState(false);
+
+  const isLarge = useMedia("(min-width: 861px)");
+  const isBig = useMedia("(min-width: 1360px)");
+
+  const showMessage = (text, type = "success") => {
+    const fn = {
+      success: messageBlock.success,
+      error: messageBlock.error
+    };
+    fn[type](text, 5);
+  };
+
+  const loginUser = async body => {
+    try {
+      setLoading(!loading);
+      const {
+        username,
+        email,
+        first_name: firstName,
+        last_name: lastName
+      } = await loginApi(body);
+      setLoading(false);
+
+      updateProfileAction({ username, email, firstName, lastName });
+      await authorizeUserAction();
+    } catch ({ message }) {
+      setLoading(false);
+      showMessage(message, "error");
+    }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    form.validateFields((err, values) => {
+      if (!err) loginUser(values);
+      const [invalidField] = Object.keys(err);
+      form.getFieldInstance(invalidField).focus();
+    });
+  };
 
   return (
     <ParallaxLayer offset={0.3} speed={0.3}>
       <LayerContainer>
-        <FormWrapper width={isSmall ? 65 : 80}>
+        <FormWrapper width={isBig ? 60 : 80}>
           {isLarge && <LeftPartForm src={signInFormBg} />}
           <RightPartForm>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Form.Header>Sign in</Form.Header>
-              <Form.SocialBlock>
-                <Form.SocialBlock.Head>
-                  with your social network
-                </Form.SocialBlock.Head>
-                <Form.SocialBlock.IconBox>
-                  <Form.SocialBlock.Icon src={facebookIcon} />
-                  <Form.SocialBlock.Icon src={twitterIcon} />
-                  <Form.SocialBlock.Icon src={vkIcon} />
-                </Form.SocialBlock.IconBox>
-                <Form.SocialBlock.Footer>or</Form.SocialBlock.Footer>
-              </Form.SocialBlock>
-              <Form.Input placeholder="Email" />
-              <Form.Input placeholder="Password" />
-              <Form.Button>Sign in</Form.Button>
+              <SocialBlock />
+
+              <DecoratedFormItem type="email" form={form} disableRules>
+                <Form.Input placeholder="Email" type="text" />
+              </DecoratedFormItem>
+
+              <DecoratedFormItem type="password" form={form} disableRules>
+                <Form.Input placeholder="Password" type="password" />
+              </DecoratedFormItem>
+
+              <Form.Button htmlType="submit" loading={loading}>
+                Sign in
+              </Form.Button>
               <Form.TextContainer>
                 <Form.TextContainer.Text
                   onClick={() => parallaxLayer.current.scrollTo(0)}
@@ -60,4 +102,4 @@ const SignInForm = props => {
   );
 };
 
-export default SignInForm;
+export default withCookies(AntdForm.create({ name: "authorize" })(SignInForm));

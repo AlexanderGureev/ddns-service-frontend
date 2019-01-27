@@ -3,12 +3,12 @@ import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, Select, message as messageBlock } from "antd";
 import { withCookies } from "react-cookie";
-import { registration, isAuth } from "../../services/api";
+import { useAction } from "easy-peasy";
+import { registrationApi } from "../../services/api";
+import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 import signUpFormBg from "./img/bg-form-signup.svg";
-import twitterIcon from "./img/soc-twitter.svg";
-import vkIcon from "./img/soc-vk.svg";
-import facebookIcon from "./img/soc-facebook.svg";
+
 import {
   LayerContainer,
   FormWrapper,
@@ -18,8 +18,11 @@ import {
 } from "./styles";
 
 const SignUpForm = ({ parallaxLayer, form, cookies }) => {
+  const { authorizeUserAction, updateProfileAction } = useAction(
+    dispatch => dispatch.user
+  );
   const [loading, setLoading] = useState(false);
-  const isLarge = useMedia("(min-width: 860px)");
+  const isLarge = useMedia("(min-width: 861px)");
 
   const showMessage = (text, type = "success") => {
     const fn = {
@@ -32,13 +35,19 @@ const SignUpForm = ({ parallaxLayer, form, cookies }) => {
   const registerUser = async body => {
     try {
       setLoading(!loading);
-      const response = await registration(body);
+      const {
+        username,
+        email,
+        first_name: firstName,
+        last_name: lastName
+      } = await registrationApi(body);
       setLoading(false);
+
+      updateProfileAction({ username, email, firstName, lastName });
       showMessage(
         "User created successfully. Data has been sent to your email to confirm registration."
       );
-      const data = await isAuth();
-      console.log(data);
+      await authorizeUserAction();
     } catch ({ message }) {
       setLoading(false);
       showMessage(message, "error");
@@ -69,17 +78,7 @@ const SignUpForm = ({ parallaxLayer, form, cookies }) => {
           <RightPartForm>
             <Form onSubmit={handleSubmit}>
               <Form.Header>Create Your Account</Form.Header>
-              <Form.SocialBlock>
-                <Form.SocialBlock.Head>
-                  with your social network
-                </Form.SocialBlock.Head>
-                <Form.SocialBlock.IconBox>
-                  <Form.SocialBlock.Icon src={facebookIcon} />
-                  <Form.SocialBlock.Icon src={twitterIcon} />
-                  <Form.SocialBlock.Icon src={vkIcon} />
-                </Form.SocialBlock.IconBox>
-                <Form.SocialBlock.Footer>or</Form.SocialBlock.Footer>
-              </Form.SocialBlock>
+              <SocialBlock />
 
               <DecoratedFormItem type="email" form={form}>
                 <Form.Input placeholder="Email" type="text" />
@@ -105,9 +104,6 @@ const SignUpForm = ({ parallaxLayer, form, cookies }) => {
                       decorate={false}
                     >
                       <Select disabled={form.getFieldValue("createLater")}>
-                        <Select.Option value=".best-service.online">
-                          .best-service.online
-                        </Select.Option>
                         <Select.Option value=".shrt.zone">
                           .shrt.zone
                         </Select.Option>

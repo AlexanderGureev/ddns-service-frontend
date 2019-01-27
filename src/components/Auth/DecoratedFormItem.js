@@ -29,17 +29,31 @@ const policyСonfirmValidate = form => (rule, value, callback) => {
   }
 };
 
-const getOptions = (type, form) => {
+const getOptions = (type, form, disableRules = false) => {
   const rules = {
     email: {
-      rules: [
-        {
-          type: "email",
-          message: "The input is not valid E-mail!"
-        },
-        { whitespace: true, message: "The string cannot contain spaces" },
-        { required: true, message: "Please input your email." }
-      ]
+      rules: disableRules
+        ? [{ required: true, message: "Please input your email." }]
+        : [
+            {
+              type: "email",
+              message: "The input is not valid E-mail!"
+            },
+            { whitespace: true, message: "The string cannot contain spaces" },
+            { required: true, message: "Please input your email." }
+          ]
+    },
+    password: {
+      rules: disableRules
+        ? [{ required: true, message: "Please input your password." }]
+        : [
+            { required: true, message: "Please input your password." },
+            {
+              pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?!.*\\s).{8,}$",
+              message:
+                "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number and without spaces"
+            }
+          ]
     },
     password1: {
       rules: [
@@ -82,11 +96,21 @@ const getOptions = (type, form) => {
   return rules[type];
 };
 
-export const DecoratedFormItem = ({ type, form, children, decorate = true }) =>
+export const DecoratedFormItem = ({
+  type,
+  form,
+  children,
+  decorate = true,
+  disableRules
+}) =>
   decorate ? (
     <Form.Item>
-      {form.getFieldDecorator(type, { ...getOptions(type, form) })(children)}
+      {form.getFieldDecorator(type, {
+        ...getOptions(type, form, disableRules)
+      })(children)}
     </Form.Item>
   ) : (
-    form.getFieldDecorator(type, { ...getOptions(type, form) })(children)
+    form.getFieldDecorator(type, { ...getOptions(type, form, disableRules) })(
+      children
+    )
   );

@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { useMedia } from "react-use";
 import { Link } from "react-router-dom";
+import { useAction, useStore } from "easy-peasy";
 import { MenuBtn, CollapseMenuWrapper, MenuWrapper, TopMenu } from "./styles";
 import btnBlack from "./img/menu-black.svg";
 import btnWhite from "./img/menu-white.svg";
 
 const Menu = () => {
   const [visible, setVisible] = useState(false);
+  const { isAuth } = useStore(state => state.user);
+  const { logoutUserAction } = useAction(dispatch => dispatch.user);
+
   const changeStateMenu = () => setVisible(!visible);
   const closeMenu = () => setVisible(false);
-
+  const logout = e => {
+    e.preventDefault();
+    logoutUserAction();
+  };
   const isSmall = useMedia("(max-width: 900px)");
   const isMedium = useMedia("(min-width: 1100px)");
 
@@ -47,7 +54,11 @@ const Menu = () => {
             <Link to="/managed">Services</Link>
           </TopMenu.Item>
           <TopMenu.Item btn>
-            <Link to="/login">Sign up</Link>
+            {isAuth ? (
+              <a onClick={logout}>Log out</a>
+            ) : (
+              <Link to="/login">Sign up</Link>
+            )}
           </TopMenu.Item>
         </TopMenu>
       )}

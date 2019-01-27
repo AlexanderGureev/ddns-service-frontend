@@ -60,13 +60,6 @@ const MenuIcon = styled.img.attrs(props => ({
   height: auto;
 `;
 
-const MenuLink = styled(Link)`
-  font-size: 18px;
-  font-family: "Montserrat";
-  font-weight: 500;
-  color: #fff !important;
-  padding-left: 25px;
-`;
 export const MenuItem = styled(Menu.Item)`
   display: flex !important;
   align-items: center !important;
@@ -131,6 +124,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 150px;
 `;
 
 const ProfileAvatar = styled.div`
@@ -146,10 +140,16 @@ const ProfileName = styled.p`
   font-family: "Montserrat";
   font-weight: 700;
   color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 const ProfileEmail = styled(ProfileName)`
   font-size: 15px;
   font-weight: 300;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 const ProfileBtn = styled(Icon)`
   position: absolute;
@@ -245,7 +245,13 @@ const SideMenuCirclesLayer = styled(SideMenuCircles)`
   bottom: 10%;
   position: absolute;
 `;
-
+const MenuLink = styled(Link)`
+  font-size: 18px;
+  font-family: "Montserrat";
+  font-weight: 500;
+  color: #fff !important;
+  padding-left: 27px;
+`;
 export const MenuContainer = styled(Sider)`
   transition: none;
   background: linear-gradient(
@@ -253,15 +259,20 @@ export const MenuContainer = styled(Sider)`
     #1f5ad1,
     rgba(23, 56, 122, 0.85)
   );
-  width: 300px;
+  width: 295px;
   .ant-menu {
     background: transparent;
+    border-right: 0;
+
+    .ant-menu-item {
+      transition: padding 0.3s ease;
+      padding: 0 0 0 25px !important;
+    }
   }
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: #3b30a191;
   }
   .ant-menu-inline-collapsed > .ant-menu-item {
-    padding: 0 25px !important;
   }
 `;
 export const SideMenuContainer = props => (

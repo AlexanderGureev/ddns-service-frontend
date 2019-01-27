@@ -12,7 +12,7 @@ import {
 
 const ResetPasswordForm = props => {
   const { parallaxLayer } = props;
-  const isLarge = useMedia("(min-width: 860px)");
+  const isLarge = useMedia("(min-width: 861px)");
   const isBig = useMedia("(min-width: 1500px)");
 
   return (

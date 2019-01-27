@@ -17,6 +17,7 @@ export const HeaderImg = styled.div`
   background: url(${props => props.src}) no-repeat left center;
   background-size: cover;
   z-index: -1;
+  min-height: 860px;
 
   @media (max-width: 900px) {
     background-position: right center;

@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { Parallax } from "react-spring/addons";
+import { useStore } from "easy-peasy";
+import { Redirect } from "react-router-dom";
 import { StyledParallaxLayer, ParallaxPositioningLayer } from "./styles";
 import layerBg from "./img/layer-bg.svg";
 import SignInForm from "./SignInForm";
@@ -9,9 +11,10 @@ import CircleLayer from "./CircleLayer";
 import GoToHomeBtn from "./GoToHomeBtn";
 
 const Auth = () => {
+  const { isAuth } = useStore(state => state.user);
   const parallaxLayer = useRef();
 
-  return (
+  return !isAuth ? (
     <Parallax
       pages={3}
       scrolling={false}
@@ -67,6 +70,8 @@ const Auth = () => {
         <GoToHomeBtn />
       </ParallaxPositioningLayer>
     </Parallax>
+  ) : (
+    <Redirect to="/managed" />
   );
 };
 

@@ -1,14 +1,29 @@
 import axios from "axios";
+import Cookie from "js-cookie";
 
+axios.defaults.withCredentials = true;
 // const { NODE_ENV = "development" } = process.env;
 
-const API_URL = "https://api.shrt.zone/v1/rest-auth";
+const API_URL = "https://accounts.best-service.online/v1/rest-auth";
 
-const API_URL_CSRF = "https://api.shrt.zone/";
+const API_URL_CSRF = "https://accounts.best-service.online/v1/csrf";
 const API_URL_REGISTRATION = `${API_URL}/registration/`;
+const API_URL_LOGIN = `${API_URL}/login/`;
+const API_URL_LOGOUT = `${API_URL}/logout/`;
+const API_URL_SOCIAL_LINKS = `${API_URL}/social/login/links/`;
 const API_URL_USER = `${API_URL}/user/`;
 const API_URL_USER_IS_AUTH = `${API_URL}/user/`;
 
+const errorParse = error => {
+  if (!error.response)
+    return error.message || "Request processing error, try again later.";
+
+  const { data = null, status } = error.response;
+  if (data && status !== 500) {
+    return Object.values(data).join("\n");
+  }
+  return "Request processing error, try again later.";
+};
 const noop = async () =>
   new Promise((res, rej) =>
     setTimeout(() => {
@@ -16,69 +31,128 @@ const noop = async () =>
     }, 2000)
   );
 
-export const isAuth = async () => {
+export const authStatusApi = async () => {
   try {
-    const data = await axios.get(API_URL_USER_IS_AUTH);
-    return true;
+    const { data } = await axios.get(API_URL_USER_IS_AUTH);
+    return { status: true, data };
   } catch (error) {
-    const { data = {} } = error.response;
-    const errorMessage = Object.values(data);
-    console.log(error.response);
-    throw new Error(errorMessage);
+    // throw new Error(errorParse(error));
+    return false;
   }
 };
 
-const getToken = async () => {
+export const getTokenApi = async () => {
   try {
-    const {
-      data: { token }
-    } = await axios.get(API_URL_CSRF);
-    return token;
+    return await axios.get(API_URL_CSRF);
   } catch (error) {
-    throw new Error("Token request error");
+    throw new Error("Token request error.");
   }
 };
 
-export const registration = async body => {
+export const registrationApi = async body => {
   try {
-    console.log(body);
-    await noop();
-    // const token = await getToken("/api/token");
-    const { data, status, statusText, headers } = await axios.post(
+    const { data, status, statusText } = await axios.post(
       `${API_URL_REGISTRATION}`,
       body
     );
 
     if (status !== 201) {
-      console.log({ data, status, statusText, headers });
-      throw new Error();
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
     }
 
-    console.log({ data, status, statusText, headers });
     return data;
   } catch (error) {
-    const { data = {} } = error.response;
-    console.log(error.response);
-    // const errorMessage = Object.values(data);
-    // throw new Error(errorMessage || "Ошибка загрузки данных...");
+    throw new Error(errorParse(error));
+  }
+};
+
+export const loginApi = async body => {
+  try {
+    const { data, status, statusText } = await axios.post(
+      `${API_URL_LOGIN}`,
+      body
+    );
+
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(errorParse(error));
+  }
+};
+
+export const logoutApi = async () => {
+  try {
+    const token = Cookie.get("csrftoken");
+    await axios({
+      method: "post",
+      url: API_URL_LOGOUT,
+      headers: { "X-CSRFToken": `${token}` }
+    });
+  } catch (error) {
+    throw new Error(errorParse(error));
+  }
+};
+
+export const getSocialIdApi = async () => {
+  try {
+    const { data, status, statusText } = await axios.get(API_URL_SOCIAL_LINKS);
+
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+
+    return data;
+  } catch (error) {
+    throw new Error(errorParse(error));
   }
 };
 
 export const user = async () => {
   try {
-    const token = await getToken("/api/token");
-    const { data, status, statusText, headers } = await axios.post(
-      `${API_URL_USER}`,
-      {
-        headers: { "X-CSRFToken": `${token}` }
-      }
-    );
+    const token = Cookie.get("csrftoken");
+
+    const { data, status, statusText } = await axios({
+      method: "post",
+      url: API_URL_LOGOUT,
+      headers: { "X-CSRFToken": token }
+    });
 
     if (status !== 200) {
-      throw new Error();
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
     }
 
-    console.log({ data, status, statusText, headers });
+    return data;
+  } catch (error) {
+    throw new Error("Ошибка отправки запроса...");
+  }
+};
+
+export const sendSocialCodeApi = async (code, state) => {
+  try {
+    const { data, status, statusText } = await axios({
+      method: "post",
+      url: API_URL_USER,
+      headers: { "X-CSRFToken": state },
+      data: { code }
+    });
+
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+
     return data;
   } catch (error) {
     throw new Error("Ошибка отправки запроса...");
