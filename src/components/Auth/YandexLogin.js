@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withCookies } from "react-cookie";
+import Cookie from "js-cookie";
 import { Form } from "./styles";
 import yandexIcon from "./img/soc-yandex.svg";
 import { getTokenApi, sendSocialCodeApi } from "../../services/api";
@@ -23,14 +23,10 @@ class YandexLogin extends Component {
   }
 
   getCode = async () => {
-    const { redirectUri, clientId, onFailure, cookies } = this.props;
-    console.log(cookies.getAll());
+    const { redirectUri, clientId, onFailure } = this.props;
     try {
-      const response = await getTokenApi();
-      console.log({ response });
-      console.log(cookies.getAll());
-
-      const token = cookies.get("csrftoken");
+      await getTokenApi();
+      const token = Cookie.get("csrftoken");
       if (!token) throw new Error("Token request error.");
 
       const popup = this.openPopup();
@@ -107,4 +103,4 @@ class YandexLogin extends Component {
   }
 }
 
-export default withCookies(YandexLogin);
+export default YandexLogin;

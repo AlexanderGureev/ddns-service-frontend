@@ -13,7 +13,16 @@ body {
 #root {
   position: relative;
 }
-
+.ant-popover-inner-content {
+  padding: 0 !important;
+}
+.ant-popover-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  text-align: center;
+}
 .ant-tooltip-arrow {
   border-right-color: rgba(9, 20, 41, 0.7) !important;
   background-color: transparent !important;

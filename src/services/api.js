@@ -13,6 +13,7 @@ const API_URL_LOGOUT = `${API_URL}/logout/`;
 const API_URL_SOCIAL_LINKS = `${API_URL}/social/login/links/`;
 const API_URL_USER = `${API_URL}/user/`;
 const API_URL_USER_IS_AUTH = `${API_URL}/user/`;
+const API_URL_USER_EMAIL_CONFIRM = `${API_URL}/registration/verify-email/`;
 
 const errorParse = error => {
   if (!error.response)
@@ -33,8 +34,28 @@ const noop = async () =>
 
 export const authStatusApi = async () => {
   try {
-    const { data } = await axios.get(API_URL_USER_IS_AUTH);
-    return { status: true, data };
+    const {
+      data: {
+        email,
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        avatar_path: avatarPath,
+        email_verified: emailConfirm
+      }
+    } = await axios.get(API_URL_USER_IS_AUTH);
+
+    return {
+      status: true,
+      data: {
+        email,
+        username,
+        firstName,
+        lastName,
+        avatarPath,
+        emailConfirm
+      }
+    };
   } catch (error) {
     // throw new Error(errorParse(error));
     return false;
@@ -120,7 +141,18 @@ export const user = async () => {
   try {
     const token = Cookie.get("csrftoken");
 
-    const { data, status, statusText } = await axios({
+    const {
+      data: {
+        email,
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        avatar_path: avatarPath,
+        email_verified: emailConfirm
+      },
+      status,
+      statusText
+    } = await axios({
       method: "post",
       url: API_URL_LOGOUT,
       headers: { "X-CSRFToken": token }
@@ -132,7 +164,14 @@ export const user = async () => {
       );
     }
 
-    return data;
+    return {
+      email,
+      username,
+      firstName,
+      lastName,
+      avatarPath,
+      emailConfirm
+    };
   } catch (error) {
     throw new Error("Ошибка отправки запроса...");
   }
@@ -154,6 +193,29 @@ export const sendSocialCodeApi = async (code, state) => {
     }
 
     return data;
+  } catch (error) {
+    throw new Error("Ошибка отправки запроса...");
+  }
+};
+
+export const confirmEmailApi = async code => {
+  try {
+    const token = Cookie.get("csrftoken");
+
+    const { status, statusText } = await axios({
+      method: "post",
+      url: API_URL_USER_EMAIL_CONFIRM,
+      headers: { "X-CSRFToken": token },
+      data: { key: code }
+    });
+
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+
+    return { emailConfirm: true };
   } catch (error) {
     throw new Error("Ошибка отправки запроса...");
   }

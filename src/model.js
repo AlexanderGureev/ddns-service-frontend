@@ -3,7 +3,8 @@ import {
   authStatusApi,
   logoutApi,
   registrationApi,
-  loginApi
+  loginApi,
+  confirmEmailApi
 } from "./services/api";
 
 const effects = {
@@ -39,12 +40,26 @@ const effects = {
     } catch (error) {
       console.log(error.message);
     }
+  }),
+  confirmEmailAction: effect(async (dispatch, payload, getState) => {
+    try {
+      const response = await confirmEmailApi(payload);
+      dispatch.session.updateProfileAction(response);
+    } catch (error) {
+      console.log(error.message);
+    }
   })
 };
 
 const model = {
   session: {
-    profile: { email: "", username: "", firstName: "", lastName: "" },
+    profile: {
+      email: "",
+      username: "",
+      firstName: "",
+      lastName: "",
+      emailConfirm: false
+    },
     isAuth: false,
     updateProfileAction: (state, payload) => ({
       ...state,

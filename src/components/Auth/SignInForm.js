@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, message as messageBlock } from "antd";
-import { withCookies } from "react-cookie";
 import { useAction } from "easy-peasy";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
@@ -15,7 +14,7 @@ import {
   Form
 } from "./styles";
 
-const SignInForm = ({ parallaxLayer, form, cookies }) => {
+const SignInForm = ({ parallaxLayer, form }) => {
   const { loginUserAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
 
@@ -91,4 +90,4 @@ const SignInForm = ({ parallaxLayer, form, cookies }) => {
   );
 };
 
-export default withCookies(AntdForm.create({ name: "authorize" })(SignInForm));
+export default AntdForm.create({ name: "authorize" })(SignInForm);

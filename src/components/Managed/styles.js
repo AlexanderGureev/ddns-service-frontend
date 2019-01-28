@@ -1,4 +1,4 @@
-import { Layout, Menu, Icon, Input } from "antd";
+import { Layout, Menu, Icon, Input, Alert } from "antd";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -74,13 +74,14 @@ export const StyledBtn = styled.div`
   align-items: center;
   cursor: pointer;
   border-radius: 5px;
-  filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.15));
   background: #fff;
   margin: 0 20px;
   transition: 0.3s ease;
 
   &:hover {
-    background: #449ceeb0;
+    background: #b4bdc538;
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.15));
   }
   @media (max-width: 400px) {
     margin: 0 10px;
@@ -105,10 +106,6 @@ const BtnText = styled.span`
   align-items: center;
   padding: 0 10px;
   transition: 0.3s ease;
-
-  &:hover {
-    color: white;
-  }
 `;
 
 export const ShortProfile = styled.div`
@@ -180,6 +177,8 @@ export const StyledHeader = styled(Header)`
   background: #fff;
   padding: 0;
   position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 `;
 const HeaderContainer = styled.div`
   display: flex;
@@ -189,7 +188,7 @@ const HeaderContainer = styled.div`
 export const Search = styled(Input.Search)`
   width: 350px;
   margin: 0 50px;
-  filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.15));
   font-size: 16px;
   font-family: "Montserrat";
   font-weight: 700;
@@ -218,7 +217,7 @@ export const Search = styled(Input.Search)`
     }
 
     &:hover {
-      background: #449ceeb0;
+      background: #b4bdc538;
     }
   }
 
@@ -250,7 +249,7 @@ const MenuLink = styled(Link)`
   font-family: "Montserrat";
   font-weight: 500;
   color: #fff !important;
-  padding-left: 27px;
+  padding-left: 28px;
 `;
 export const MenuContainer = styled(Sider)`
   transition: none;
@@ -259,7 +258,10 @@ export const MenuContainer = styled(Sider)`
     #1f5ad1,
     rgba(23, 56, 122, 0.85)
   );
-  width: 295px;
+  box-shadow: 3px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  min-width: 81px !important;
+
   .ant-menu {
     background: transparent;
     border-right: 0;
@@ -267,6 +269,13 @@ export const MenuContainer = styled(Sider)`
     .ant-menu-item {
       transition: padding 0.3s ease;
       padding: 0 0 0 25px !important;
+
+      &:active {
+        background: #3b30a191 !important;
+      }
+      &::after {
+        display: none;
+      }
     }
   }
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
@@ -288,6 +297,7 @@ export const StyledContent = styled(Content)`
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  position: relative;
 `;
 
 LogoContainer.Text = Text;
@@ -458,6 +468,42 @@ const InfoBlockText = styled(InfoBlockTitle)`
 
   @media (max-width: 376px) {
     font-size: 12px;
+  }
+`;
+
+export const StyledAlert = styled(Alert)`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  font-family: "Montserrat";
+  font-weight: 400;
+
+  @media (max-width: 1200px) {
+    position: fixed;
+  }
+
+  @media (max-width: 560px) {
+    font-size: 10px;
+  }
+  span {
+    @media (max-width: 400px) {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      max-width: 120px;
+    }
+  }
+  a {
+    right: 20px;
+    @media (max-width: 1200px) {
+      right: 100px;
+    }
+    @media (max-width: 560px) {
+      font-size: 10px;
+      top: 5px;
+    }
   }
 `;
 

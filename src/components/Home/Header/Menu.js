@@ -55,7 +55,9 @@ const Menu = () => {
           </TopMenu.Item>
           <TopMenu.Item btn>
             {isAuth ? (
-              <a onClick={logout}>Log out</a>
+              <a href="/" onClick={logout}>
+                Log out
+              </a>
             ) : (
               <Link to="/login">Sign up</Link>
             )}

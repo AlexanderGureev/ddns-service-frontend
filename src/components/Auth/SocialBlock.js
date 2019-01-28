@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { message } from "antd";
 import YandexLogin from "./YandexLogin";
 import VkLogin from "./VkLogin";
@@ -6,7 +6,7 @@ import GoogleLogin from "./GoogleLogin";
 import FacebookLogin from "./FacebookLogin";
 import { Form } from "./styles";
 
-const SocialBlock = props => {
+const SocialBlock = memo(props => {
   const yandexOnFailed = error => message.error(error);
   const yandexOnSuccess = response => console.log(response);
 
@@ -39,6 +39,6 @@ const SocialBlock = props => {
       <Form.SocialBlock.Footer>or</Form.SocialBlock.Footer>
     </Form.SocialBlock>
   );
-};
+});
 
 export default SocialBlock;

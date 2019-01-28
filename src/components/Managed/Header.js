@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useMedia } from "react-use";
 import { StyledHeader, StyledBtn, Search } from "./styles";
 import shoppingIcon from "./img/shopping-cart.svg";

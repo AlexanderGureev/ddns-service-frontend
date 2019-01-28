@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, Select, message as messageBlock } from "antd";
-import { withCookies } from "react-cookie";
 import { useAction } from "easy-peasy";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
@@ -16,7 +15,7 @@ import {
   Form
 } from "./styles";
 
-const SignUpForm = ({ parallaxLayer, form, cookies }) => {
+const SignUpForm = ({ parallaxLayer, form }) => {
   const { registerUserAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
@@ -143,4 +142,4 @@ const SignUpForm = ({ parallaxLayer, form, cookies }) => {
   );
 };
 
-export default withCookies(AntdForm.create({ name: "register" })(SignUpForm));
+export default AntdForm.create({ name: "register" })(SignUpForm);

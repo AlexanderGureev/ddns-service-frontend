@@ -14,7 +14,9 @@ const Auth = () => {
   const { isAuth } = useStore(state => state.session);
   const parallaxLayer = useRef();
 
-  return !isAuth ? (
+  if (isAuth) return <Redirect to="/managed" />;
+
+  return (
     <Parallax
       pages={3}
       scrolling={false}
@@ -70,8 +72,6 @@ const Auth = () => {
         <GoToHomeBtn />
       </ParallaxPositioningLayer>
     </Parallax>
-  ) : (
-    <Redirect to="/managed" />
   );
 };
 

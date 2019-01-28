@@ -17,6 +17,13 @@ export const PreloaderContainer = styled.div`
   align-items: center;
   background: url(${loadingBg}) no-repeat center center;
   background-size: cover;
+
+  @media (max-width: 1200px) {
+    font-size: 40px;
+  }
+  @media (max-width: 560px) {
+    font-size: 23px;
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -30,11 +37,24 @@ export const Text = styled.p`
   font-family: "Montserrat";
   font-weight: 500;
   font-size: 40px;
+  @media (max-width: 1200px) {
+    font-size: 30px;
+  }
+  @media (max-width: 560px) {
+    font-size: 18px;
+  }
 `;
 export const StatusCode = styled(Text)`
   font-size: 120px;
   font-weight: 700;
   margin: 0;
+
+  @media (max-width: 1200px) {
+    font-size: 100px;
+  }
+  @media (max-width: 560px) {
+    font-size: 80px;
+  }
 `;
 
 export const StyledCode = styled.code`
@@ -56,5 +76,12 @@ export const HomeLink = styled(Link)`
   &:hover {
     color: white;
     background: rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 1200px) {
+    font-size: 16px;
+  }
+  @media (max-width: 560px) {
+    font-size: 14px;
   }
 `;

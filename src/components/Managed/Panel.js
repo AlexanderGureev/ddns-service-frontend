@@ -11,11 +11,11 @@ const Panel = props => {
   const [clicked, setClicked] = useState(false);
   const isMedium = useMedia("(max-width: 920px)");
 
+  console.log(props);
   const toggleVisible = () => {
     setVisible(!visible);
   };
   const toggleClicked = () => setClicked(!clicked);
-
   if (isMedium && !visible && !clicked) {
     setVisible(true);
   }

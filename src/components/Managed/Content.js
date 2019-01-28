@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { StyledContent } from "./styles";
+import ConfirmEmail from "./ConfirmEmail";
 import MainPage from "./MainPage";
 import ProfilePage from "./ProfilePage";
 import contentBg from "./img/content-bg-managed.svg";
@@ -16,6 +17,7 @@ const Content = props => {
         <Route path={url} exact component={MainPage} />
         <Route path={`${url}/account`} component={ProfilePage} />
       </Switch>
+      <ConfirmEmail />
     </StyledContent>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Form } from "./styles";
 
 const compareToFirstPassword = form => (rule, value, callback) => {
