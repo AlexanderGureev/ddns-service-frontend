@@ -2,10 +2,8 @@ import axios from "axios";
 import Cookie from "js-cookie";
 
 axios.defaults.withCredentials = true;
-// const { NODE_ENV = "development" } = process.env;
 
 const API_URL = "https://accounts.best-service.online/v1/rest-auth";
-
 const API_URL_CSRF = "https://accounts.best-service.online/v1/csrf";
 const API_URL_REGISTRATION = `${API_URL}/registration/`;
 const API_URL_LOGIN = `${API_URL}/login/`;
@@ -25,12 +23,6 @@ const errorParse = error => {
   }
   return "Request processing error, try again later.";
 };
-const noop = async () =>
-  new Promise((res, rej) =>
-    setTimeout(() => {
-      res();
-    }, 2000)
-  );
 
 export const authStatusApi = async () => {
   try {
@@ -57,7 +49,6 @@ export const authStatusApi = async () => {
       }
     };
   } catch (error) {
-    // throw new Error(errorParse(error));
     return false;
   }
 };
@@ -73,7 +64,7 @@ export const getTokenApi = async () => {
 export const registrationApi = async body => {
   try {
     const { data, status, statusText } = await axios.post(
-      `${API_URL_REGISTRATION}`,
+      API_URL_REGISTRATION,
       body
     );
 
@@ -91,10 +82,7 @@ export const registrationApi = async body => {
 
 export const loginApi = async body => {
   try {
-    const { data, status, statusText } = await axios.post(
-      `${API_URL_LOGIN}`,
-      body
-    );
+    const { data, status, statusText } = await axios.post(API_URL_LOGIN, body);
 
     if (status !== 200) {
       throw new Error(
@@ -111,11 +99,17 @@ export const loginApi = async body => {
 export const logoutApi = async () => {
   try {
     const token = Cookie.get("csrftoken");
-    await axios({
+    const { status, statusText } = await axios({
       method: "post",
       url: API_URL_LOGOUT,
-      headers: { "X-CSRFToken": `${token}` }
+      headers: { "X-CSRFToken": token }
     });
+
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
   } catch (error) {
     throw new Error(errorParse(error));
   }

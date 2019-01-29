@@ -10,7 +10,8 @@ import ResetPasswordForm from "./ResetPasswordForm";
 import CircleLayer from "./CircleLayer";
 import GoToHomeBtn from "./GoToHomeBtn";
 
-const Auth = () => {
+const Auth = props => {
+  const { invert = false } = props.location.state || {};
   const { isAuth } = useStore(state => state.session);
   const parallaxLayer = useRef();
 
@@ -48,12 +49,12 @@ const Auth = () => {
         speed={0}
       />
 
-      <ParallaxPositioningLayer offset={0} speed={0}>
-        <SignUpForm parallaxLayer={parallaxLayer} />
+      <ParallaxPositioningLayer offset={invert ? 1 : 0} speed={0}>
+        <SignUpForm {...props} parallaxLayer={parallaxLayer} />
       </ParallaxPositioningLayer>
 
-      <ParallaxPositioningLayer offset={1} speed={0}>
-        <SignInForm parallaxLayer={parallaxLayer} />
+      <ParallaxPositioningLayer offset={invert ? 0 : 1} speed={0}>
+        <SignInForm {...props} parallaxLayer={parallaxLayer} />
       </ParallaxPositioningLayer>
 
       <ParallaxPositioningLayer offset={2} speed={0}>

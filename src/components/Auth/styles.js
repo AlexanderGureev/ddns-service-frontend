@@ -126,6 +126,10 @@ export const Form = styled(AntdForm)`
         @media (max-width: 980px) {
           font-size: 12px;
         }
+
+        @media (max-width: 460px) {
+          width: 120px !important;
+        }
       }
     }
   }

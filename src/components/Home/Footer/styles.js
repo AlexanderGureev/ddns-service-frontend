@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Select as AntdSelect, Input as AntdInput } from "antd";
+import { Link } from "react-router-dom";
 import { ReactComponent as FooterCircles } from "./img/footer-bg-circles.svg";
 import { ReactComponent as MiniLogoIcon } from "../Header/img/header-logo-white.svg";
 
@@ -38,11 +40,25 @@ export const FooterBottomContainer = styled.div`
 `;
 
 export const ShortForm = styled.form`
+  display: flex;
+  align-items: center;
   @media (max-width: 870px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .ant-row {
+    margin-right: 20px !important;
+    width: 300px !important;
+
+    @media (max-width: 870px) {
+      margin-right: 0px !important;
+    }
+    @media (max-width: 470px) {
+      width: 250px !important;
+    }
   }
 `;
 
@@ -75,7 +91,7 @@ export const HeaderForm = styled.p`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled(AntdInput)`
   border: none;
   color: #8f8f8f;
   filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
@@ -83,21 +99,43 @@ export const Input = styled.input`
   border-radius: 10px;
   font-family: "Montserrat";
   font-weight: 700;
-  padding: 10px 30px;
+  padding: 12px 30px;
   margin-right: 20px;
   outline: none;
+  transition: none;
 
   @media (max-width: 870px) {
-    width: 320px;
     margin: 0 0 20px 0;
   }
   @media (max-width: 470px) {
     font-size: 14px;
-    width: 250px;
   }
 `;
+export const Select = styled(AntdSelect)`
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 16px;
+  color: #8f8f8f;
+  filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
+  .ant-select-selection {
+    border-radius: 10px;
+    border: none;
+    padding: 12px 30px !important;
+    transition: none;
+  }
+  .ant-select-selection--single {
+    height: auto !important;
+  }
+  .ant-select-selection__rendered {
+    line-height: 25px !important ;
+    margin: 0;
+  }
 
-export const Button = styled.button`
+  @media (max-width: 470px) {
+    font-size: 14px;
+  }
+`;
+export const ButtonLink = styled(Link)`
   background: linear-gradient(140deg, #2c3ff9, #3673f1);
   border-radius: 10px;
   filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
@@ -106,12 +144,26 @@ export const Button = styled.button`
   font-size: 18px;
   font-family: "Montserrat";
   font-weight: 800;
-  padding: 10px 60px;
+  padding: 12px 70px;
   outline: none;
   cursor: pointer;
+  white-space: nowrap;
+  text-align: center;
+
+  &:hover {
+    color: white;
+  }
 
   @media (max-width: 1200px) {
-    padding: 10px 40px;
+    padding: 12px 40px;
+  }
+
+  @media (max-width: 870px) {
+    width: 100%;
+    margin: 20px 0;
+  }
+  @media (max-width: 470px) {
+    font-size: 16px;
   }
 `;
 
@@ -188,6 +240,7 @@ const SocialBarIcon = styled.div`
   @media (max-width: 780px) {
     width: 35px;
     height: 35px;
+    margin-right: 10px;
   }
 
   @media (max-width: 470px) {

@@ -8,14 +8,14 @@ import {
   HomeLink
 } from "./styles";
 
-const NoMatch = ({ location }) => (
+const NoMatch = ({ location }, disableLink = false) => (
   <Preloader>
     <ContentWrapper>
       <StatusCode>404</StatusCode>
       <Text>
         No match for <StyledCode>{location.pathname}</StyledCode>
       </Text>
-      <HomeLink to="/">Home</HomeLink>
+      {!disableLink && <HomeLink to="/">Home</HomeLink>}
     </ContentWrapper>
   </Preloader>
 );

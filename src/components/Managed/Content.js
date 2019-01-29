@@ -5,6 +5,7 @@ import ConfirmEmail from "./ConfirmEmail";
 import MainPage from "./MainPage";
 import ProfilePage from "./ProfilePage";
 import contentBg from "./img/content-bg-managed.svg";
+import NoMatch from "../Common/NoMatch";
 
 const Content = props => {
   const {
@@ -16,8 +17,10 @@ const Content = props => {
       <Switch>
         <Route path={url} exact component={MainPage} />
         <Route path={`${url}/account`} component={ProfilePage} />
+        <Route path={`${url}/verify`} component={MainPage} />
+        <Route component={NoMatch} disableLink />
       </Switch>
-      <ConfirmEmail />
+      <ConfirmEmail {...props} />
     </StyledContent>
   );
 };

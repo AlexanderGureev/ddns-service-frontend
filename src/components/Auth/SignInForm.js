@@ -14,7 +14,8 @@ import {
   Form
 } from "./styles";
 
-const SignInForm = ({ parallaxLayer, form }) => {
+const SignInForm = ({ parallaxLayer, form, location: { state = {} } }) => {
+  const { invert = false } = state;
   const { loginUserAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +50,12 @@ const SignInForm = ({ parallaxLayer, form }) => {
     });
   };
 
+  const goToNextForm = index => {
+    form.resetFields();
+    parallaxLayer.current.scrollTo(index);
+  };
   return (
-    <ParallaxLayer offset={0.3} speed={0.3}>
+    <ParallaxLayer offset={invert ? 0 : 0.3} speed={0.3}>
       <LayerContainer>
         <FormWrapper width={isBig ? 60 : 80}>
           {isLarge && <LeftPartForm src={signInFormBg} />}
@@ -72,13 +77,11 @@ const SignInForm = ({ parallaxLayer, form }) => {
               </Form.Button>
               <Form.TextContainer>
                 <Form.TextContainer.Text
-                  onClick={() => parallaxLayer.current.scrollTo(0)}
+                  onClick={() => goToNextForm(invert ? 1 : 0)}
                 >
                   Not a member? Sign up
                 </Form.TextContainer.Text>
-                <Form.TextContainer.Text
-                  onClick={() => parallaxLayer.current.scrollTo(2)}
-                >
+                <Form.TextContainer.Text onClick={() => goToNextForm(2)}>
                   Recover my password
                 </Form.TextContainer.Text>
               </Form.TextContainer>

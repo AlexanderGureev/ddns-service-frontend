@@ -47,6 +47,7 @@ const effects = {
       dispatch.session.updateProfileAction(response);
     } catch (error) {
       console.log(error.message);
+      throw new Error("Email verification failed.");
     }
   })
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, Select, message as messageBlock } from "antd";
@@ -15,10 +15,26 @@ import {
   Form
 } from "./styles";
 
-const SignUpForm = ({ parallaxLayer, form }) => {
+const SignUpForm = ({ parallaxLayer, form, location: { state = {} } }) => {
+  const { invert = false, data = null } = state;
   const { registerUserAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
+  const [checkedLater, setCheckedLater] = useState(false);
+  const [checkedPolicy, setCheckedPolicy] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
+
+  useEffect(
+    () => {
+      if (data && Object.values(state.data).length) {
+        form.setFields({
+          hostname: { value: state.data.hostname },
+          domain: { value: state.data.domain }
+        });
+        form.getFieldInstance("email").focus();
+      }
+    },
+    [state]
+  );
 
   const showMessage = (text, type = "success") => {
     const fn = {
@@ -55,11 +71,13 @@ const SignUpForm = ({ parallaxLayer, form }) => {
 
   const goToNextForm = () => {
     form.resetFields();
-    parallaxLayer.current.scrollTo(1);
+    setCheckedPolicy(false);
+    setCheckedLater(false);
+    parallaxLayer.current.scrollTo(invert ? 0 : 1);
   };
 
   return (
-    <ParallaxLayer offset={0} speed={0.3}>
+    <ParallaxLayer offset={invert ? 0.3 : 0} speed={0.3}>
       <LayerContainer>
         <FormWrapper width={isLarge ? 80 : 90}>
           {isLarge && <LeftPartForm src={signUpFormBg} />}
@@ -107,17 +125,21 @@ const SignUpForm = ({ parallaxLayer, form }) => {
                     <Form.CheckBoxContainer.CheckBox
                       onChange={() => {
                         form.setFields({ hostname: { value: "" } });
+                        setCheckedLater(!checkedLater);
                       }}
+                      checked={checkedLater}
                     >
                       Create my hostname later
                     </Form.CheckBoxContainer.CheckBox>
                   </Form.CheckBoxContainer>
                 </DecoratedFormItem>
 
-                <DecoratedFormItem type="policyСonfirm" form={form}>
+                <DecoratedFormItem type="policy" form={form}>
                   <Form.CheckBoxContainer>
                     <Form.CheckBoxContainer.CheckBox
-                      isError={form.getFieldError("policyСonfirm")}
+                      isError={form.getFieldError("policy")}
+                      onChange={() => setCheckedPolicy(!checkedPolicy)}
+                      checked={checkedPolicy}
                     >
                       I agree to the Terms of Service and Privacy Policy. I also
                       agree that I will only create one free account.
@@ -125,6 +147,7 @@ const SignUpForm = ({ parallaxLayer, form }) => {
                   </Form.CheckBoxContainer>
                 </DecoratedFormItem>
               </Form.ContentWrapper>
+
               <Form.Button htmlType="submit" loading={loading}>
                 Sign up
               </Form.Button>

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { Form } from "./styles";
 
 const compareToFirstPassword = form => (rule, value, callback) => {
@@ -21,7 +21,7 @@ const hostnameValidate = form => (rule, value, callback) => {
   }
 };
 
-const policyСonfirmValidate = form => (rule, value, callback) => {
+const policyСonfirmValidate = () => (rule, value, callback) => {
   if (!value) {
     callback("");
   } else {
@@ -85,7 +85,10 @@ const getOptions = (type, form, disableRules = false) => {
       ],
       hidden: form.getFieldValue("createLater")
     },
-    policyСonfirm: { rules: [{ validator: policyСonfirmValidate(form) }] },
+    policy: {
+      initialValue: false,
+      rules: [{ validator: policyСonfirmValidate(form) }]
+    },
     createLater: { initialValue: false },
     domain: {
       initialValue: ".shrt.zone",

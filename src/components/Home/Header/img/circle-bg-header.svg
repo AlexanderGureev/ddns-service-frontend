@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1133.444" height="1047.129" viewBox="0 0 1133.444 1047.129">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.21" y1="0.128" x2="0.879" y2="0.965" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c8cdfd" stop-opacity="0.471"/>
+      <stop offset="1" stop-color="#001193" stop-opacity="0.722"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_496" data-name="Group 496" transform="translate(-616.599 399.877)">
+    <circle id="Ellipse_195" data-name="Ellipse 195" cx="172.689" cy="172.689" r="172.689" transform="translate(1388.759 200.346)" opacity="0.348" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_196" data-name="Ellipse 196" cx="138.481" cy="138.481" r="138.481" transform="translate(777.916 -383.972)" opacity="0.386" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_197" data-name="Ellipse 197" cx="59.46" cy="59.46" r="59.46" transform="translate(879.504 313.427)" opacity="0.586" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_198" data-name="Ellipse 198" cx="69.047" cy="69.047" r="69.047" transform="translate(1404.877 -276.074)" opacity="0.426" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_199" data-name="Ellipse 199" cx="35.15" cy="35.15" r="35.15" transform="translate(1007.594 137.792)" opacity="0.421" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_201" data-name="Ellipse 201" cx="37.547" cy="37.547" r="37.547" transform="translate(1154.633 496.656)" opacity="0.554" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_202" data-name="Ellipse 202" cx="38.917" cy="38.917" r="38.917" transform="translate(1332.999 95.478)" opacity="0.432" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_204" data-name="Ellipse 204" cx="59.46" cy="59.46" r="59.46" transform="translate(632.504 512.427)" opacity="0.371" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_205" data-name="Ellipse 205" cx="42.46" cy="42.46" r="42.46" transform="translate(1135.504 -80.573)" opacity="0.603" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_206" data-name="Ellipse 206" cx="37.547" cy="37.547" r="37.547" transform="translate(1607.633 -52.344)" opacity="0.554" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

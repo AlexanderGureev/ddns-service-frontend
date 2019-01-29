@@ -1,9 +1,30 @@
 import styled from "styled-components";
 import { Drawer } from "antd";
 import React from "react";
-import { useSpring, animated } from "react-spring/hooks";
+import { animated } from "react-spring/hooks";
 import { ReactComponent as MenuBg } from "./img/menu-bg.svg";
+import { ReactComponent as CircleBg } from "./img/circle-bg-header.svg";
 
+export const CircleBackground = styled(CircleBg)`
+  position: absolute;
+  right: 0;
+  top: -100px;
+  filter: blur(3px);
+  opacity: 0.7;
+  overflow-x: hidden;
+  width: 70%;
+  height: 100vh;
+
+  @media (max-width: 1400px) {
+    width: 50%;
+  }
+  @media (max-width: 1100px) {
+    width: 30%;
+  }
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+`;
 export const HeaderWrapper = styled.div`
   width: 100%;
   height: 100vh;
@@ -84,11 +105,7 @@ export const TopMenu = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-right: 80px;
-
-  @media (max-width: 1300px) {
-    margin-right: 40px;
-  }
+  padding: 20px 30px;
 `;
 const TopMenuItem = styled.p`
   a {
@@ -105,9 +122,10 @@ const TopMenuItem = styled.p`
     }
   }
   position: relative;
+  text-transform: uppercase;
   font-size: 18px;
   font-family: "Montserrat";
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   margin: 0;
   margin-right: 10px;
@@ -115,8 +133,22 @@ const TopMenuItem = styled.p`
   background: ${props => (props.btn ? "rgba(17, 2, 148, 0.3)" : "none")};
   transition: 0.3s ease;
 
+  &::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.3);
+    width: 0%;
+    left: 10%;
+    transition: 0.3s ease;
+  }
+
   &:hover {
     background: ${props => (props.btn ? "rgba(255, 255, 255, 0.3)" : "none")};
+
+    &::after {
+      width: ${props => (props.btn ? "0%" : "80%")};
+    }
   }
 
   @media (max-width: 1600px) {
@@ -132,10 +164,11 @@ TopMenu.Item = TopMenuItem;
 export const MenuBtn = styled.img.attrs(({ src }) => ({ src }))`
   width: 35px;
   height: auto;
-  margin: 30px 0 30px 100px;
+  position: relative;
+  left: 40px;
 
-  @media (max-width: 900px) {
-    margin: 30px 0 30px 70px;
+  @media (max-width: 1100px) {
+    top: 20px;
   }
 `;
 
@@ -222,7 +255,7 @@ export const HeaderButton = styled(animated.div)`
   color: white;
   text-transform: uppercase;
   padding: 13px 60px;
-  filter: drop-shadow(5px 10px 25px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(5px 10px 35px rgba(0, 102, 242, 0.2));
   cursor: pointer;
   border: none;
   border-radius: 30px;
