@@ -4,13 +4,23 @@ import {
   logoutApi,
   registrationApi,
   loginApi,
-  confirmEmailApi
+  confirmEmailApi,
+  resetPasswordApi,
+  sendSocialCodeApi
 } from "./services/api";
 
 const effects = {
   registerUserAction: effect(async (dispatch, payload) => {
     try {
       await registrationApi(payload);
+      dispatch.session.authorizeUserAction();
+    } catch (error) {
+      throw new Error(error);
+    }
+  }),
+  socialAuthorizeUserAction: effect(async (dispatch, payload) => {
+    try {
+      await sendSocialCodeApi(payload);
       dispatch.session.authorizeUserAction();
     } catch (error) {
       throw new Error(error);
@@ -48,6 +58,13 @@ const effects = {
     } catch (error) {
       console.log(error.message);
       throw new Error("Email verification failed.");
+    }
+  }),
+  resetPasswordAction: effect(async (dispatch, payload, getState) => {
+    try {
+      await resetPasswordApi(payload);
+    } catch (error) {
+      console.log(error);
     }
   })
 };

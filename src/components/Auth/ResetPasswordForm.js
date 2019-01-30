@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/addons";
 import { useMedia } from "react-use";
+import { Form as AntdForm, message as messageBlock } from "antd";
+import { useAction } from "easy-peasy";
 import resetFormBg from "./img/bg-form-reset.svg";
 import {
   LayerContainer,
@@ -9,11 +11,50 @@ import {
   RightPartForm,
   Form
 } from "./styles";
+import { DecoratedFormItem } from "./DecoratedFormItem";
 
 const ResetPasswordForm = props => {
-  const { parallaxLayer } = props;
+  const { resetPasswordAction } = useAction(dispatch => dispatch.session);
+  const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
   const isBig = useMedia("(min-width: 1500px)");
+  const { parallaxLayer, form } = props;
+
+  const showMessage = (text, type = "success") => {
+    const fn = {
+      success: messageBlock.success,
+      error: messageBlock.error
+    };
+    fn[type](text, 5);
+  };
+
+  const resetPassword = async body => {
+    try {
+      setLoading(true);
+      await resetPasswordAction(body);
+      setLoading(false);
+      showMessage("Password reset information sent to your email.");
+    } catch ({ message }) {
+      setLoading(false);
+      showMessage(message, "error");
+    }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    form.validateFields((err, values) => {
+      if (!err) {
+        resetPassword(values);
+      }
+      const [invalidField] = Object.keys(err);
+      form.getFieldInstance(invalidField).focus();
+    });
+  };
+
+  const goToNextForm = index => {
+    form.resetFields();
+    parallaxLayer.current.scrollTo(index);
+  };
 
   return (
     <ParallaxLayer offset={0.6} speed={0.3}>
@@ -21,7 +62,7 @@ const ResetPasswordForm = props => {
         <FormWrapper width={isBig ? 50 : isLarge ? 75 : 80}>
           {isLarge && <LeftPartForm src={resetFormBg} />}
           <RightPartForm>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Form.Header>Reset password</Form.Header>
               <Form.Caption>
                 <Form.Caption.Text>
@@ -31,17 +72,20 @@ const ResetPasswordForm = props => {
                   password contact us or send us an email.
                 </Form.Caption.Text>
               </Form.Caption>
-              <Form.Input placeholder="Email" />
-              <Form.Button>Reset password</Form.Button>
+
+              <DecoratedFormItem type="email" form={form}>
+                <Form.Input placeholder="Email" type="text" />
+              </DecoratedFormItem>
+
+              <Form.Button htmlType="submit" loading={loading}>
+                Reset password
+              </Form.Button>
+
               <Form.TextContainer>
-                <Form.TextContainer.Text
-                  onClick={() => parallaxLayer.current.scrollTo(1)}
-                >
+                <Form.TextContainer.Text onClick={() => goToNextForm(1)}>
                   Sign in
                 </Form.TextContainer.Text>
-                <Form.TextContainer.Text
-                  onClick={() => parallaxLayer.current.scrollTo(0)}
-                >
+                <Form.TextContainer.Text onClick={() => goToNextForm(0)}>
                   Not a member? Sign up
                 </Form.TextContainer.Text>
               </Form.TextContainer>
@@ -53,4 +97,4 @@ const ResetPasswordForm = props => {
   );
 };
 
-export default ResetPasswordForm;
+export default AntdForm.create()(ResetPasswordForm);

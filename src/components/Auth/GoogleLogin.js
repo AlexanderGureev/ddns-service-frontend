@@ -1,61 +1,85 @@
-import React, { useEffect } from "react";
-import { Form } from "./styles";
+import React, { useState, useLayoutEffect, useRef } from "react";
+import { message } from "antd";
+import { useAction } from "easy-peasy";
 import googleIcon from "./img/soc-google.svg";
+import { Form } from "./styles";
+import SocialService from "../../services/social";
 
-const GoogleLogin = ({ onFailure, onSuccess }) => {
-  useEffect(() => {
-    googleOAuth2Init();
-  }, []);
+const GoogleLogin = ({
+  requestCodeUrl = "",
+  clientId = "",
+  redirectUri = "",
+  onFailure = () => {},
+  onSuccess = () => {},
+  ...rest
+}) => {
+  const [loading, setLoading] = useState(false);
+  const { socialAuthorizeUserAction } = useAction(dispatch => dispatch.session);
 
-  const googleOAuth2Init = () => {
-    const script = document.createElement("script");
-    script.src = "https://apis.google.com/js/client.js";
-    document.body.appendChild(script);
+  const provider = "google";
+  const loadingIndicator = useRef(() => {});
+  const socialService = new SocialService(requestCodeUrl);
 
-    script.addEventListener("load", gapiInit);
+  const setLoadingIndicator = () => {
+    loadingIndicator.current = message.loading("Signing in...", 0);
+  };
+  const clearLoadingIndicator = () => loadingIndicator.current();
+
+  useLayoutEffect(
+    () => {
+      loading ? setLoadingIndicator() : clearLoadingIndicator();
+    },
+    [loading]
+  );
+
+  const onButtonClick = e => {
+    e.preventDefault();
+    getParams()
+      .then(queryParams => {
+        socialService.getCode(queryParams, success, failure);
+      })
+      .catch(failure);
   };
 
-  const gapiInit = () => {
-    const { gapi } = window;
-    gapi.load("auth2", () => {
-      gapi.auth2
-        .init({
-          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID
-        })
-        .then(
-          () => {
-            console.log("GoogleAuth success initialize!");
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    });
+  const getParams = async () => {
+    if (!clientId || !redirectUri || !requestCodeUrl) {
+      throw new Error("Bad params");
+    }
+    const token = await socialService.getRequestToken();
+
+    const params = {
+      response_type: rest.responseType || "code",
+      scope:
+        rest.scope ||
+        ["profile", "https://www.googleapis.com/auth/userinfo.email"].join(" "),
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      include_granted_scopes: true,
+      state: token
+    };
+
+    const paramsConstructor = new URLSearchParams();
+    Object.keys(params).map(key => paramsConstructor.append(key, params[key]));
+
+    return paramsConstructor.toString();
   };
 
-  const googleSignIn = e => {
-    const { gapi } = window;
-
-    const success = user => console.log(user);
-    const failure = error => console.log(error);
-
-    const GoogleAuth = gapi.auth2.getAuthInstance();
-    GoogleAuth.signIn({
-      scope: "profile email"
-    }).then(success, failure);
+  const success = async (code, state) => {
+    try {
+      setLoading(true);
+      await socialAuthorizeUserAction({ provider, code, state });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      onFailure(error.message);
+    }
   };
 
-  const googleLogout = e => {
-    const { gapi } = window;
-
-    const success = data => console.log(data);
-    const failure = error => console.log(error);
-
-    const GoogleAuth = gapi.auth2.getAuthInstance();
-    GoogleAuth.signOut().then(success, failure);
+  const failure = error => {
+    console.log(error.message || error);
   };
 
-  return <Form.SocialBlock.Icon src={googleIcon} onClick={googleSignIn} />;
+  return <Form.SocialBlock.Icon src={googleIcon} onClick={onButtonClick} />;
 };
 
 export default GoogleLogin;

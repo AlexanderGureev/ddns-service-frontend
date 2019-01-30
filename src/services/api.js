@@ -8,17 +8,29 @@ const API_URL_CSRF = "https://accounts.best-service.online/v1/csrf";
 const API_URL_REGISTRATION = `${API_URL}/registration/`;
 const API_URL_LOGIN = `${API_URL}/login/`;
 const API_URL_LOGOUT = `${API_URL}/logout/`;
-const API_URL_SOCIAL_LINKS = `${API_URL}/social/login/links/`;
 const API_URL_USER = `${API_URL}/user/`;
 const API_URL_USER_IS_AUTH = `${API_URL}/user/`;
 const API_URL_USER_EMAIL_CONFIRM = `${API_URL}/registration/verify-email/`;
+const API_URL_USER_RESET_TOKEN = `${API_URL}/password/reset/`;
+
+const API_URL_SOCIAL_FACEBOOK = `${API_URL}/social/facebook/`;
+const API_URL_SOCIAL_VK = `${API_URL}/social/vk/`;
+const API_URL_SOCIAL_GOOGLE = `${API_URL}/social/google/`;
+const API_URL_SOCIAL_YANDEX = `${API_URL}/social/yandex/`;
+
+const SOCIAL_LINKS = {
+  facebook: API_URL_SOCIAL_FACEBOOK,
+  google: API_URL_SOCIAL_GOOGLE,
+  yandex: API_URL_SOCIAL_YANDEX,
+  vk: API_URL_SOCIAL_VK
+};
 
 const errorParse = error => {
   if (!error.response)
     return error.message || "Request processing error, try again later.";
 
   const { data = null, status } = error.response;
-  if (data && status !== 500) {
+  if (data && status !== 500 && typeof data !== "string") {
     return Object.values(data).join("\n");
   }
   return "Request processing error, try again later.";
@@ -55,7 +67,11 @@ export const authStatusApi = async () => {
 
 export const getTokenApi = async () => {
   try {
-    return await axios.get(API_URL_CSRF);
+    const token = Cookie.get("csrftoken");
+    if (token) return token;
+
+    await axios.get(API_URL_CSRF);
+    return Cookie.get("csrftoken");
   } catch (error) {
     throw new Error("Token request error.");
   }
@@ -98,7 +114,7 @@ export const loginApi = async body => {
 
 export const logoutApi = async () => {
   try {
-    const token = Cookie.get("csrftoken");
+    const token = await getTokenApi();
     const { status, statusText } = await axios({
       method: "post",
       url: API_URL_LOGOUT,
@@ -115,25 +131,9 @@ export const logoutApi = async () => {
   }
 };
 
-export const getSocialIdApi = async () => {
-  try {
-    const { data, status, statusText } = await axios.get(API_URL_SOCIAL_LINKS);
-
-    if (status !== 200) {
-      throw new Error(
-        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
-      );
-    }
-
-    return data;
-  } catch (error) {
-    throw new Error(errorParse(error));
-  }
-};
-
 export const user = async () => {
   try {
-    const token = Cookie.get("csrftoken");
+    const token = await getTokenApi();
 
     const {
       data: {
@@ -171,11 +171,11 @@ export const user = async () => {
   }
 };
 
-export const sendSocialCodeApi = async (code, state) => {
+export const sendSocialCodeApi = async ({ provider, code, state }) => {
   try {
     const { data, status, statusText } = await axios({
       method: "post",
-      url: API_URL_USER,
+      url: SOCIAL_LINKS[provider],
       headers: { "X-CSRFToken": state },
       data: { code }
     });
@@ -188,19 +188,43 @@ export const sendSocialCodeApi = async (code, state) => {
 
     return data;
   } catch (error) {
-    throw new Error("Ошибка отправки запроса...");
+    console.log({ error });
+    throw new Error(errorParse(error));
   }
 };
 
 export const confirmEmailApi = async code => {
   try {
-    const token = Cookie.get("csrftoken");
+    const token = await getTokenApi();
 
     const { status, statusText } = await axios({
       method: "post",
       url: API_URL_USER_EMAIL_CONFIRM,
       headers: { "X-CSRFToken": token },
       data: { key: code }
+    });
+
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+
+    return { emailConfirm: true };
+  } catch (error) {
+    throw new Error("Ошибка отправки запроса...");
+  }
+};
+
+export const resetPasswordApi = async body => {
+  try {
+    const token = await getTokenApi();
+
+    const { status, statusText } = await axios({
+      method: "post",
+      url: API_URL_USER_RESET_TOKEN,
+      headers: { "X-CSRFToken": token },
+      data: body
     });
 
     if (status !== 200) {

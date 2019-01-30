@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { message } from "antd";
 import YandexLogin from "./YandexLogin";
-import VkLogin from "./VkLogin";
+import VKLogin from "./VkLogin";
 import GoogleLogin from "./GoogleLogin";
 import FacebookLogin from "./FacebookLogin";
 import { Form } from "./styles";
@@ -24,13 +24,29 @@ const SocialBlock = memo(props => {
       <Form.SocialBlock.Head>with your social network</Form.SocialBlock.Head>
       <Form.SocialBlock.IconBox>
         <FacebookLogin
+          requestCodeUrl={process.env.REACT_APP_FACEBOOK_REQUEST_URL}
+          redirectUri={process.env.REACT_APP_FACEBOOK_REDIRECT_URL}
+          clientId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
           onFailure={facebookOnFailed}
           onSuccess={facebookOnSuccess}
         />
-        <GoogleLogin onFailure={googleOnFailed} onSuccess={googleOnSuccess} />
-        <VkLogin onFailure={vkOnFailed} onSuccess={vkOnSuccess} />
+        <GoogleLogin
+          requestCodeUrl={process.env.REACT_APP_GOOGLE_REQUEST_URL}
+          redirectUri={process.env.REACT_APP_GOOGLE_REDIRECT_URL}
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          onFailure={googleOnFailed}
+          onSuccess={googleOnSuccess}
+        />
+        <VKLogin
+          requestCodeUrl={process.env.REACT_APP_VK_REQUEST_URL}
+          redirectUri={process.env.REACT_APP_VK_REDIRECT_URL}
+          clientId={process.env.REACT_APP_VK_CLIENT_ID}
+          onFailure={vkOnFailed}
+          onSuccess={vkOnSuccess}
+        />
         <YandexLogin
-          redirectUri="https://best-service.online/login"
+          requestCodeUrl={process.env.REACT_APP_YANDEX_REQUEST_URL}
+          redirectUri={process.env.REACT_APP_YANDEX_REDIRECT_URL}
           clientId={process.env.REACT_APP_YANDEX_CLIENT_ID}
           onFailure={yandexOnFailed}
           onSuccess={yandexOnSuccess}

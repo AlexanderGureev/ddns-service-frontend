@@ -1,46 +1,82 @@
-import React, { useEffect } from "react";
+import React, { useState, useLayoutEffect, useRef } from "react";
+import { message } from "antd";
+import { useAction } from "easy-peasy";
 import { Form } from "./styles";
+import SocialService from "../../services/social";
 import facebookIcon from "./img/soc-facebook.svg";
 
-const FacebookLogin = ({ onFailure, onSuccess }) => {
-  useEffect(() => {
-    facebookOAuth2Init();
-  }, []);
+const FacebookLogin = ({
+  requestCodeUrl = "",
+  clientId = "",
+  redirectUri = "",
+  onFailure = () => {},
+  onSuccess = () => {},
+  ...rest
+}) => {
+  const [loading, setLoading] = useState(false);
+  const { socialAuthorizeUserAction } = useAction(dispatch => dispatch.session);
 
-  const facebookOAuth2Init = () => {
-    const script = document.createElement("script");
-    script.src = "https://connect.facebook.net/en_US/sdk.js";
-    document.body.appendChild(script);
+  const provider = "facebook";
+  const loadingIndicator = useRef(() => {});
+  const socialService = new SocialService(requestCodeUrl);
 
-    script.addEventListener("load", facebookApiInit);
+  const setLoadingIndicator = () => {
+    loadingIndicator.current = message.loading("Signing in...", 0);
+  };
+  const clearLoadingIndicator = () => loadingIndicator.current();
+
+  useLayoutEffect(
+    () => {
+      loading ? setLoadingIndicator() : clearLoadingIndicator();
+    },
+    [loading]
+  );
+
+  const onButtonClick = e => {
+    e.preventDefault();
+    getParams()
+      .then(queryParams => {
+        socialService.getCode(queryParams, success, failure);
+      })
+      .catch(failure);
   };
 
-  const facebookApiInit = () => {
-    const { FB } = window;
-    FB.init(
-      {
-        appId: process.env.REACT_APP_FACEBOOK_CLIENT_ID,
-        version: "v3.2"
-      },
-      { scope: "public_profile,email" }
-    );
+  const getParams = async () => {
+    if (!clientId || !redirectUri || !requestCodeUrl) {
+      throw new Error("Bad params");
+    }
+    const token = await socialService.getRequestToken();
+
+    const params = {
+      response_type: rest.responseType || "code",
+      scope: rest.scope || ["email", "public_profile"].join(", "),
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      state: token
+    };
+
+    const paramsConstructor = new URLSearchParams();
+    Object.keys(params).map(key => paramsConstructor.append(key, params[key]));
+
+    return paramsConstructor.toString();
   };
 
-  const facebookLogout = () => {
-    const { FB } = window;
-    FB.logout(response => {
-      console.log({ response });
-    });
+  const success = async (code, state) => {
+    try {
+      setLoading(true);
+      await socialAuthorizeUserAction({ provider, code, state });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      onFailure(error.message);
+    }
   };
 
-  const fbSignIn = e => {
-    const { FB } = window;
-    FB.login(response => {
-      console.log({ response });
-    });
+  const failure = error => {
+    console.log(error.message || error);
   };
 
-  return <Form.SocialBlock.Icon src={facebookIcon} onClick={fbSignIn} />;
+  return <Form.SocialBlock.Icon src={facebookIcon} onClick={onButtonClick} />;
 };
 
 export default FacebookLogin;
