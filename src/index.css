@@ -48,3 +48,21 @@ body {
 .ant-btn {
   height: auto !important;
 }
+
+.ant-message-notice-content {
+  background: linear-gradient(135deg, #a3ceff, #6f4dff) !important;
+  font-family: "Montserrat";
+  color: white;
+  font-weight: 500;
+  box-shadow: 0px 5px 25px rgba(111, 77, 255, 0.3) !important;
+}
+.ant-message-custom-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ant-message .anticon {
+  font-size: 18px !important;
+  top: 0px !important;
+}

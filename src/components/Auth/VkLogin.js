@@ -1,9 +1,11 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { message } from "antd";
 import { useAction } from "easy-peasy";
 import vkIcon from "./img/soc-vk.svg";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
+import MessageConstructor from "../Common/LoadingMessage";
+
+const loadingMessage = MessageConstructor({ content: "Signing in..." });
 
 const VKLogin = ({
   requestCodeUrl = "",
@@ -21,7 +23,7 @@ const VKLogin = ({
   const socialService = new SocialService(requestCodeUrl);
 
   const setLoadingIndicator = () => {
-    loadingIndicator.current = message.loading("Signing in...", 0);
+    loadingIndicator.current = loadingMessage.open();
   };
   const clearLoadingIndicator = () => loadingIndicator.current();
 

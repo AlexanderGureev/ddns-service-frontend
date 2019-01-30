@@ -32,7 +32,7 @@ const App = () => {
                 path="/password/change"
                 component={ChangePassword}
               />
-              <Route path="/managed" component={Managed} />
+              <PrivateRoute path="/managed" component={Managed} />
               <Route component={NoMatch} />
             </Switch>
           </Suspense>

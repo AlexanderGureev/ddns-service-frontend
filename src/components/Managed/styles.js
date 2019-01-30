@@ -507,5 +507,43 @@ export const StyledAlert = styled(Alert)`
   }
 `;
 
+export const ShortProfileContainer = styled.div`
+  font-size: 14px;
+  font-family: "Montserrat";
+  font-weight: 400;
+`;
+
+const ProfileList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const ProfileItem = styled.li`
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: #039dc53d;
+  }
+`;
+
+const ProfileItemIcon = styled(Icon)`
+  font-size: 16px;
+`;
+
+const ProfileItemText = styled.span`
+  padding-left: 10px;
+`;
+
+const ProfileItemLink = styled(ProfileItemText)``;
+
+ShortProfileContainer.List = ProfileList;
+ShortProfileContainer.Item = ProfileItem;
+ShortProfileContainer.Item.Icon = ProfileItemIcon;
+ShortProfileContainer.Item.Text = ProfileItemText;
+ShortProfileContainer.Item.Link = ProfileItemLink;
+
 InfoBlock.Title = InfoBlockTitle;
 InfoBlock.Text = InfoBlockText;

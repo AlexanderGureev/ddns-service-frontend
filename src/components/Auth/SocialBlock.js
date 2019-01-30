@@ -1,10 +1,12 @@
 import React, { memo } from "react";
-import { message } from "antd";
 import YandexLogin from "./YandexLogin";
 import VKLogin from "./VkLogin";
 import GoogleLogin from "./GoogleLogin";
 import FacebookLogin from "./FacebookLogin";
 import { Form } from "./styles";
+import MessageConstructor from "../Common/LoadingMessage";
+
+const message = MessageConstructor();
 
 const SocialBlock = memo(props => {
   const yandexOnFailed = error => message.error(error);
