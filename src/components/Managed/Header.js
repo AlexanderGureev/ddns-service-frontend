@@ -1,39 +1,59 @@
-import React, { memo } from "react";
+import React from "react";
 import { useMedia } from "react-use";
-import { StyledHeader, StyledBtn, Search } from "./styles";
-import shoppingIcon from "./img/shopping-cart.svg";
-import notificationIcon from "./img/notification.svg";
-import languageIcon from "./img/language.svg";
-import sideMenuIcon from "./img/sidemenu-icon.svg";
+import { ReactComponent as notifIcon } from "./img/notif-icon.svg";
+import { ReactComponent as shopIcon } from "./img/shop-icon.svg";
+import { ReactComponent as langIcon } from "./img/lang-icon.svg";
+import {
+  Header as StyledHeader,
+  BtnContainer,
+  Search,
+  Icon,
+  Badge
+} from "./styles";
+import ShortProfile from "./ShortProfile";
 
-const Header = ({ toggleClicked, toggleVisible }) => {
-  const isBig = useMedia("(max-width: 1200px)");
-  const isSmall = useMedia("(max-width: 720px)");
+const Header = ({
+  collapsed,
+  toggleSideMenu,
+  visible,
+  handleVisibleChange
+}) => {
+  const isMediumSize = useMedia("(max-width: 1200px)");
 
   return (
     <StyledHeader>
       <StyledHeader.Container>
-        <StyledBtn
-          onClick={() => {
-            toggleClicked();
-            toggleVisible();
-          }}
-        >
-          <StyledBtn.Icon src={sideMenuIcon} />
-        </StyledBtn>
-        {!isSmall && <Search placeholder="Search..." enterButton />}
+        <BtnContainer>
+          <Icon
+            type={collapsed ? "menu-unfold" : "menu-fold"}
+            onClick={toggleSideMenu}
+          />
+        </BtnContainer>
+        <Search placeholder="Search..." enterButton />
       </StyledHeader.Container>
+
       <StyledHeader.Container>
-        <StyledBtn>
-          <StyledBtn.Icon src={notificationIcon} />
-        </StyledBtn>
-        <StyledBtn>
-          <StyledBtn.Icon src={shoppingIcon} />
-        </StyledBtn>
-        <StyledBtn>
-          <StyledBtn.Icon src={languageIcon} />
-          {!isBig && <StyledBtn.Text>Language</StyledBtn.Text>}
-        </StyledBtn>
+        {!isMediumSize && (
+          <>
+            <BtnContainer>
+              <Badge dot>
+                <Icon component={notifIcon} />
+              </Badge>
+            </BtnContainer>
+            <BtnContainer>
+              <Badge count={0} showZero>
+                <Icon component={shopIcon} />
+              </Badge>
+            </BtnContainer>
+            <BtnContainer>
+              <Icon component={langIcon} />
+            </BtnContainer>
+          </>
+        )}
+        <ShortProfile
+          visible={visible}
+          handleVisibleChange={handleVisibleChange}
+        />
       </StyledHeader.Container>
     </StyledHeader>
   );

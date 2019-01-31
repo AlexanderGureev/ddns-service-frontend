@@ -17,6 +17,7 @@ export const PreloaderContainer = styled.div`
   align-items: center;
   background: url(${loadingBg}) no-repeat center center;
   background-size: cover;
+  min-width: 200px;
 
   @media (max-width: 1200px) {
     font-size: 40px;
@@ -33,6 +34,7 @@ export const ContentWrapper = styled.div`
   align-items: center;
 `;
 export const Text = styled.p`
+  text-align: center;
   color: white;
   font-family: "Montserrat";
   font-weight: 500;
@@ -40,8 +42,12 @@ export const Text = styled.p`
   @media (max-width: 1200px) {
     font-size: 30px;
   }
+  @media (max-width: 890px) {
+    font-size: 23px;
+  }
   @media (max-width: 560px) {
-    font-size: 18px;
+    letter-spacing: 2px;
+    font-size: 14px;
   }
 `;
 export const StatusCode = styled(Text)`
@@ -52,8 +58,11 @@ export const StatusCode = styled(Text)`
   @media (max-width: 1200px) {
     font-size: 100px;
   }
-  @media (max-width: 560px) {
+  @media (max-width: 890px) {
     font-size: 80px;
+  }
+  @media (max-width: 560px) {
+    font-size: 60px;
   }
 `;
 

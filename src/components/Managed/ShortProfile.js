@@ -1,39 +1,35 @@
-import React, { useState } from "react";
-import { useStore, useAction } from "easy-peasy";
+import React from "react";
 import { Popover } from "antd";
+import { useStore, useAction } from "easy-peasy";
 import { withRouter } from "react-router-dom";
-import { ShortProfile as StyledShortProfile } from "./styles";
+import { ReactComponent as MenuIcon } from "./img/down-arrow.svg";
+import avaIcon from "./img/ava.jpg";
 import ShortProfilePopover from "./ShortProfilePopover";
-import avaIcon from "./img/ava-icon.svg";
+import { ShortProfile as StyledShortProfile } from "./styles";
 
-const ShortProfile = ({ history }) => {
-  const { username, email } = useStore(state => state.session.profile);
+const ShortProfile = ({ visible, handleVisibleChange, history }) => {
+  const { username, email = "none" } = useStore(state => state.session.profile);
   const { logoutUserAction } = useAction(dispatch => dispatch.session);
-  const [visible, setVisible] = useState(false);
-
   const logout = e => {
     e.preventDefault();
     logoutUserAction().then(() => history.push("/"));
   };
-  const handleVisibleChange = () => setVisible(!visible);
 
   return (
     <StyledShortProfile>
-      <StyledShortProfile.Avatar size={100} src={avaIcon} />
-      <StyledShortProfile.Container>
-        <StyledShortProfile.Name>{username}</StyledShortProfile.Name>
-        <StyledShortProfile.Email>{email}</StyledShortProfile.Email>
-      </StyledShortProfile.Container>
+      <StyledShortProfile.Name>{username}</StyledShortProfile.Name>
+      <StyledShortProfile.Avatar src={avaIcon} />
       <Popover
         content={<ShortProfilePopover logout={logout} />}
-        title="g.alex00@bk.ru"
+        title={email}
         trigger="click"
         visible={visible}
         onVisibleChange={handleVisibleChange}
       >
-        <StyledShortProfile.Button type="align-left" />
+        <StyledShortProfile.Menu component={MenuIcon} />
       </Popover>
     </StyledShortProfile>
   );
 };
+
 export default withRouter(ShortProfile);

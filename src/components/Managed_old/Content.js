@@ -1,11 +1,11 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { Content as StyledContent } from "./styles";
-import Footer from "./Footer";
+import { Route, Switch } from "react-router-dom";
+import { StyledContent } from "./styles";
+import ConfirmEmail from "./ConfirmEmail";
 import MainPage from "./MainPage";
 import ProfilePage from "./ProfilePage";
+import contentBg from "./img/content-bg-managed.svg";
 import NoMatch from "../Common/NoMatch";
-import ConfirmEmail from "./ConfirmEmail";
 
 const Content = props => {
   const {
@@ -13,15 +13,14 @@ const Content = props => {
   } = props;
 
   return (
-    <StyledContent>
-      <ConfirmEmail {...props} />
+    <StyledContent src={contentBg}>
       <Switch>
         <Route path={url} exact component={MainPage} />
         <Route path={`${url}/account`} component={ProfilePage} />
         <Route path={`${url}/verify`} component={MainPage} />
         <Route component={NoMatch} disableLink />
       </Switch>
-      <Footer />
+      <ConfirmEmail {...props} />
     </StyledContent>
   );
 };

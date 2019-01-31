@@ -1,40 +1,76 @@
 import React from "react";
-import { Row, Col } from "antd";
-import { Main, InfoBlock } from "./styles";
-import ActiveHostnames from "./ActiveHostnames";
-import UpdatedHostnames from "./UpdatedHostnames";
-import AccountOverview from "./AccountOverview";
+import {
+  Row,
+  Col,
+  Content as StyledContent,
+  Card as StyledCard
+} from "./styles";
+
+import { Card, BigCard } from "./Card";
+import Tabs from "./Tabs";
 
 const MainPage = props => (
-  <Main>
-    <Row type="flex">
-      <Col lg={{ span: 24 }} xl={{ span: 16 }}>
-        <Col lg={{ span: 11 }} xl={{ span: 10 }}>
-          <ActiveHostnames />
-        </Col>
-        <Col lg={{ span: 11, offset: 1 }} xl={{ span: 10, offset: 2 }}>
-          <UpdatedHostnames />
-        </Col>
-
-        <Col lg={{ span: 23 }} xl={{ span: 22 }}>
-          <InfoBlock>
-            <InfoBlock.Title>Title</InfoBlock.Title>
-            <InfoBlock.Text>
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of letters, as opposed to using Content here, content
-              here, making it look like readable English.
-            </InfoBlock.Text>
-          </InfoBlock>
-        </Col>
+  <StyledContent.Wrapper>
+    <Row gutter={16}>
+      <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+        <Card
+          colorA="#586CC4"
+          colorB="#7343C7"
+          title="0"
+          text="Active"
+          smallText="hostnames"
+        />
       </Col>
-
-      <Col span={24} lg={{ span: 23 }} xl={{ span: 8 }}>
-        <AccountOverview />
+      <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+        <Card
+          colorA="#3E2BA7"
+          colorB="#4E8BBC"
+          title="0"
+          text="Active"
+          smallText="updates detected"
+        />
+      </Col>
+      <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+        <Card
+          colorA="#2B8FA7"
+          colorB="#0585EB"
+          title="0"
+          text="Registered"
+          smallText="domains"
+        />
       </Col>
     </Row>
-  </Main>
+
+    <Row gutter={32}>
+      <Col xs={{ span: 24 }} lg={{ span: 14 }}>
+        <Tabs />
+      </Col>
+      <Col xs={{ span: 24 }} lg={{ span: 10 }}>
+        <BigCard
+          colorA="#2B8FA7"
+          colorB="#0585EB"
+          title="Account Overview"
+          footer="Upgrade to Enhanced"
+        >
+          <StyledCard.Content center gutter>
+            <StyledCard.Content.SmallText>
+              Last Login IP
+            </StyledCard.Content.SmallText>
+            <StyledCard.Content.Text>95.165.136.7</StyledCard.Content.Text>
+          </StyledCard.Content>
+
+          <StyledCard.Content center gutter>
+            <StyledCard.Content.SmallText>
+              Last Login
+            </StyledCard.Content.SmallText>
+            <StyledCard.Content.Text>
+              Jan 2, 2019 16:31:38 PST
+            </StyledCard.Content.Text>
+          </StyledCard.Content>
+        </BigCard>
+      </Col>
+    </Row>
+  </StyledContent.Wrapper>
 );
 
 export default MainPage;

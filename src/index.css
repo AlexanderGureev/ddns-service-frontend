@@ -66,3 +66,16 @@ body {
   font-size: 18px !important;
   top: 0px !important;
 }
+
+.ant-layout-header .anticon {
+  color: #707070;
+}
+
+.ant-layout-sider .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+.ant-layout-sider-trigger {
+  background: linear-gradient(135deg, #255bc7, #348eb4) !important;
+}

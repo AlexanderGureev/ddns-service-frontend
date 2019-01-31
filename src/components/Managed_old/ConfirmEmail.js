@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useStore, useAction } from "easy-peasy";
+import { message } from "antd";
 import { StyledAlert } from "./styles";
-import MessageConstructor from "../Common/LoadingMessage";
-
-const loadingMessage = MessageConstructor({ content: "Signing in..." });
 
 const confirmEmail = async ({ search, pathname }, confirmEmailAction) => {
   const validPathname = "/managed/verify";
@@ -14,10 +12,10 @@ const confirmEmail = async ({ search, pathname }, confirmEmailAction) => {
       if (!code) throw new Error("Invalid request (params).");
 
       await confirmEmailAction(code);
-      loadingMessage.success("Email confirmed successfully.");
+      message.success("Email confirmed successfully.");
     }
   } catch (error) {
-    loadingMessage.error(error.message);
+    message.error(error.message);
   }
 };
 

@@ -1,44 +1,40 @@
 import React from "react";
-import { Menu } from "antd";
-import { SideMenuContainer, LogoContainer, MenuItem } from "./styles";
-import ShortProfile from "./ShortProfile";
-import dashboardIcon from "./img/dashboard.svg";
-import dnsIcon from "./img/dns.svg";
-import settingsIcon from "./img/settings.svg";
-import supportIcon from "./img/support.svg";
-import userIcon from "./img/user.svg";
+import { withRouter } from "react-router-dom";
+import { Menu } from "./styles";
+import { ReactComponent as DashboardIcon } from "./img/dashboard.svg";
+import { ReactComponent as SettingsIcon } from "./img/settings.svg";
+import { ReactComponent as DnsIcon } from "./img/dns.svg";
+import { ReactComponent as AccountIcon } from "./img/account.svg";
+import { ReactComponent as SupportIcon } from "./img/support.svg";
 
-const SideMenu = ({ visible, match }) => (
-  <SideMenuContainer width={300} trigger={null} collapsible collapsed={visible}>
-    <LogoContainer>
-      {!visible ? <LogoContainer.Logo /> : <LogoContainer.MiniLogo />}
-      <LogoContainer.Link to="/" />
-    </LogoContainer>
-
-    <Menu defaultSelectedKeys={["1"]}>
-      <MenuItem key="1">
-        <MenuItem.Icon src={dashboardIcon} />
-        <MenuItem.Link to={`${match.url}`}>Dashboard</MenuItem.Link>
-      </MenuItem>
-      <MenuItem key="2">
-        <MenuItem.Icon src={dnsIcon} />
-        <MenuItem.Link to={`${match.url}`}>Dynamic DNS</MenuItem.Link>
-      </MenuItem>
-      <MenuItem key="3">
-        <MenuItem.Icon src={settingsIcon} />
-        <MenuItem.Link to={`${match.url}`}>My Services</MenuItem.Link>
-      </MenuItem>
-      <MenuItem key="4">
-        <MenuItem.Icon src={userIcon} />
-        <MenuItem.Link to={`${match.url}/account`}>Account</MenuItem.Link>
-      </MenuItem>
-      <MenuItem key="5">
-        <MenuItem.Icon src={supportIcon} />
-        <MenuItem.Link to={`${match.url}`}>Support Center</MenuItem.Link>
-      </MenuItem>
-    </Menu>
-    {!visible && <ShortProfile />}
-  </SideMenuContainer>
+const SideMenu = ({ match: { url } }) => (
+  <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+    <Menu.Item key="1">
+      <Menu.Item.Icon component={DashboardIcon} />
+      <Menu.Item.Text>Dashboard</Menu.Item.Text>
+      <Menu.Item.Link to={`${url}`} />
+    </Menu.Item>
+    <Menu.Item key="2">
+      <Menu.Item.Icon component={DnsIcon} />
+      <Menu.Item.Text>Dynamic DNS</Menu.Item.Text>
+      <Menu.Item.Link to={`${url}`} />
+    </Menu.Item>
+    <Menu.Item key="3">
+      <Menu.Item.Icon component={SettingsIcon} />
+      <Menu.Item.Text>My Services</Menu.Item.Text>
+      <Menu.Item.Link to={`${url}`} />
+    </Menu.Item>
+    <Menu.Item key="4">
+      <Menu.Item.Icon component={AccountIcon} />
+      <Menu.Item.Text>Account</Menu.Item.Text>
+      <Menu.Item.Link to={`${url}/account`} />
+    </Menu.Item>
+    <Menu.Item key="5">
+      <Menu.Item.Icon component={SupportIcon} />
+      <Menu.Item.Text>Support Center</Menu.Item.Text>
+      <Menu.Item.Link to={`${url}/error`} />
+    </Menu.Item>
+  </Menu>
 );
 
-export default SideMenu;
+export default withRouter(SideMenu);
