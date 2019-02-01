@@ -6,7 +6,7 @@ const sessionEffects = {
       await api.registrationApi(payload);
       dispatch.session.authorizeUserAction();
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   }),
   socialAuthorizeUserAction: effect(async (dispatch, payload, _, { api }) => {
@@ -14,7 +14,7 @@ const sessionEffects = {
       await api.sendSocialCodeApi(payload);
       dispatch.session.authorizeUserAction();
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   }),
   loginUserAction: effect(async (dispatch, payload, _, { api }) => {
@@ -22,7 +22,7 @@ const sessionEffects = {
       await api.loginApi(payload);
       dispatch.session.authorizeUserAction();
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   }),
   createOrRecoverySessionAction: effect(
@@ -77,8 +77,9 @@ const sessionEffects = {
   resetPasswordAction: effect(async (dispatch, payload, _, { api }) => {
     try {
       await api.resetPasswordApi(payload);
+      // dispatch.session.authorizeUserAction();
     } catch (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   })
 };

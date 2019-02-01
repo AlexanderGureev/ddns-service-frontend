@@ -6,7 +6,7 @@ import ChangePasswordForm from "./ChangePasswordForm";
 import CircleLayer from "./CircleLayer";
 import GoToHomeBtn from "./GoToHomeBtn";
 
-const Auth = () => {
+const ChangePassword = props => {
   const parallaxLayer = useRef();
 
   return (
@@ -26,7 +26,7 @@ const Auth = () => {
       />
 
       <ParallaxPositioningLayer offset={0} speed={0}>
-        <ChangePasswordForm />
+        <ChangePasswordForm {...props} />
       </ParallaxPositioningLayer>
 
       <CircleLayer />
@@ -44,4 +44,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default ChangePassword;

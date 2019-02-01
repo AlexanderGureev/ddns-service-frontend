@@ -113,8 +113,7 @@ const TopMenuItem = styled.p`
     padding: 5px 20px;
     color: #fff;
     &:hover {
-      color: ${props =>
-        props.btn ? "rgba(0,0,0, .9)" : "rgba(255,255,255, .3)"};
+      color: ${props => (props.btn ? "none" : "rgba(255,255,255, .3)")};
     }
 
     @media (max-width: 1300px) {
@@ -130,7 +129,7 @@ const TopMenuItem = styled.p`
   margin: 0;
   margin-right: 10px;
   border-radius: 30px;
-  background: ${props => (props.btn ? "rgba(17, 2, 148, 0.3)" : "none")};
+  background: ${props => (props.btn ? "rgba(255, 255,255, 0.2)" : "none")};
   transition: 0.3s ease;
 
   &::after {
@@ -144,7 +143,7 @@ const TopMenuItem = styled.p`
   }
 
   &:hover {
-    background: ${props => (props.btn ? "rgba(255, 255, 255, 0.3)" : "none")};
+    background: ${props => (props.btn ? "rgba(255, 255, 255, 0.4)" : "none")};
 
     &::after {
       width: ${props => (props.btn ? "0%" : "80%")};

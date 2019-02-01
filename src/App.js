@@ -28,10 +28,6 @@ const App = () => {
               <Route exact path="/" component={Home} />
               <Route path="/login/" component={Auth} />
               <Route path="/reset/password" component={ChangePassword} />
-              <PrivateRoute
-                path="/password/change"
-                component={ChangePassword}
-              />
               <PrivateRoute path="/managed" component={Managed} />
               <Route component={NoMatch} />
             </Switch>

@@ -12,6 +12,7 @@ const API_URL_USER = `${API_URL}/user/`;
 const API_URL_USER_IS_AUTH = `${API_URL}/user/`;
 const API_URL_USER_EMAIL_CONFIRM = `${API_URL}/registration/verify-email/`;
 const API_URL_USER_RESET_TOKEN = `${API_URL}/password/reset/`;
+const API_URL_USER_CHANGE_PASSWORD = `${API_URL}/password/reset/confirm`;
 
 const API_URL_SOCIAL_FACEBOOK = `${API_URL}/social/facebook/`;
 const API_URL_SOCIAL_VK = `${API_URL}/social/vk/`;
@@ -31,6 +32,8 @@ const errorParse = error => {
 
   const { data = null, status } = error.response;
   if (data && status !== 500 && typeof data !== "string") {
+    // const errorMessage = Object.keys(data).map(key => `[${key}]: ${data[key]}`);
+    // return errorMessage;
     return Object.values(data).join("\n");
   }
   return "Request processing error, try again later.";
@@ -212,10 +215,9 @@ const confirmEmailApi = async code => {
 
     return { emailConfirm: true };
   } catch (error) {
-    throw new Error("Ошибка отправки запроса...");
+    throw new Error(errorParse(error));
   }
 };
-
 const resetPasswordApi = async body => {
   try {
     const token = await getTokenApi();
@@ -232,13 +234,30 @@ const resetPasswordApi = async body => {
         `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
       );
     }
-
-    return { emailConfirm: true };
   } catch (error) {
-    throw new Error("Ошибка отправки запроса...");
+    throw new Error(errorParse(error));
   }
 };
+const changePasswordApi = async body => {
+  try {
+    const token = await getTokenApi();
 
+    const { status, statusText } = await axios({
+      method: "post",
+      url: API_URL_USER_CHANGE_PASSWORD,
+      headers: { "X-CSRFToken": token },
+      data: body
+    });
+
+    if (status !== 201) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+  } catch (error) {
+    throw new Error(errorParse(error));
+  }
+};
 export default {
   authStatusApi,
   logoutApi,
@@ -246,6 +265,7 @@ export default {
   loginApi,
   confirmEmailApi,
   resetPasswordApi,
+  changePasswordApi,
   sendSocialCodeApi,
   getTokenApi
 };
