@@ -36,7 +36,7 @@ const errorParse = error => {
   return "Request processing error, try again later.";
 };
 
-export const authStatusApi = async () => {
+const authStatusApi = async () => {
   try {
     const {
       data: {
@@ -65,7 +65,7 @@ export const authStatusApi = async () => {
   }
 };
 
-export const getTokenApi = async () => {
+const getTokenApi = async () => {
   try {
     const token = Cookie.get("csrftoken");
     if (token) return token;
@@ -77,7 +77,7 @@ export const getTokenApi = async () => {
   }
 };
 
-export const registrationApi = async body => {
+const registrationApi = async body => {
   try {
     const { data, status, statusText } = await axios.post(
       API_URL_REGISTRATION,
@@ -96,7 +96,7 @@ export const registrationApi = async body => {
   }
 };
 
-export const loginApi = async body => {
+const loginApi = async body => {
   try {
     const { data, status, statusText } = await axios.post(API_URL_LOGIN, body);
 
@@ -112,7 +112,7 @@ export const loginApi = async body => {
   }
 };
 
-export const logoutApi = async () => {
+const logoutApi = async () => {
   try {
     const token = await getTokenApi();
     const { status, statusText } = await axios({
@@ -131,7 +131,7 @@ export const logoutApi = async () => {
   }
 };
 
-export const user = async () => {
+const user = async () => {
   try {
     const token = await getTokenApi();
 
@@ -171,7 +171,7 @@ export const user = async () => {
   }
 };
 
-export const sendSocialCodeApi = async ({ provider, code, state }) => {
+const sendSocialCodeApi = async ({ provider, code, state }) => {
   try {
     const { data, status, statusText } = await axios({
       method: "post",
@@ -193,7 +193,7 @@ export const sendSocialCodeApi = async ({ provider, code, state }) => {
   }
 };
 
-export const confirmEmailApi = async code => {
+const confirmEmailApi = async code => {
   try {
     const token = await getTokenApi();
 
@@ -216,7 +216,7 @@ export const confirmEmailApi = async code => {
   }
 };
 
-export const resetPasswordApi = async body => {
+const resetPasswordApi = async body => {
   try {
     const token = await getTokenApi();
 
@@ -237,4 +237,15 @@ export const resetPasswordApi = async body => {
   } catch (error) {
     throw new Error("Ошибка отправки запроса...");
   }
+};
+
+export default {
+  authStatusApi,
+  logoutApi,
+  registrationApi,
+  loginApi,
+  confirmEmailApi,
+  resetPasswordApi,
+  sendSocialCodeApi,
+  getTokenApi
 };

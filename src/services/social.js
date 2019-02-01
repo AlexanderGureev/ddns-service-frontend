@@ -1,5 +1,5 @@
 import Cookie from "js-cookie";
-import { getTokenApi } from "./api";
+import api from "./api";
 
 export default class SocialService {
   constructor(requestCodeUrl) {
@@ -14,7 +14,7 @@ export default class SocialService {
 
   getRequestToken = async () => {
     try {
-      const token = await getTokenApi();
+      const token = await api.getTokenApi();
       if (!token) throw new Error("Token request error.");
 
       return token;
