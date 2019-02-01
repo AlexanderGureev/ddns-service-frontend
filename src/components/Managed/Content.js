@@ -18,10 +18,10 @@ const Content = props => {
       <Switch>
         <Route path={url} exact component={MainPage} />
         <Route path={`${url}/account`} component={ProfilePage} />
-        <Route path={`${url}/verify`} component={MainPage} />
+        {/* <Route path={`${url}/verify`} component={MainPage} /> */}
         <Route component={NoMatch} disableLink />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </StyledContent>
   );
 };

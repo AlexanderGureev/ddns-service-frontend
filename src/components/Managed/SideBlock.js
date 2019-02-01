@@ -5,7 +5,7 @@ import { StyledSide, Logo, MiniLogo } from "./styles";
 import CircleLayer from "./CircleLayer";
 import SideMenu from "./SideMenu";
 
-const SideBlock = ({ collapsed, toggleSideMenu, match }) => {
+const SideBlock = ({ collapsed, toggleSideMenu }) => {
   const isExtraSmallSize = useMedia("(max-width: 480px)");
 
   return (
@@ -16,7 +16,7 @@ const SideBlock = ({ collapsed, toggleSideMenu, match }) => {
       onCollapse={toggleSideMenu}
       width={300}
     >
-      {collapsed ? <MiniLogo /> : <Logo />}
+      {collapsed ? <MiniLogo to="/" /> : <Logo to="/" />}
 
       <SideMenu />
 

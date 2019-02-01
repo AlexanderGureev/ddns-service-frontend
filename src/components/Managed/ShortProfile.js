@@ -8,7 +8,9 @@ import ShortProfilePopover from "./ShortProfilePopover";
 import { ShortProfile as StyledShortProfile } from "./styles";
 
 const ShortProfile = ({ visible, handleVisibleChange, history }) => {
-  const { username, email = "none" } = useStore(state => state.session.profile);
+  const { username, email = "none", firstName, lastName } = useStore(
+    state => state.session.profile
+  );
   const { logoutUserAction } = useAction(dispatch => dispatch.session);
   const logout = e => {
     e.preventDefault();
@@ -17,12 +19,15 @@ const ShortProfile = ({ visible, handleVisibleChange, history }) => {
 
   return (
     <StyledShortProfile>
-      <StyledShortProfile.Name>{username}</StyledShortProfile.Name>
+      <StyledShortProfile.Name>
+        {`${firstName} ${lastName}`}
+      </StyledShortProfile.Name>
       <StyledShortProfile.Avatar src={avaIcon} />
       <Popover
         content={<ShortProfilePopover logout={logout} />}
         title={email}
         trigger="click"
+        placement="bottomRight"
         visible={visible}
         onVisibleChange={handleVisibleChange}
       >

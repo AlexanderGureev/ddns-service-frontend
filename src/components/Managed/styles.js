@@ -80,12 +80,34 @@ export const Header = styled(AntdHeader)`
   min-width: 200px;
 `;
 
-export const Logo = styled(LogoIcon)`
+export const Logo = props => (
+  <LogoContainer>
+    <StyledLogo />
+    <Link to={props.to} />
+  </LogoContainer>
+);
+export const MiniLogo = props => (
+  <LogoContainer>
+    <StyledMiniLogo />
+    <Link to={props.to} />
+  </LogoContainer>
+);
+const LogoContainer = styled.div`
+  position: relative;
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+`;
+const StyledLogo = styled(LogoIcon)`
   width: 280px;
   cursor: pointer;
   animation: ${logoShow} 0.5s ease;
 `;
-export const MiniLogo = styled(MiniLogoIcon)`
+const StyledMiniLogo = styled(MiniLogoIcon)`
   width: 78px;
   cursor: pointer;
   animation: ${logoShow} 0.5s ease;
@@ -353,16 +375,17 @@ export const ShortProfileContainer = styled.div`
   font-size: 14px;
   font-family: "Montserrat";
   font-weight: 400;
+  min-width: 200px;
 `;
 
 const ProfileList = styled.ul`
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 5px 0;
 `;
 
 const ProfileItem = styled.li`
-  padding: 10px 15px;
+  padding: 10px 20px;
   cursor: pointer;
   transition: 0.3s ease;
 
@@ -380,7 +403,28 @@ const ProfileItemText = styled.span`
 `;
 
 const ProfileItemLink = styled(ProfileItemText)``;
-export const StyledAlert = styled(Alert)``;
+export const StyledAlert = styled(Alert)`
+  font-size: 14px;
+  font-family: "Montserrat";
+  font-weight: 400;
+
+  @media (max-width: 560px) {
+    font-size: 12px;
+  }
+  a {
+    @media (max-width: 560px) {
+      font-size: 10px;
+      top: 7px;
+    }
+  }
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 35%;
+    display: block;
+  }
+`;
 
 export const StyledFooter = styled(Footer)`
   text-align: center;

@@ -5,8 +5,10 @@ import MessageConstructor from "../Common/LoadingMessage";
 
 const loadingMessage = MessageConstructor({ content: "Signing in..." });
 
-const confirmEmail = async ({ search, pathname }, confirmEmailAction) => {
+const confirmEmail = async ({ state }, confirmEmailAction) => {
   const validPathname = "/managed/verify";
+  const { pathname, search } = state;
+
   try {
     if (search && pathname === validPathname) {
       const urlSearch = new URLSearchParams(search);

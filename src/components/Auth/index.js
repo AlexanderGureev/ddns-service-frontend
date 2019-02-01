@@ -15,7 +15,15 @@ const Auth = props => {
   const { isAuth } = useStore(state => state.session);
   const parallaxLayer = useRef();
 
-  if (isAuth) return <Redirect to="/managed" />;
+  if (isAuth)
+    return (
+      <Redirect
+        to={{
+          pathname: "/managed",
+          state: props.location.state || {}
+        }}
+      />
+    );
 
   return (
     <Parallax
