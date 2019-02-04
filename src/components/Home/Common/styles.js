@@ -1,5 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { animated } from "react-spring/hooks";
+
+const showLoadingCircle = keyframes`
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1
+  }
+`;
 
 export const Circle = styled.div`
   position: absolute;
@@ -23,7 +32,11 @@ export const Button = styled(animated.div)`
   display: inline-block;
   cursor: pointer;
   white-space: nowrap;
-
+  i {
+    animation: ${showLoadingCircle} 0.3s ease;
+    position: relative;
+    right: 10px;
+  }
   a {
     color: #fff;
     display: block;
@@ -31,7 +44,11 @@ export const Button = styled(animated.div)`
 `;
 export const ButtonLink = styled(Button)`
   padding: 0;
-
+  i {
+    animation: ${showLoadingCircle} 0.3s ease;
+    position: relative;
+    right: 10px;
+  }
   a {
     padding: 8px 50px;
     color: #fff;

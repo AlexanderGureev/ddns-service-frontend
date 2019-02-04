@@ -1,6 +1,7 @@
 import { useSpring } from "react-spring/hooks";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Icon } from "antd";
 import {
   Button as StyledButton,
   ButtonLink as StyledButtonLink
@@ -19,35 +20,45 @@ const useAnimate = visible => {
   return props;
 };
 
-const Button = ({ children, className }) => {
+const Button = ({ children, className, loading = false, ...rest }) => {
   const [visible, setVisible] = useState(false);
   const props = useAnimate(visible);
 
   const onHandleMouse = () => setVisible(!visible);
   return (
     <StyledButton
+      {...rest}
       className={className}
       style={props}
       onMouseEnter={onHandleMouse}
       onMouseLeave={onHandleMouse}
     >
+      {loading && <Icon type="loading" />}
       {children}
     </StyledButton>
   );
 };
 
-export const ButtonLink = ({ children, className, to = "/" }) => {
+export const ButtonLink = ({
+  children,
+  className,
+  to = "/",
+  loading = false,
+  ...rest
+}) => {
   const [visible, setVisible] = useState(false);
   const props = useAnimate(visible);
 
   const onHandleMouse = () => setVisible(!visible);
   return (
     <StyledButtonLink
+      {...rest}
       className={className}
       style={props}
       onMouseEnter={onHandleMouse}
       onMouseLeave={onHandleMouse}
     >
+      {loading && <Icon type="loading" />}
       <Link to={to}>{children}</Link>
     </StyledButtonLink>
   );

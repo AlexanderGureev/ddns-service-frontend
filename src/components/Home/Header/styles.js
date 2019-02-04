@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Anchor } from "antd";
-import { ButtonLink } from "../Common/Button";
 
-import { ReactComponent as HeaderLogo } from "./img/logo.svg";
+import { Elastic } from "react-burgers";
+import React from "react";
+import { Drawer, Anchor } from "antd";
+import StyledButton, { ButtonLink } from "../Common/Button";
+// import { ReactComponent as HeaderLogo } from "./img/logo.svg";
+import { ReactComponent as HeaderLogo1 } from "./img/logo_new.svg";
+import { ReactComponent as MenuBg } from "./img/side-menu-bg.svg";
 
 export const HeaderWrapper = styled.div`
   height: 100vh;
@@ -36,7 +40,7 @@ export const TopLine = styled.div`
 export const Logo = styled.div`
   position: relative;
 `;
-const LogoIcon = styled(HeaderLogo)`
+const LogoIcon = styled(HeaderLogo1)`
   cursor: pointer;
 
   @media (max-width: 1200px) {
@@ -204,7 +208,7 @@ const MenuItem = styled(Link)`
   }
 `;
 
-const MenuBtn = styled(ButtonLink)`
+export const MenuBtn = styled(ButtonLink)`
   a {
     @media (max-width: 1400px) {
       font-size: 16px;
@@ -215,5 +219,83 @@ const MenuBtn = styled(ButtonLink)`
     }
   }
 `;
+const MenuButton = styled(StyledButton)`
+  @media (max-width: 1400px) {
+    font-size: 16px;
+    padding: 8px 40px;
+  }
+  @media (max-width: 1200px) {
+    font-size: 14px;
+  }
+`;
+
 Menu.Item = MenuItem;
-Menu.Button = MenuBtn;
+Menu.ButtonLink = MenuBtn;
+Menu.Button = MenuButton;
+
+export const Button = styled(Elastic)`
+  color: #083269;
+`;
+
+const Background = styled(MenuBg)`
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
+
+export const CollapseMenuWrapper = props => (
+  <CollapseMenu {...props}>
+    <Background />
+    {props.children}
+  </CollapseMenu>
+);
+const CollapseMenu = styled(Drawer)`
+  .ant-drawer-wrapper-body {
+    min-height: 400px;
+  }
+  .ant-drawer-content {
+    position: relative;
+  }
+
+  .ant-drawer-header {
+    border-radius: 0;
+  }
+  .ant-drawer-body {
+    margin-top: 150px;
+
+    a,
+    p {
+      margin-bottom: 10px;
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      font-family: "Montserrat";
+      font-weight: 400;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s ease;
+
+      &:hover {
+        color: #8ee0ff;
+      }
+    }
+  }
+`;
+export const CloseBtn = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.2) url(${props => props.src}) no-repeat center
+    center;
+  background-size: 50% 50%;
+  cursor: pointer;
+`;
+export const CollapsedMenu = styled.div`
+  display: none;
+  @media (max-width: 970px) {
+    display: inline;
+  }
+`;

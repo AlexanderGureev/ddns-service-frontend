@@ -1,6 +1,7 @@
 import React from "react";
 import { Copyright } from "./styles";
-import { ReactComponent as FooterLogo } from "./img/white-logo.svg";
+// import { ReactComponent as FooterLogo } from "./img/white-logo.svg";
+import { ReactComponent as FooterLogo } from "./img/footer-logo.svg";
 
 const FooterCopyright = () => (
   <Copyright>

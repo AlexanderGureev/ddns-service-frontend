@@ -12,8 +12,10 @@ import {
   Badge as AntdBadge
 } from "antd";
 import { Link } from "react-router-dom";
-import { ReactComponent as LogoIcon } from "./img/side-menu-logo.svg";
-import { ReactComponent as MiniLogoIcon } from "./img/managed-mini-logo.svg";
+// import { ReactComponent as LogoIcon } from "./img/side-menu-logo.svg";
+// import { ReactComponent as MiniLogoIcon } from "./img/managed-mini-logo.svg";
+import { ReactComponent as LogoIcon } from "./img/logo-managed.svg";
+import { ReactComponent as MiniLogoIcon } from "./img/mini-logo-managed.svg";
 
 const { Header: AntdHeader, Content: AntdContent, Sider, Footer } = AntdLayout;
 const { TabPane: AntdTabPane } = Tabs;
@@ -94,6 +96,7 @@ export const MiniLogo = props => (
 );
 const LogoContainer = styled.div`
   position: relative;
+  margin: 30px 0 50px;
   a {
     position: absolute;
     top: 0;
@@ -108,7 +111,8 @@ const StyledLogo = styled(LogoIcon)`
   animation: ${logoShow} 0.5s ease;
 `;
 const StyledMiniLogo = styled(MiniLogoIcon)`
-  width: 78px;
+  width: 70px;
+  padding-left: 7px;
   cursor: pointer;
   animation: ${logoShow} 0.5s ease;
 `;
