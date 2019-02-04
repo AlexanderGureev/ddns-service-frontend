@@ -1,11 +1,21 @@
 import React from "react";
-import Description from "./Description";
-import contentImg from "./img/content-bg.png";
-import { ContentWrapper } from "./styles";
+import ContentBackgroundCircles from "./ContentBackgroundCircles";
+import PricingPlanBlock from "./PricingPlanBlock";
+import { ContentWrapper, ContentBlock } from "./styles";
+import ChooseCard from "./ChooseCard";
 
-const Content = () => (
-  <ContentWrapper src={contentImg}>
-    <Description />
+const Content = props => (
+  <ContentWrapper>
+    <ContentBackgroundCircles />
+    <ContentBlock>
+      <ContentBlock.Title>Why Choose us</ContentBlock.Title>
+      <ContentBlock.Caption>
+        It is a long established fact that a reader will be distracted by the
+        readable content of a page when looking at its layout.
+      </ContentBlock.Caption>
+      <ChooseCard />
+    </ContentBlock>
+    <PricingPlanBlock />
   </ContentWrapper>
 );
 

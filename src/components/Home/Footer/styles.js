@@ -1,172 +1,253 @@
 import styled from "styled-components";
-import { Select as AntdSelect, Input as AntdInput } from "antd";
-import { Link } from "react-router-dom";
-import { ReactComponent as FooterCircles } from "./img/footer-bg-circles.svg";
-import { ReactComponent as MiniLogoIcon } from "../Header/img/header-logo-white.svg";
+import {
+  Form as AntdForm,
+  Input as AntdInput,
+  Select as AntdSelect,
+  Row as AntdRow,
+  Col as AntdCol
+} from "antd";
+import StyledButton, { ButtonLink } from "../Common/Button";
+import { ReactComponent as EmailIcon } from "./img/email-icon.svg";
 
-export const FooterCircleLayer = styled(FooterCircles)`
+export const FooterWrapper = styled.div``;
+export const FooterTop = styled.div`
   width: 100%;
+  min-height: 400px;
+  padding: 150px 0;
   position: relative;
-  top: 200px;
-`;
-export const FooterContainer = styled.div`
-  position: relative;
-`;
+  overflow: hidden;
 
-export const FooterTopWrapper = styled.div`
-  background: url(${props => props.src}) no-repeat center center;
-  background-size: cover;
-  width: 100%;
-  position: absolute;
-  top: -460px;
-  height: 1060px;
-  display: flex;
-  justify-content: center;
-`;
-export const FooterMidWrapper = styled(FooterTopWrapper)`
-  display: block;
-  top: 600px;
-  height: 680px;
+  /* &::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    border-radius: 50px;
+    left: 150px;
+    width: 85%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: -1;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  } */
 `;
 
-export const FooterMidContainer = styled.div`
-  display: block;
-  position: relative;
-`;
-
-export const FooterBottomContainer = styled.div`
-  position: relative;
-  top: 1150px;
-`;
-
-export const ShortForm = styled.form`
-  display: flex;
-  align-items: center;
-  @media (max-width: 870px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .ant-row {
-    margin-right: 20px !important;
-    width: 300px !important;
-
-    @media (max-width: 870px) {
-      margin-right: 0px !important;
-    }
-    @media (max-width: 470px) {
-      width: 250px !important;
+export const Row = styled(AntdRow)``;
+export const Col = styled(AntdCol)`
+  @media (max-width: 991px) {
+    :not(:last-child) {
+      margin-bottom: 30px;
     }
   }
 `;
 
-export const FormWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 450px;
-`;
-
-export const HeaderForm = styled.p`
+export const Form = styled(AntdForm)`
   font-family: "Montserrat";
-  font-weight: 700;
-  font-size: 45px;
-  color: #fff;
-
+  padding: 60px 0;
+`;
+const Input = styled(AntdInput)`
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  padding: 15px 20px;
+  font-weight: 500;
+  font-size: 20px;
   @media (max-width: 1200px) {
-    font-size: 35px;
+    font-size: 18px;
   }
-
-  @media (max-width: 870px) {
-    font-size: 30px;
-  }
-
-  @media (max-width: 470px) {
-    font-size: 25px;
-    text-align: center;
-    padding: 0 20px;
+  @media (max-width: 991px) {
+    font-size: 16px;
   }
 `;
-
-export const Input = styled(AntdInput)`
-  border: none;
-  color: #8f8f8f;
-  filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
-  font-size: 16px;
-  border-radius: 10px;
-  font-family: "Montserrat";
-  font-weight: 700;
-  padding: 12px 30px;
-  margin-right: 20px;
-  outline: none;
-  transition: none;
-
-  @media (max-width: 870px) {
-    margin: 0 0 20px 0;
-  }
-  @media (max-width: 470px) {
-    font-size: 14px;
-  }
-`;
-export const Select = styled(AntdSelect)`
-  font-family: "Montserrat";
-  font-weight: 700;
-  font-size: 16px;
-  color: #8f8f8f;
-  filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
-  .ant-select-selection {
-    border-radius: 10px;
-    border: none;
-    padding: 12px 30px !important;
-    transition: none;
-  }
-  .ant-select-selection--single {
-    height: auto !important;
-  }
-  .ant-select-selection__rendered {
-    line-height: 25px !important ;
-    margin: 0;
-  }
-
-  @media (max-width: 470px) {
-    font-size: 14px;
-  }
-`;
-export const ButtonLink = styled(Link)`
-  background: linear-gradient(140deg, #2c3ff9, #3673f1);
-  border-radius: 10px;
-  filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  font-family: "Montserrat";
-  font-weight: 800;
-  padding: 12px 70px;
-  outline: none;
-  cursor: pointer;
-  white-space: nowrap;
+const Button = styled(ButtonLink)`
+  border-radius: 15px;
   text-align: center;
-
-  &:hover {
-    color: white;
+  a {
+    padding: 15px 50px;
   }
-
   @media (max-width: 1200px) {
-    padding: 12px 40px;
+    font-size: 18px;
   }
-
-  @media (max-width: 870px) {
-    width: 100%;
-    margin: 20px 0;
-  }
-  @media (max-width: 470px) {
+  @media (max-width: 991px) {
     font-size: 16px;
   }
 `;
 
+export const Select = styled(AntdSelect)`
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+  color: #011457;
+  @media (max-width: 1200px) {
+    font-size: 18px;
+  }
+  @media (max-width: 991px) {
+    font-size: 16px;
+  }
+  .ant-select-selection--single {
+    height: auto !important;
+  }
+  .ant-select-open .ant-select-selection {
+    box-shadow: none;
+  }
+  .ant-select-selection {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: none !important;
+    outline: none !important;
+    :hover {
+      border-color: #fff !important;
+      box-shadow: none !important;
+    }
+  }
+  .ant-select-selection__rendered {
+    margin: 0 !important;
+  }
+`;
+
+Form.Input = Input;
+Form.Button = Button;
+
+export const Header = styled.p`
+  font-weight: 700;
+  color: #011457;
+  text-align: center;
+  margin: 0;
+  font-size: 50px;
+
+  @media (max-width: 1200px) {
+    font-size: 40px;
+  }
+  @media (max-width: 991px) {
+    padding: 0 30px;
+    font-size: 32px;
+  }
+  @media (max-width: 460px) {
+    font-size: 27px;
+  }
+`;
+
+export const FooterBottom = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  background: url(${props => props.src}) no-repeat top center;
+  background-size: cover;
+`;
+
+export const StayUpdatedForm = styled.div`
+  padding: 100px 0 10px 0;
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+
+  @media (max-width: 860px) {
+    width: 400px;
+  }
+
+  @media (max-width: 480px) {
+    width: auto;
+    padding: 100px 40px 0;
+  }
+`;
+const StayUpdatedFormHeader = styled.p`
+  margin: 0;
+  font-family: "Montserrat";
+  font-size: 40px;
+  color: #fff;
+  font-weight: 600;
+
+  @media (max-width: 1200px) {
+    font-size: 35px;
+  }
+  @media (max-width: 991px) {
+    font-size: 30px;
+  }
+  @media (max-width: 460px) {
+    font-size: 27px;
+  }
+`;
+const StayUpdatedFormButton = styled(StyledButton)`
+  font-size: 20px;
+  padding: 15px 70px;
+  border-radius: 15px;
+`;
+const StayUpdatedFormInput = styled(Input.Search)`
+  text-align: center;
+  margin: 30px 0;
+  padding: 0 !important;
+
+  span {
+    right: 10px !important;
+  }
+  button {
+    border: none;
+    border-radius: 50% !important;
+    width: 45px !important;
+    height: 45px !important;
+    padding: 3px 0 0 0;
+    background: linear-gradient(135deg, #11013c, #053a80);
+    &:hover {
+      background: linear-gradient(135deg, #11013c, #053a80);
+    }
+
+    @media (max-width: 460px) {
+      width: 35px !important;
+      height: 35px !important;
+    }
+  }
+  input {
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 50px;
+    text-align: center;
+    padding: 15px 65px 15px 55px !important;
+
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
+    @media (max-width: 991px) {
+      font-size: 16px;
+    }
+    @media (max-width: 460px) {
+      padding: 10px 65px 10px 55px !important;
+      font-size: 14px;
+    }
+  }
+  .ant-input-prefix i {
+    position: absolute;
+    left: 5px;
+    top: -13px;
+    @media (max-width: 460px) {
+      top: -10px;
+    }
+  }
+  i {
+    font-size: 25px;
+    @media (max-width: 460px) {
+      font-size: 20px;
+    }
+  }
+`;
+const StayUpdatedFormIcon = styled(EmailIcon)`
+  margin-bottom: 10px;
+
+  @media (max-width: 991px) {
+    width: 80px;
+  }
+`;
+StayUpdatedForm.Header = StayUpdatedFormHeader;
+StayUpdatedForm.Input = StayUpdatedFormInput;
+StayUpdatedForm.Button = StayUpdatedFormButton;
+StayUpdatedForm.Icon = StayUpdatedFormIcon;
+
+export const FooterRow = styled(Row)`
+  margin: 40px 0 0 0 !important;
+`;
 export const ContentColumn = styled.div``;
 
 const Head = styled.p`
@@ -175,15 +256,11 @@ const Head = styled.p`
   margin: 20px 0;
   color: #fff;
 
-  @media (max-width: 1200px) {
-    font-size: 24px;
-  }
-  @media (max-width: 870px) {
+  @media (max-width: 760px) {
     font-size: 20px;
   }
-  @media (max-width: 470px) {
-    margin: 15px 0;
-    font-size: 18px;
+  @media (max-width: 460px) {
+    font-size: 16px;
   }
 `;
 
@@ -199,75 +276,89 @@ const Item = styled.li`
   color: #fff;
   cursor: pointer;
   transition: 0.3s ease;
-  &:hover {
-    color: #2868d7;
+  :hover {
+    color: #8ee0ff;
   }
-
-  @media (max-width: 1200px) {
-    font-size: 18px;
-  }
-  @media (max-width: 870px) {
+  @media (max-width: 760px) {
     font-size: 16px;
   }
-  @media (max-width: 870px) {
+  @media (max-width: 460px) {
     font-size: 14px;
   }
 `;
 
+FooterRow.Col = ContentColumn;
 ContentColumn.Head = Head;
 ContentColumn.List = List;
 ContentColumn.ListItem = Item;
 
 export const SocialContainer = styled.div`
+  padding: 20px 0;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-`;
-
-const SocialBarIcon = styled.div`
-  background: url(${props => props.src}) no-repeat center center;
-  background-size: cover;
-  width: 60px;
-  height: 60px;
-  margin-left: -5px;
-  cursor: pointer;
-
-  @media (max-width: 960px) {
-    width: 50px;
-    height: 50px;
-  }
-
-  @media (max-width: 780px) {
-    width: 35px;
-    height: 35px;
-    margin-right: 10px;
-  }
-
-  @media (max-width: 470px) {
-    width: 30px;
-    height: 30px;
-  }
-`;
-
-SocialContainer.Icon = SocialBarIcon;
-
-export const MiniLogo = styled(MiniLogoIcon)`
-  height: 120px;
-  width: 300px;
+  width: 200px;
 
   @media (max-width: 760px) {
-    height: 100px;
+    width: 150px;
+  }
+  @media (max-width: 375px) {
+    width: auto;
+    justify-content: space-between;
+    padding-right: 10px;
   }
 `;
+const SocialIcon = styled.img.attrs(props => ({ src: props.src }))`
+  @media (max-width: 760px) {
+    width: 30px;
+    height: 15px;
+  }
+  cursor: pointer;
+`;
+SocialContainer.Icon = SocialIcon;
 
-export const Copyright = styled.p`
-  color: #fff;
+export const Copyright = styled.div``;
+const CopyrightRow = styled(Row)`
+  padding: 170px 0 30px 0;
+  align-items: center;
+  @media (max-width: 990px) {
+    align-items: flex-start;
+  }
+  @media (max-width: 760px) {
+    padding: 50px 0 10px 0;
+  }
+`;
+const CopyrightCol = styled(Col)`
+  @media (max-width: 575px) {
+    margin: 0 !important;
+  }
+`;
+const CopyrightText = styled.p`
+  font-weight: 400;
   font-size: 16px;
   font-family: "Montserrat";
-  font-weight: 500;
+  color: #fff;
   margin: 0;
 
-  @media (max-width: 960px) {
+  @media (max-width: 760px) {
     font-size: 14px;
   }
+  @media (max-width: 575px) {
+    margin: 0;
+    text-align: center;
+  }
 `;
+const CopyrightLogoWrapper = styled.div`
+  @media (max-width: 575px) {
+    text-align: center;
+  }
+  svg {
+    @media (max-width: 760px) {
+      width: 120px;
+    }
+  }
+`;
+Copyright.Text = CopyrightText;
+Copyright.LogoWrapper = CopyrightLogoWrapper;
+Copyright.Row = CopyrightRow;
+Copyright.Col = CopyrightCol;

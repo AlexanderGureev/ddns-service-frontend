@@ -1,15 +1,24 @@
 import React from "react";
-import FooterTop from "./FooterTop";
-import FooterMid from "./FooterMid";
-import FooterBottom from "./FooterBottom";
-import { FooterContainer } from "./styles";
+import footerBg from "./img/footer-bg.svg";
+import FooterBackgroundCircles from "./FooterBackgroundCircles";
+import { FooterWrapper, FooterBottom, FooterTop } from "./styles";
+import FooterCards from "./FooterCards";
+import Copyright from "./Copyright";
+import StayUpdatedForm from "./StayUpdatedForm";
+import CreateHostnameForm from "./CreateHostnameForm";
 
 const Footer = props => (
-  <FooterContainer>
-    <FooterTop />
-    <FooterMid />
-    <FooterBottom />
-  </FooterContainer>
+  <FooterWrapper id="shortForm">
+    <FooterTop>
+      <FooterBackgroundCircles />
+      <CreateHostnameForm />
+    </FooterTop>
+    <FooterBottom src={footerBg}>
+      <StayUpdatedForm />
+      <FooterCards />
+      <Copyright />
+    </FooterBottom>
+  </FooterWrapper>
 );
 
 export default Footer;

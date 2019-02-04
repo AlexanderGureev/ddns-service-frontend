@@ -1,317 +1,219 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { Drawer } from "antd";
-import React from "react";
-import { animated } from "react-spring/hooks";
-import { ReactComponent as MenuBg } from "./img/menu-bg.svg";
-import { ReactComponent as CircleBg } from "./img/circle-bg-header.svg";
+import { Anchor } from "antd";
+import { ButtonLink } from "../Common/Button";
 
-export const CircleBackground = styled(CircleBg)`
-  position: absolute;
-  right: 0;
-  top: -100px;
-  filter: blur(3px);
-  opacity: 0.7;
-  overflow-x: hidden;
-  width: 70%;
+import { ReactComponent as HeaderLogo } from "./img/logo.svg";
+
+export const HeaderWrapper = styled.div`
   height: 100vh;
+  min-height: 860px;
+  width: 100%;
+  padding: 20px 100px 0 100px;
+  background: url(${props => props.src}) no-repeat right top;
+  background-size: contain;
+  position: relative;
 
-  @media (max-width: 1400px) {
-    width: 50%;
+  @media (max-width: 1200px) {
+    padding: 20px 30px 0 100px;
   }
-  @media (max-width: 1100px) {
-    width: 30%;
+
+  @media (max-width: 970px) {
+    background-size: cover;
+    background-position: right center;
+    padding: 50px 50px 0;
   }
-  @media (max-width: 900px) {
-    width: 100%;
+  @media (max-width: 460px) {
+    padding: 30px 30px 0;
   }
 `;
-export const HeaderWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  min-height: 700px;
+
+export const TopLine = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const Logo = styled.div`
   position: relative;
 `;
+const LogoIcon = styled(HeaderLogo)`
+  cursor: pointer;
 
-export const HeaderImg = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: url(${props => props.src}) no-repeat left center;
-  background-size: cover;
-  z-index: -1;
-  min-height: 860px;
-
-  @media (max-width: 900px) {
-    background-position: right center;
+  @media (max-width: 1200px) {
+    width: 200px;
+  }
+  @media (max-width: 970px) {
+    display: none;
+  }
+  a {
+    width: 500px;
+    height: 500px;
   }
 `;
 
-export const MenuWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  z-index: 1;
-`;
-
-const Background = styled(MenuBg)`
-  z-index: -1;
+const LogoLink = styled(Link)`
   position: absolute;
   left: 0;
   top: 0;
-`;
-
-const CollapseMenu = styled(Drawer)`
-  .ant-drawer-content {
-    position: relative;
-  }
-
-  .ant-drawer-header {
-    border-radius: 0;
-  }
-  .ant-drawer-body {
-    margin-top: 150px;
-
-    a,
-    p {
-      margin-bottom: 10px;
-      display: block;
-      text-align: center;
-      font-size: 18px;
-      font-family: "Montserrat";
-      font-weight: 400;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.3s ease;
-
-      &:hover {
-        color: rgba(255, 255, 255, 0.4);
-      }
-    }
-  }
-`;
-
-export const CollapseMenuWrapper = props => (
-  <CollapseMenu {...props}>
-    <Background />
-    {props.children}
-  </CollapseMenu>
-);
-
-export const TopMenu = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
   height: 100%;
-  padding: 20px 30px;
+  display: block;
 `;
-const TopMenuItem = styled.p`
-  a {
-    display: block;
-    padding: 5px 20px;
-    color: #fff;
-    &:hover {
-      color: ${props => (props.btn ? "none" : "rgba(255,255,255, .3)")};
-    }
+Logo.Link = LogoLink;
+Logo.Icon = LogoIcon;
 
-    @media (max-width: 1300px) {
-      padding: 5px 10px;
-    }
-  }
-  position: relative;
-  text-transform: uppercase;
-  font-size: 18px;
+export const HeaderContent = styled.div`
+  width: 600px;
+  margin-top: 200px;
   font-family: "Montserrat";
-  font-weight: 400;
-  cursor: pointer;
+  color: #012052;
+
+  line-height: 1.4;
+  @media (max-width: 1400px) {
+    width: 500px;
+  }
+  @media (max-width: 1200px) {
+    width: 450px;
+  }
+  @media (max-width: 970px) {
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin: 150px auto 0;
+  }
+`;
+const HeaderTitle = styled.p`
+  font-size: 50px;
+  font-weight: 700;
   margin: 0;
-  margin-right: 10px;
-  border-radius: 30px;
-  background: ${props => (props.btn ? "rgba(255, 255,255, 0.2)" : "none")};
-  transition: 0.3s ease;
-
-  &::after {
-    content: "";
-    position: absolute;
-    height: 2px;
-    background: rgba(0, 0, 0, 0.3);
-    width: 0%;
-    left: 10%;
-    transition: 0.3s ease;
+  padding-bottom: 30px;
+  @media (max-width: 1400px) {
+    font-size: 42px;
   }
-
-  &:hover {
-    background: ${props => (props.btn ? "rgba(255, 255, 255, 0.4)" : "none")};
-
-    &::after {
-      width: ${props => (props.btn ? "0%" : "80%")};
-    }
+  @media (max-width: 1200px) {
+    font-size: 38px;
   }
+  @media (max-width: 460px) {
+    font-size: 27px;
+  }
+`;
 
-  @media (max-width: 1600px) {
+const HeaderCaption = styled(HeaderTitle)`
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  @media (max-width: 1400px) {
     font-size: 16px;
   }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 460px) {
     font-size: 14px;
   }
 `;
-TopMenu.Item = TopMenuItem;
-
-export const MenuBtn = styled.img.attrs(({ src }) => ({ src }))`
-  width: 35px;
-  height: auto;
-  position: relative;
-  left: 40px;
-
-  @media (max-width: 1100px) {
-    top: 20px;
+const HeaderButton = styled(ButtonLink)`
+  font-weight: 500;
+  a {
+    padding: 15px 60px;
   }
-`;
-
-export const LeftPartWrapper = styled.div`
-  position: absolute;
-  width: 580px;
-  height: 60%;
-  top: 40px;
-  left: 100px;
-
-  @media (max-width: 900px) {
-    left: 0;
-    width: 100%;
-  }
-`;
-
-export const ContentWrapper = styled.div`
-  position: absolute;
-  top: 130px;
-
-  @media (max-width: 900px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-export const Logo = styled.img.attrs(({ src }) => ({ src }))`
-  width: 640px;
-  height: auto;
-  filter: drop-shadow(5px 35px 15px rgba(0, 0, 0, 0.05));
-
-  @media (max-width: 1800px) {
-    width: 540px;
-  }
-  @media (max-width: 900px) {
-    width: 460px;
-  }
-  @media (max-width: 760px) {
-    width: 360px;
-  }
-  @media (max-width: 560px) {
-    width: 260px;
-  }
-`;
-
-export const getStyledLogo = Component => styled(Component)`
-  width: 640px;
-  height: auto;
-  filter: drop-shadow(5px 35px 15px rgba(0, 0, 0, 0.05));
-
-  @media (max-width: 1800px) {
-    width: 540px;
-  }
-  @media (max-width: 900px) {
-    width: 460px;
-  }
-  @media (max-width: 760px) {
-    width: 360px;
-  }
-  @media (max-width: 560px) {
-    width: 260px;
-  }
-`;
-export const HeaderContentText = styled.div`
-  font-size: 18px;
-  font-family: "Montserrat";
-  color: #707070;
-  padding: 20px 0 30px 0;
-
-  @media (max-width: 1800px) {
-    font-size: 16px;
-  }
-  @media (max-width: 900px) {
-    color: #fff;
-    font-weight: 400px;
-    width: 70%;
-    text-align: center;
-  }
-`;
-
-export const HeaderButton = styled(animated.div)`
-  background: linear-gradient(140deg, #1194e8, #75acfd);
-  color: white;
   text-transform: uppercase;
-  padding: 13px 60px;
-  filter: drop-shadow(5px 10px 35px rgba(0, 102, 242, 0.2));
-  cursor: pointer;
-  border: none;
-  border-radius: 30px;
-  font-size: 20px;
-  font-family: "Montserrat";
-  font-weight: 600;
-  transition: 0.3s ease;
-  outline: none;
-  text-align: center;
-  width: 270px;
-
-  @media (max-width: 760px) {
-    padding: 10px 40px;
-    font-size: 18px;
-  }
-  @media (max-width: 570px) {
-    padding: 10px 30px;
+  @media (max-width: 460px) {
+    a {
+      padding: 10px 30px;
+    }
     font-size: 16px;
   }
 `;
-
 export const ScrollBtn = styled.div`
-  position: absolute;
-  bottom: ${props => (props.bottom ? "80px" : "20px")};
-  left: 48.5%;
+  position: relative;
+  bottom: -25%;
+  margin: 0 auto;
   border-radius: 50%;
-  background: linear-gradient(180deg, #2c3d89, #3b51b2);
-  filter: drop-shadow(5px 10px 25px rgba(0, 0, 0, 0.35));
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(140deg, #11013c, #083269);
+  box-shadow: 0 10px 20px rgba(0, 28, 118, 0.32);
   cursor: pointer;
-  width: 60px;
-  height: 60px;
-  &::before {
-    content: "";
-    background: url(${props => props.src}) no-repeat center center;
-    background-size: contain;
-    display: block;
-    width: 40px;
-    height: 40px;
-    left: 10px;
-    top: 10px;
-    position: absolute;
-    transform: rotate(${props => (props.bottom ? "180deg" : 0)});
-    @media (max-width: 1200px) {
-      width: 30px;
-      height: 30px;
-      left: 10px;
-      top: 10px;
-    }
-  }
-  @media (max-width: 1200px) {
+
+  @media (max-width: 460px) {
     width: 50px;
     height: 50px;
   }
-  @media (max-width: 900px) {
-    left: 47%;
-  }
-  @media (max-width: 570px) {
-    left: 45%;
+`;
+const ScrollBtnIcon = styled.div`
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  width: 80%;
+  height: 80%;
+  background: url(${props => props.src}) no-repeat center center;
+
+  @media (max-width: 460px) {
+    left: 10px;
+    width: 60%;
+    height: 60%;
   }
 `;
+const AntdLink = styled(Anchor.Link)``;
+
+ScrollBtn.Icon = ScrollBtnIcon;
+ScrollBtn.Link = AntdLink;
+HeaderContent.Title = HeaderTitle;
+HeaderContent.Caption = HeaderCaption;
+HeaderContent.Button = HeaderButton;
+
+export const Menu = styled.div`
+  font-family: "Montserrat";
+  font-weight: 400;
+  color: #fff;
+
+  @media (max-width: 970px) {
+    display: none;
+  }
+`;
+
+const MenuItem = styled(Link)`
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s ease;
+  white-space: nowrap;
+  padding: 0 30px;
+  font-size: 20px;
+  :hover {
+    color: #8ee0ff;
+  }
+  + div {
+    margin-left: 15px;
+  }
+
+  @media (max-width: 1680px) {
+    padding: 0 15px;
+    font-size: 18px;
+  }
+  @media (max-width: 1400px) {
+    + div {
+      margin-left: 10px;
+    }
+    padding: 0 10px;
+    font-size: 16px;
+  }
+  @media (max-width: 1200px) {
+    + div {
+      margin-left: 5px;
+    }
+    padding: 0 10px;
+    font-size: 14px;
+  }
+`;
+
+const MenuBtn = styled(ButtonLink)`
+  a {
+    @media (max-width: 1400px) {
+      font-size: 16px;
+      padding: 8px 40px;
+    }
+    @media (max-width: 1200px) {
+      font-size: 14px;
+    }
+  }
+`;
+Menu.Item = MenuItem;
+Menu.Button = MenuBtn;
