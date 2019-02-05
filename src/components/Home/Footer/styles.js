@@ -32,17 +32,17 @@ export const FooterTop = styled.div`
 `;
 
 export const Row = styled(AntdRow)``;
-export const Col = styled(AntdCol)`
-  @media (max-width: 991px) {
-    :not(:last-child) {
-      margin-bottom: 30px;
-    }
-  }
-`;
+export const Col = styled(AntdCol)``;
 
 export const Form = styled(AntdForm)`
   font-family: "Montserrat";
   padding: 60px 0;
+
+  .ant-row {
+    @media (max-width: 991px) {
+      padding-bottom: 30px;
+    }
+  }
 `;
 const Input = styled(AntdInput)`
   border: none;
@@ -61,8 +61,9 @@ const Input = styled(AntdInput)`
 const Button = styled(ButtonLink)`
   border-radius: 15px;
   text-align: center;
+  display: block;
   a {
-    padding: 15px 50px;
+    padding: 15px 0;
   }
   @media (max-width: 1200px) {
     font-size: 18px;
@@ -319,10 +320,10 @@ SocialContainer.Icon = SocialIcon;
 
 export const Copyright = styled.div``;
 const CopyrightRow = styled(Row)`
-  padding: 170px 0 30px 0;
+  padding: 100px 0 30px 0;
   align-items: center;
   @media (max-width: 990px) {
-    align-items: flex-start;
+    align-items: center;
   }
   @media (max-width: 760px) {
     padding: 50px 0 10px 0;
@@ -353,6 +354,9 @@ const CopyrightLogoWrapper = styled.div`
     text-align: center;
   }
   svg {
+    @media (max-width: 1200px) {
+      width: 150px;
+    }
     @media (max-width: 760px) {
       width: 120px;
     }

@@ -20,7 +20,7 @@ const CreateHostnameForm = ({ form }) => (
             </Select>
           </DecoratedFormItem>
         </Col>
-        <Col xs={{ span: 19 }} sm={{ span: 13 }} lg={{ span: 3 }}>
+        <Col xs={{ span: 19 }} sm={{ span: 13 }} lg={{ span: 4 }}>
           <Form.Button
             to={{ pathname: "/login", state: { data: form.getFieldsValue() } }}
           >
