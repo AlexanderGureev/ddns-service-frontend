@@ -8,7 +8,7 @@ import ShortProfilePopover from "./ShortProfilePopover";
 import { ShortProfile as StyledShortProfile } from "./styles";
 
 const ShortProfile = ({ visible, handleVisibleChange, history }) => {
-  const { username, email = "none", firstName, lastName } = useStore(
+  const { email = "none", firstName, lastName } = useStore(
     state => state.session.profile
   );
   const { logoutUserAction } = useAction(dispatch => dispatch.session);

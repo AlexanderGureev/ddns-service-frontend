@@ -1,7 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Content as StyledContent } from "./styles";
-import Footer from "./Footer";
 import MainPage from "./MainPage";
 import ProfilePage from "./ProfilePage";
 import NoMatch from "../Common/NoMatch";
@@ -12,13 +11,14 @@ const Content = props => {
     match: { url }
   } = props;
 
+  console.log(props);
+  console.log(url);
   return (
     <StyledContent>
       <ConfirmEmail {...props} />
       <Switch>
         <Route path={url} exact component={MainPage} />
         <Route path={`${url}/account`} component={ProfilePage} />
-        {/* <Route path={`${url}/verify`} component={MainPage} /> */}
         <Route component={NoMatch} disableLink />
       </Switch>
       {/* <Footer /> */}

@@ -13,7 +13,7 @@ const confirmEmail = async (location, confirmEmailAction) => {
     if (search && pathname === validPathname) {
       const urlSearch = new URLSearchParams(search);
       const code = urlSearch.get("code");
-      if (!code) throw new Error("Invalid request (params).");
+      if (!code) throw new Error("Verification link is not valid.");
 
       await confirmEmailAction(code);
       loadingMessage.success("Email confirmed successfully.");

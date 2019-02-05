@@ -25,9 +25,12 @@ const App = () => {
         <ErrorBoundary>
           <Suspense fallback={<Preloader>Loading page...</Preloader>}>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/login/" component={Auth} />
-              <Route path="/reset/password" component={ChangePassword} />
+              <Route exact path="/" render={props => <Home {...props} />} />
+              <Route path="/login/" render={props => <Auth {...props} />} />
+              <Route
+                path="/reset/password"
+                render={props => <ChangePassword {...props} />}
+              />
               <PrivateRoute path="/managed" component={Managed} />
               <Route component={NoMatch} />
             </Switch>

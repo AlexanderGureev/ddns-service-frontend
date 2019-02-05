@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import api from "./api";
 
 export default class SocialService {

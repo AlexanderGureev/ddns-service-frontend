@@ -8,7 +8,7 @@ const API_URL_CSRF = "https://accounts.best-service.online/v1/csrf";
 const API_URL_REGISTRATION = `${API_URL}/registration/`;
 const API_URL_LOGIN = `${API_URL}/login/`;
 const API_URL_LOGOUT = `${API_URL}/logout/`;
-const API_URL_USER = `${API_URL}/user/`;
+// const API_URL_USER = `${API_URL}/user/`;
 const API_URL_USER_IS_AUTH = `${API_URL}/user/`;
 const API_URL_USER_EMAIL_CONFIRM = `${API_URL}/registration/verify-email/`;
 const API_URL_USER_RESET_TOKEN = `${API_URL}/password/reset/`;
@@ -134,45 +134,45 @@ const logoutApi = async () => {
   }
 };
 
-const user = async () => {
-  try {
-    const token = await getTokenApi();
+// const user = async () => {
+//   try {
+//     const token = await getTokenApi();
 
-    const {
-      data: {
-        email,
-        username,
-        first_name: firstName,
-        last_name: lastName,
-        avatar_path: avatarPath,
-        email_verified: emailConfirm
-      },
-      status,
-      statusText
-    } = await axios({
-      method: "post",
-      url: API_URL_LOGOUT,
-      headers: { "X-CSRFToken": token }
-    });
+//     const {
+//       data: {
+//         email,
+//         username,
+//         first_name: firstName,
+//         last_name: lastName,
+//         avatar_path: avatarPath,
+//         email_verified: emailConfirm
+//       },
+//       status,
+//       statusText
+//     } = await axios({
+//       method: "post",
+//       url: API_URL_LOGOUT,
+//       headers: { "X-CSRFToken": token }
+//     });
 
-    if (status !== 200) {
-      throw new Error(
-        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
-      );
-    }
+//     if (status !== 200) {
+//       throw new Error(
+//         `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+//       );
+//     }
 
-    return {
-      email,
-      username,
-      firstName,
-      lastName,
-      avatarPath,
-      emailConfirm
-    };
-  } catch (error) {
-    throw new Error("Ошибка отправки запроса...");
-  }
-};
+//     return {
+//       email,
+//       username,
+//       firstName,
+//       lastName,
+//       avatarPath,
+//       emailConfirm
+//     };
+//   } catch (error) {
+//     throw new Error("Ошибка отправки запроса...");
+//   }
+// };
 
 const sendSocialCodeApi = async ({ provider, code, state }) => {
   try {
