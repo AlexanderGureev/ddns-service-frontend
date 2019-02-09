@@ -15,7 +15,7 @@ export const FooterTop = styled.div`
   min-height: 400px;
   padding: 150px 0;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 
   /* &::before {
     content: "";
@@ -133,8 +133,6 @@ export const Header = styled.p`
 `;
 
 export const FooterBottom = styled.div`
-  width: 100%;
-  min-height: 100vh;
   background: url(${props => props.src}) no-repeat top center;
   background-size: cover;
 `;
@@ -326,7 +324,7 @@ const CopyrightRow = styled(Row)`
     align-items: center;
   }
   @media (max-width: 760px) {
-    padding: 50px 0 10px 0;
+    padding: 50px 0 20px 0;
   }
 `;
 const CopyrightCol = styled(Col)`

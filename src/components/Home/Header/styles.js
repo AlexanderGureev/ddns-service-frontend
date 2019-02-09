@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 import { Elastic } from "react-burgers";
 import React from "react";
-import { Drawer, Anchor } from "antd";
+import { Drawer } from "antd";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 import StyledButton, { ButtonLink } from "../Common/Button";
 // import { ReactComponent as HeaderLogo } from "./img/logo.svg";
 import { ReactComponent as HeaderLogo1 } from "./img/logo_new.svg";
@@ -121,7 +122,7 @@ const HeaderButton = styled(ButtonLink)`
   text-transform: uppercase;
   @media (max-width: 460px) {
     a {
-      padding: 10px 30px;
+      padding: 15px 40px;
     }
     font-size: 16px;
   }
@@ -156,7 +157,12 @@ const ScrollBtnIcon = styled.div`
     height: 60%;
   }
 `;
-const AntdLink = styled(Anchor.Link)``;
+const AntdLink = styled(AnchorLink)`
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: absolute;
+`;
 
 ScrollBtn.Icon = ScrollBtnIcon;
 ScrollBtn.Link = AntdLink;
@@ -252,7 +258,7 @@ export const CollapseMenuWrapper = props => (
 );
 const CollapseMenu = styled(Drawer)`
   .ant-drawer-wrapper-body {
-    min-height: 400px;
+    min-height: 600px;
   }
   .ant-drawer-content {
     position: relative;

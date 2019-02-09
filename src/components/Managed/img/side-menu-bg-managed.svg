@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="1000" viewBox="0 0 300 1000">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_275" data-name="Rectangle 275" width="300" height="1000" transform="translate(16568 7335)" fill="#fff"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1f5ad1"/>
+      <stop offset="1" stop-color="#17387a" stop-opacity="0.839"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.224" y1="0.119" x2="0.887" y2="0.811" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6ee8fd"/>
+      <stop offset="1" stop-color="#2ca6bb" stop-opacity="0.549"/>
+    </linearGradient>
+    <filter id="Ellipse_170" x="221.084" y="575.5" width="85.164" height="87" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_171" x="-115.74" y="635.5" width="210.438" height="218" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_172" x="141.625" y="816.5" width="90.902" height="93" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_173" x="90.549" y="685.5" width="67.951" height="69" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_174" x="241.117" y="738.5" width="54.563" height="55" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-5"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Mask_Group_151" data-name="Mask Group 151" transform="translate(-16568 -7335)" clip-path="url(#clip-path)">
+    <rect id="Rectangle_274" data-name="Rectangle 274" width="300" height="1000" transform="translate(16568 7335)" fill="url(#linear-gradient)"/>
+    <g transform="matrix(1, 0, 0, 1, 16568, 7335)" filter="url(#Ellipse_170)">
+      <ellipse id="Ellipse_170-2" data-name="Ellipse 170" cx="20.082" cy="21" rx="20.082" ry="21" transform="translate(238.58 593)" fill="url(#linear-gradient-2)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 16568, 7335)" filter="url(#Ellipse_171)">
+      <ellipse id="Ellipse_171-2" data-name="Ellipse 171" cx="82.719" cy="86.5" rx="82.719" ry="86.5" transform="translate(-98.24 653)" fill="url(#linear-gradient-2)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 16568, 7335)" filter="url(#Ellipse_172)">
+      <ellipse id="Ellipse_172-2" data-name="Ellipse 172" cx="22.951" cy="24" rx="22.951" ry="24" transform="translate(159.13 834)" fill="url(#linear-gradient-2)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 16568, 7335)" filter="url(#Ellipse_173)">
+      <ellipse id="Ellipse_173-2" data-name="Ellipse 173" cx="11.475" cy="12" rx="11.475" ry="12" transform="translate(108.05 703)" fill="url(#linear-gradient-2)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 16568, 7335)" filter="url(#Ellipse_174)">
+      <ellipse id="Ellipse_174-2" data-name="Ellipse 174" cx="4.781" cy="5" rx="4.781" ry="5" transform="translate(258.62 756)" fill="url(#linear-gradient-2)"/>
+    </g>
+  </g>
+</svg>

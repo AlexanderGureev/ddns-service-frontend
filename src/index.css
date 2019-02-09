@@ -79,27 +79,6 @@ body {
 .ant-layout-sider-trigger {
   background: linear-gradient(135deg, #255bc7, #348eb4) !important;
 }
-.ant-anchor-link {
-  width: 100%;
-  height: 100%;
-  padding: 0 !important;
-}
-.ant-anchor-link a {
-  z-index: 10;
-}
-.ant-anchor-link-title {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.ant-anchor,
-.ant-anchor-wrapper {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.ant-anchor-ink:before {
-  width: 0px !important;
-}
 .ant-back-top-content {
   background: #083269 !important;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);

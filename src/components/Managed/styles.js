@@ -32,19 +32,15 @@ to {
 export const Layout = styled(AntdLayout)`
   height: 100vh;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 `;
 export const StyledSide = styled(Sider)`
-  background: linear-gradient(
-    140deg,
-    #1f5ad1,
-    rgba(23, 56, 122, 0.8)
-  ) !important;
+  background: linear-gradient(140deg, #1f5ad1, rgba(23, 56, 122, 0.8));
   box-shadow: 5px 0px 25px rgba(0, 0, 0, 0.1);
 `;
 
 export const Content = styled(AntdContent)`
   margin: 24px 16px 0;
-  overflow: initial;
   min-width: 200px;
 `;
 export const Menu = styled(AntdMenu)`
@@ -121,8 +117,8 @@ export const StyledCircle = styled.div`
   background: linear-gradient(140deg, #6ee8fd, rgba(44, 166, 187, 0.45));
   filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.35));
   border-radius: 50%;
-  top: ${props => `${props.top}%`};
-  right: ${props => `${props.right}%`};
+  top: ${props => `${props.top}px`};
+  right: ${props => `${props.right}px`};
   width: ${props => `${props.size}px`};
   height: ${props => `${props.size}px `};
   opacity: ${props => props.opacity || 1};
@@ -304,9 +300,9 @@ const CardRow = styled.div`
 `;
 export const CardBackgroundCircles = () => (
   <>
-    <StyledCircle size={40} top={50} right={5} />
-    <StyledCircle size={25} top={10} right={30} />
-    <StyledCircle size={20} top={60} right={35} />
+    <StyledCircle size={40} top={60} right={40} />
+    <StyledCircle size={25} top={20} right={150} />
+    <StyledCircle size={20} top={75} right={230} />
   </>
 );
 const ContentWrapper = styled.div`

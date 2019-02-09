@@ -1,6 +1,7 @@
 import React from "react";
 import { useMedia } from "react-use";
 import { StyledSide, Logo, MiniLogo } from "./styles";
+import sideMenuBg from "./img/side-menu-bg-managed.svg";
 
 import CircleLayer from "./CircleLayer";
 import SideMenu from "./SideMenu";

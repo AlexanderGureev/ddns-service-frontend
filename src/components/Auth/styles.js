@@ -116,6 +116,7 @@ export const Form = styled(AntdForm)`
     .ant-input-group-addon {
       border: none;
       background-color: #e2e2e2;
+      filter: drop-shadow(5px 10px 10px rgba(0, 0, 0, 0.2));
 
       .ant-select {
         width: 170px !important;
@@ -191,7 +192,9 @@ const CaptionText = styled.p`
   }
 `;
 
-const SocialBlock = styled.div``;
+const SocialBlock = styled.div`
+  width: 100%;
+`;
 const HeaderSocial = styled.div`
   color: #4b4b4b;
   font-size: 16px;
@@ -212,66 +215,33 @@ const HeaderSocial = styled.div`
   }
 `;
 const FooterSocial = styled(HeaderSocial)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  position: relative;
   &::after {
     content: "";
     display: block;
     position: absolute;
-    width: 37%;
+    width: 45%;
     height: 1px;
-    left: 50px;
+    left: 0;
+    top: 50%;
     background-color: #dddddd;
-
-    @media (max-width: 1375px) {
-      width: 34%;
-    }
-    @media (max-width: 1200px) {
-      width: 30%;
-    }
-    @media (max-width: 860px) {
-      width: 40%;
-      left: 30px;
-    }
-    @media (max-width: 560px) {
-      width: 35%;
-    }
-    @media (max-width: 375px) {
-      width: 30%;
-    }
   }
   &::before {
     content: "";
     display: block;
     position: absolute;
-    width: 37%;
+    width: 45%;
     height: 1px;
-    right: 50px;
+    right: 0;
+    top: 50%;
     background-color: #dddddd;
-
-    @media (max-width: 1375px) {
-      width: 34%;
-    }
-    @media (max-width: 1200px) {
-      width: 30%;
-    }
-    @media (max-width: 860px) {
-      width: 40%;
-      right: 30px;
-    }
-    @media (max-width: 560px) {
-      width: 35%;
-    }
-    @media (max-width: 375px) {
-      width: 30%;
-    }
   }
 `;
 
 const SocialIconBox = styled.div`
   margin: 5px 0;
+  display: flex;
+  justify-content: center;
 `;
 
 const SocialIcon = styled.img.attrs(props => ({
@@ -288,8 +258,8 @@ const SocialIcon = styled.img.attrs(props => ({
   }
 
   @media (max-width: 560px) {
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -300,7 +270,7 @@ const Input = styled(AntdInput)`
   font-family: "Montserrat";
   font-weight: 600;
   padding: 12px 20px;
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
   outline: none;
   width: 100%;
   border: none;
@@ -376,7 +346,7 @@ const FormCheckBox = styled(Checkbox)`
 const Button = styled(AntdButton)`
   background: linear-gradient(140deg, #0d52df, #562685);
   border-radius: 10px;
-  filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 10px 10px rgba(13, 82, 223, 0.25));
   color: #fff;
   border: none;
   font-size: 18px;
