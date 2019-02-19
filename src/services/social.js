@@ -13,7 +13,7 @@ export default class SocialService {
 
   getRequestToken = async () => {
     try {
-      const token = await api.getTokenApi();
+      const token = await api.getCSRFTokenApi();
       if (!token) throw new Error("Token request error.");
 
       return token;
@@ -74,7 +74,7 @@ export default class SocialService {
                 "OAuth redirect has occurred but no query or hash parameters were found."
               );
             }
-            console.log(popup.location.href);
+
             closeDialog();
             return success(code, state);
           }

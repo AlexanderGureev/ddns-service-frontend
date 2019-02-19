@@ -13,33 +13,39 @@ import {
 } from "./styles";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 
+const showMessage = (text, type = "success") => {
+  const fn = {
+    success: messageBlock.success,
+    error: messageBlock.error
+  };
+  fn[type](text, 5);
+};
+
+const checkQueryParams = ({ search }) => {
+  const urlSearch = new URLSearchParams(search);
+  const resetToken = urlSearch.get("token");
+  const userId = urlSearch.get("user_id");
+  return { resetToken, userId };
+};
 const ChangePasswordForm = ({ form, location, history }) => {
-  const { resetPasswordAction } = useAction(dispatch => dispatch.session);
+  const { changePasswordAction } = useAction(dispatch => dispatch.session);
   const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
   const isBig = useMedia("(min-width: 1500px)");
 
-  const showMessage = (text, type = "success") => {
-    const fn = {
-      success: messageBlock.success,
-      error: messageBlock.error
-    };
-    fn[type](text, 5);
-  };
-
-  const urlSearch = new URLSearchParams(location.search);
-  const resetToken = urlSearch.get("token");
-  if (!resetToken) {
+  const { resetToken, userId } = checkQueryParams(location);
+  if (!resetToken || !userId) {
     showMessage("Invalid reset token.", "error");
     history.push("/");
   }
 
-  const changePassword = async ({ password1, password2 }) => {
+  const changePassword = async ({ password1, password2, email }) => {
     try {
       setLoading(true);
-      await resetPasswordAction({
+      await changePasswordAction({
         new_password1: password1,
         new_password2: password2,
+        user_id: userId,
         resetToken
       });
       setLoading(false);

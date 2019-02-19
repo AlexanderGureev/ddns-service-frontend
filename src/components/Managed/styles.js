@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 // import { ReactComponent as MiniLogoIcon } from "./img/managed-mini-logo.svg";
 import { ReactComponent as LogoIcon } from "./img/logo-managed.svg";
 import { ReactComponent as MiniLogoIcon } from "./img/mini-logo-managed.svg";
+import { ReactComponent as CircleIcons } from "./img/circleLayers.svg";
 
 const { Header: AntdHeader, Content: AntdContent, Sider, Footer } = AntdLayout;
 const { TabPane: AntdTabPane } = Tabs;
@@ -31,6 +32,8 @@ to {
 
 export const Layout = styled(AntdLayout)`
   height: 100vh;
+  min-height: 700px;
+  z-index: 10;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 `;
@@ -112,16 +115,12 @@ const StyledMiniLogo = styled(MiniLogoIcon)`
   cursor: pointer;
   animation: ${logoShow} 0.5s ease;
 `;
-export const StyledCircle = styled.div`
+
+export const CircleLayer = styled(CircleIcons)`
   position: absolute;
-  background: linear-gradient(140deg, #6ee8fd, rgba(44, 166, 187, 0.45));
-  filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.35));
-  border-radius: 50%;
-  top: ${props => `${props.top}px`};
-  right: ${props => `${props.right}px`};
-  width: ${props => `${props.size}px`};
-  height: ${props => `${props.size}px `};
-  opacity: ${props => props.opacity || 1};
+  left: -140px;
+  bottom: 0;
+  width: 450px;
   z-index: 0;
 `;
 
@@ -129,7 +128,7 @@ export const ShortProfile = styled.div`
   display: flex;
   align-items: center;
 `;
-const Avatar = styled.div`
+export const Avatar = styled.div`
   background: url(${props => props.src}) no-repeat top center;
   background-size: cover;
   margin-right: 10px;
@@ -298,11 +297,38 @@ const CardRow = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+const StyledCardCircle = styled.div`
+  position: absolute;
+  background: linear-gradient(140deg, #6ee8fd, rgba(44, 166, 187, 0.45));
+  filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.35));
+  border-radius: 50%;
+  top: ${props => `${props.top}%`};
+  left: ${props => `${props.left}%`};
+  width: ${props => `${props.size}px`};
+  height: ${props => `${props.size}px `};
+  opacity: ${props => props.opacity || 1};
+  z-index: 0;
+
+  @media (max-width: 1400px) {
+    width: ${props => `${props.size - 8}px`};
+    height: ${props => `${props.size - 8}px `};
+  }
+
+  @media (max-width: 991px) {
+    top: ${props => `${props.top - 10}%`};
+    left: ${props => `${props.left + 10}%`};
+  }
+  @media (max-width: 680px) {
+    top: ${props => `${props.top - 10}%`};
+    left: ${props => `${props.left}%`};
+  }
+`;
 export const CardBackgroundCircles = () => (
   <>
-    <StyledCircle size={40} top={60} right={40} />
-    <StyledCircle size={25} top={20} right={150} />
-    <StyledCircle size={20} top={75} right={230} />
+    <StyledCardCircle size={40} top={55} left={80} />
+    <StyledCardCircle size={25} top={15} left={65} />
+    <StyledCardCircle size={20} top={70} left={60} />
   </>
 );
 const ContentWrapper = styled.div`

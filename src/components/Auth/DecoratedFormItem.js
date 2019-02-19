@@ -8,7 +8,13 @@ const compareToFirstPassword = form => (rule, value, callback) => {
     callback();
   }
 };
-
+const compareToFirstEmail = form => (rule, value, callback) => {
+  if (value && value !== form.getFieldValue("email")) {
+    callback("Two emails that you enter is inconsistent!");
+  } else {
+    callback();
+  }
+};
 const hostnameValidate = form => (rule, value, callback) => {
   if (form.getFieldValue("createLater")) {
     callback();
@@ -42,6 +48,15 @@ const getOptions = (type, form, disableRules = false) => {
             { whitespace: true, message: "The string cannot contain spaces" },
             { required: true, message: "Please input your email." }
           ]
+    },
+    confirmEmail: {
+      rules: [
+        {
+          required: true,
+          message: "Please confirm your email."
+        },
+        { validator: compareToFirstEmail(form) }
+      ]
     },
     password: {
       rules: disableRules
@@ -104,10 +119,11 @@ export const DecoratedFormItem = ({
   form,
   children,
   decorate = true,
-  disableRules
+  disableRules,
+  label
 }) =>
   decorate ? (
-    <Form.Item>
+    <Form.Item label={label}>
       {form.getFieldDecorator(type, {
         ...getOptions(type, form, disableRules)
       })(children)}

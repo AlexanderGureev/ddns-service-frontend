@@ -1,9 +1,6 @@
 import React from "react";
 import { useMedia } from "react-use";
-import { StyledSide, Logo, MiniLogo } from "./styles";
-import sideMenuBg from "./img/side-menu-bg-managed.svg";
-
-import CircleLayer from "./CircleLayer";
+import { StyledSide, Logo, MiniLogo, CircleLayer } from "./styles";
 import SideMenu from "./SideMenu";
 
 const SideBlock = ({ collapsed, toggleSideMenu }) => {

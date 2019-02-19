@@ -3,7 +3,7 @@ import { useMedia } from "react-use";
 import { CardBackgroundCircles, Card as StyledCard } from "./styles";
 
 export const Card = ({ colorA, colorB, title, text, smallText }) => {
-  const isExtraSmallSize = useMedia("(max-width: 600px)");
+  const isExtraSmallSize = useMedia("(max-width: 380px)");
   return (
     <StyledCard colorA={colorA} colorB={colorB}>
       <StyledCard.Title>{title}</StyledCard.Title>

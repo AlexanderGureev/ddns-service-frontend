@@ -7,7 +7,7 @@ const loadingMessage = MessageConstructor({ content: "Signing in..." });
 
 const confirmEmail = async (location, confirmEmailAction) => {
   const validPathname = "/managed/verify";
-  const { pathname = "", search = "" } = location.state || {};
+  const { pathname = "", search = "" } = location.state || location || {};
 
   try {
     if (search && pathname === validPathname) {
@@ -24,7 +24,7 @@ const confirmEmail = async (location, confirmEmailAction) => {
 };
 
 const ConfirmEmail = ({ location }) => {
-  const { emailConfirm = false } = useStore(state => state.session.profile);
+  const { emailConfirm, provider } = useStore(state => state.session.profile);
   const { confirmEmailAction } = useAction(dispatch => dispatch.session);
 
   useEffect(() => {
@@ -32,7 +32,8 @@ const ConfirmEmail = ({ location }) => {
   }, []);
 
   return (
-    !emailConfirm && (
+    !emailConfirm &&
+    !provider && (
       <StyledAlert
         message="Please Confirm Your E-mail Address."
         type="warning"

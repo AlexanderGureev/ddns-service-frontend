@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="470" height="331" viewBox="0 0 470 331">
+  <defs>
+    <linearGradient id="linear-gradient4" x1="0.224" y1="0.119" x2="0.887" y2="0.811" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6ee8fd"/>
+      <stop offset="1" stop-color="#2ca6bb" stop-opacity="0.549"/>
+    </linearGradient>
+    <filter id="Ellipse_331" x="370" y="0" width="87" height="87" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_332" x="0" y="89" width="218" height="218" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_333" x="289" y="238" width="93" height="93" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_334" x="245" y="140" width="69" height="69" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-4"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-4"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_335" x="415" y="176" width="55" height="55" filterUnits="userSpaceOnUse">
+      <feOffset dx="5" dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="7.5" result="blur-5"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-5"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1237" data-name="Group 1237" transform="translate(-7159.5 -1009.5)">
+    <g transform="matrix(1, 0, 0, 1, 7159.5, 1009.5)" filter="url(#Ellipse_331)">
+      <circle id="Ellipse_331-2" data-name="Ellipse 331" cx="21" cy="21" r="21" transform="translate(387.5 17.5)" fill="url(#linear-gradient4)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 7159.5, 1009.5)" filter="url(#Ellipse_332)">
+      <circle id="Ellipse_332-2" data-name="Ellipse 332" cx="86.5" cy="86.5" r="86.5" transform="translate(17.5 106.5)" fill="url(#linear-gradient4)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 7159.5, 1009.5)" filter="url(#Ellipse_333)">
+      <circle id="Ellipse_333-2" data-name="Ellipse 333" cx="24" cy="24" r="24" transform="translate(306.5 255.5)" fill="url(#linear-gradient4)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 7159.5, 1009.5)" filter="url(#Ellipse_334)">
+      <circle id="Ellipse_334-2" data-name="Ellipse 334" cx="12" cy="12" r="12" transform="translate(262.5 157.5)" fill="url(#linear-gradient4)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 7159.5, 1009.5)" filter="url(#Ellipse_335)">
+      <circle id="Ellipse_335-2" data-name="Ellipse 335" cx="5" cy="5" r="5" transform="translate(432.5 193.5)" fill="url(#linear-gradient4)"/>
+    </g>
+  </g>
+</svg>

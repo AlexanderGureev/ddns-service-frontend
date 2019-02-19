@@ -19,6 +19,9 @@ const API_URL_SOCIAL_VK = `${API_URL}/social/vk/`;
 const API_URL_SOCIAL_GOOGLE = `${API_URL}/social/google/`;
 const API_URL_SOCIAL_YANDEX = `${API_URL}/social/yandex/`;
 
+const API_URL_KEY = `${API_URL}/key/`;
+export const API_URL_USER_PARTIAL_UPDATE = `${API_URL}/user/`;
+
 const SOCIAL_LINKS = {
   facebook: API_URL_SOCIAL_FACEBOOK,
   google: API_URL_SOCIAL_GOOGLE,
@@ -41,26 +44,18 @@ const errorParse = error => {
 
 const authStatusApi = async () => {
   try {
-    const {
-      data: {
-        email,
-        username,
-        first_name: firstName,
-        last_name: lastName,
-        avatar_path: avatarPath,
-        email_verified: emailConfirm
-      }
-    } = await axios.get(API_URL_USER_IS_AUTH);
+    const { data } = await axios.get(API_URL_USER_IS_AUTH);
 
     return {
       status: true,
       data: {
-        email,
-        username,
-        firstName,
-        lastName,
-        avatarPath,
-        emailConfirm
+        email: data.email,
+        username: data.username,
+        firstName: data.first_name,
+        lastName: data.last_name,
+        avatarPath: data.personal.avatar,
+        emailConfirm: data.email_verified,
+        provider: data.provider
       }
     };
   } catch (error) {
@@ -68,7 +63,7 @@ const authStatusApi = async () => {
   }
 };
 
-const getTokenApi = async () => {
+const getCSRFTokenApi = async () => {
   try {
     const token = Cookie.get("csrftoken");
     if (token) return token;
@@ -80,6 +75,22 @@ const getTokenApi = async () => {
   }
 };
 
+const getTokenApi = async () => {
+  try {
+    const { data, status, statusText } = await axios({
+      method: "GET",
+      url: API_URL_KEY
+    });
+    if (status !== 200) {
+      throw new Error(
+        `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
+      );
+    }
+    console.log(data);
+  } catch (error) {
+    throw new Error("Token request error.");
+  }
+};
 const registrationApi = async body => {
   try {
     const { data, status, statusText } = await axios.post(
@@ -108,7 +119,7 @@ const loginApi = async body => {
         `Request processing error, try again later. Status: ${status}, Status text: ${statusText}`
       );
     }
-
+    console.log({ data });
     return data;
   } catch (error) {
     throw new Error(errorParse(error));
@@ -117,7 +128,7 @@ const loginApi = async body => {
 
 const logoutApi = async () => {
   try {
-    const token = await getTokenApi();
+    const token = await getCSRFTokenApi();
     const { status, statusText } = await axios({
       method: "post",
       url: API_URL_LOGOUT,
@@ -134,6 +145,26 @@ const logoutApi = async () => {
   }
 };
 
+const updateAvatarApi = async formData => {
+  try {
+    const token = await getCSRFTokenApi();
+    const { data, status } = await axios({
+      method: "PATCH",
+      url: API_URL_USER_PARTIAL_UPDATE,
+      headers: {
+        "X-CSRFToken": token,
+        "content-type": "multipart/form-data"
+      },
+      data: formData
+    });
+    if (status !== 200) {
+      throw new Error("Uploading failed");
+    }
+    return { avatarPath: data.personal.avatar };
+  } catch (error) {
+    throw new Error(errorParse(error));
+  }
+};
 // const user = async () => {
 //   try {
 //     const token = await getTokenApi();
@@ -198,7 +229,7 @@ const sendSocialCodeApi = async ({ provider, code, state }) => {
 
 const confirmEmailApi = async code => {
   try {
-    const token = await getTokenApi();
+    const token = await getCSRFTokenApi();
 
     const { status, statusText } = await axios({
       method: "post",
@@ -220,7 +251,7 @@ const confirmEmailApi = async code => {
 };
 const resetPasswordApi = async body => {
   try {
-    const token = await getTokenApi();
+    const token = await getCSRFTokenApi();
 
     const { status, statusText } = await axios({
       method: "post",
@@ -240,7 +271,7 @@ const resetPasswordApi = async body => {
 };
 const changePasswordApi = async body => {
   try {
-    const token = await getTokenApi();
+    const token = await getCSRFTokenApi();
 
     const { status, statusText } = await axios({
       method: "post",
@@ -267,5 +298,7 @@ export default {
   resetPasswordApi,
   changePasswordApi,
   sendSocialCodeApi,
-  getTokenApi
+  getCSRFTokenApi,
+  getTokenApi,
+  updateAvatarApi
 };

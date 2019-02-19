@@ -3,24 +3,24 @@ import { effect } from "easy-peasy";
 const sessionEffects = {
   registerUserAction: effect(async (dispatch, payload, _, { api }) => {
     try {
-      await api.registrationApi(payload);
-      dispatch.session.authorizeUserAction();
+      const { key } = await api.registrationApi(payload);
+      dispatch.session.authorizeUserAction(key);
     } catch (error) {
       throw new Error(error.message);
     }
   }),
   socialAuthorizeUserAction: effect(async (dispatch, payload, _, { api }) => {
     try {
-      await api.sendSocialCodeApi(payload);
-      dispatch.session.authorizeUserAction();
+      const { key } = await api.sendSocialCodeApi(payload);
+      dispatch.session.authorizeUserAction(key);
     } catch (error) {
       throw new Error(error.message);
     }
   }),
   loginUserAction: effect(async (dispatch, payload, _, { api }) => {
     try {
-      await api.loginApi(payload);
-      dispatch.session.authorizeUserAction();
+      const { key } = await api.loginApi(payload);
+      dispatch.session.authorizeUserAction(key);
     } catch (error) {
       throw new Error(error.message);
     }
@@ -39,12 +39,26 @@ const sessionEffects = {
       }
     }
   ),
+  updateAvatarAction: effect(
+    async (dispatch, payload, getState, { api, cache }) => {
+      try {
+        const avatarPath = await api.updateAvatarApi(payload);
+        dispatch.session.updateProfileAction(avatarPath);
+        cache.saveState(getState().session.profile);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    }
+  ),
   authorizeUserAction: effect(
     async (dispatch, payload, getState, { api, cache }) => {
       try {
         const { status = false, data = {} } = await api.authStatusApi();
         if (status) {
-          dispatch.session.changeAuthStatusAction(status);
+          dispatch.session.setState({
+            isAuth: status,
+            apiToken: payload || ""
+          });
           dispatch.session.updateProfileAction(data);
           cache.saveState(getState().session.profile);
         }
@@ -56,7 +70,7 @@ const sessionEffects = {
   logoutUserAction: effect(async (dispatch, payload, _, { api, cache }) => {
     try {
       await api.logoutApi();
-      dispatch.session.changeAuthStatusAction(false);
+      dispatch.session.setState({ isAuth: false, apiToken: "" });
       cache.clearCache();
     } catch (error) {
       console.log(error.message);
@@ -70,14 +84,21 @@ const sessionEffects = {
         cache.saveState(getState().session.profile);
       } catch (error) {
         console.log(error.message);
-        throw new Error("Email verification failed.");
+        throw new Error(error.message);
       }
     }
   ),
   resetPasswordAction: effect(async (dispatch, payload, _, { api }) => {
     try {
       await api.resetPasswordApi(payload);
-      // dispatch.session.authorizeUserAction();
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }),
+  changePasswordAction: effect(async (dispatch, payload, _, { api }) => {
+    try {
+      await api.changePasswordApi(payload);
+      dispatch.session.authorizeUserAction();
     } catch (error) {
       throw new Error(error.message);
     }
@@ -91,9 +112,13 @@ const model = {
       username: "",
       firstName: "",
       lastName: "",
-      emailConfirm: false
+      emailConfirm: false,
+      avatarPath: "",
+      provider: ""
     },
+    apiToken: "",
     isAuth: false,
+    setState: (state, payload) => ({ ...state, ...payload }),
     updateProfileAction: (state, payload) => ({
       ...state,
       profile: { ...state.profile, ...payload }
