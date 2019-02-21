@@ -1,9 +1,9 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Button as AntdButton } from "antd";
+import styled, { keyframes } from "styled-components";
 import loadingBg from "./img/loading-page.svg";
 
 export const PreloaderContainer = styled.div`
-  font-family: "Montserrat";
   font-weight: 700;
   font-size: 50px;
   padding: 10px;
@@ -36,7 +36,6 @@ export const ContentWrapper = styled.div`
 export const Text = styled.p`
   text-align: center;
   color: white;
-  font-family: "Montserrat";
   font-weight: 500;
   font-size: 40px;
   @media (max-width: 1200px) {
@@ -72,7 +71,6 @@ export const StyledCode = styled.code`
 `;
 
 export const HomeLink = styled(Link)`
-  font-family: "Montserrat";
   font-weight: 500;
   font-size: 20px;
   text-transform: none;
@@ -92,5 +90,59 @@ export const HomeLink = styled(Link)`
   }
   @media (max-width: 560px) {
     font-size: 14px;
+  }
+`;
+
+const showLoadingCircle = keyframes`
+  from{
+    opacity: 0;
+  }
+  to {
+    opacity: 1
+  }
+`;
+
+export const Button = styled(AntdButton)`
+  && {
+    background: linear-gradient(140deg, #0d52df, #562685);
+    border-radius: 10px;
+    filter: drop-shadow(0px 10px 10px rgba(13, 82, 223, 0.25));
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 10px 60px;
+    outline: none;
+    cursor: pointer;
+
+    span {
+      transition: 0.5s ease;
+    }
+
+    i {
+      animation: ${showLoadingCircle} 0.5s ease;
+    }
+    &:hover {
+      background: linear-gradient(140deg, #0d52df, #562685);
+      color: #fff;
+    }
+    &:focus {
+      background: linear-gradient(140deg, #0d52df, #562685);
+      color: #fff;
+    }
+    &:disabled {
+      background: rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 1200px) {
+      font-size: 16px;
+    }
+    @media (max-width: 560px) {
+      font-size: 14px;
+      padding: 10px 40px;
+    }
+    @media (max-width: 360px) {
+      font-size: 12px;
+      padding: 10px 20px;
+    }
   }
 `;

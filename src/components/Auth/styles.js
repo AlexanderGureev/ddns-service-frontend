@@ -1,22 +1,13 @@
-import {
-  Checkbox,
-  Form as AntdForm,
-  Input as AntdInput,
-  Button as AntdButton
-} from "antd";
-import styled, { keyframes } from "styled-components";
+import { Checkbox, Form as AntdForm, Input as AntdInput } from "antd";
+import styled from "styled-components";
 import { ParallaxLayer } from "react-spring/addons";
 import { Link } from "react-router-dom";
+import { Button as StyledButton } from "../Common/styles";
 
-const showLoadingCircle = keyframes`
-  from{
-    opacity: 0;
-  }
-  to {
-    opacity: 1
-  }
+export const Button = styled(StyledButton)`
+  width: 100%;
+  margin-top: 15px;
 `;
-
 export const ParallaxPositioningLayer = styled(ParallaxLayer)`
   z-index: ${props => props.order || 1};
   width: ${props => `${props.width}px !important`};
@@ -96,66 +87,65 @@ export const RightPartForm = styled.div`
 `;
 
 export const Form = styled(AntdForm)`
-  padding: 30px 50px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
+  && {
+    padding: 30px 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
 
-  .ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) {
-    padding: 10px 60px !important;
-  }
-
-  .ant-input-group-wrapper {
-    margin: 15px 0;
-
-    input {
-      margin: 0;
+    .ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) {
+      padding: 10px 60px !important;
     }
 
-    .ant-input-group-addon {
-      border: none;
-      background-color: #e2e2e2;
-      filter: drop-shadow(5px 10px 10px rgba(0, 0, 0, 0.2));
+    .ant-input-group-wrapper {
+      margin: 15px 0;
 
-      .ant-select {
-        width: 170px !important;
-        font-family: "Montserrat";
-        font-weight: 500;
-        font-size: 14px;
+      input {
+        margin: 0;
+      }
 
-        @media (max-width: 980px) {
-          font-size: 12px;
-        }
+      .ant-input-group-addon {
+        border: none;
+        background-color: #e2e2e2;
+        filter: drop-shadow(5px 10px 10px rgba(0, 0, 0, 0.2));
 
-        @media (max-width: 460px) {
-          width: 120px !important;
+        .ant-select {
+          width: 170px !important;
+          font-weight: 500;
+          font-size: 14px;
+
+          @media (max-width: 980px) {
+            font-size: 12px;
+          }
+
+          @media (max-width: 460px) {
+            width: 120px !important;
+          }
         }
       }
     }
-  }
-  .ant-form-explain {
-    font-size: 12px;
-    font-family: "Montserrat";
-    font-weight: 500;
-    margin-top: -5px !important;
-  }
-  .ant-form-item-control {
-    line-height: 1.7;
-  }
-  @media (max-width: 1200px) {
-    padding: 25px 30px 10px;
-  }
+    .ant-form-explain {
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: -5px !important;
+    }
+    .ant-form-item-control {
+      line-height: 1.7;
+    }
+    @media (max-width: 1200px) {
+      padding: 25px 30px 10px;
+    }
 
-  @media (max-width: 375px) {
-    font-size: 10px;
+    @media (max-width: 375px) {
+      font-size: 10px;
+    }
   }
 `;
 
 const FormHeader = styled.p`
   color: #4b4b4b;
   font-size: 30px;
-  font-family: "Montserrat";
   font-weight: 700;
   margin: 0;
 
@@ -184,7 +174,6 @@ const Caption = styled.div`
 const CaptionText = styled.p`
   margin: 0;
   font-size: 14px;
-  font-family: "Montserrat";
   font-weight: 500;
 
   @media (max-width: 375px) {
@@ -198,7 +187,6 @@ const SocialBlock = styled.div`
 const HeaderSocial = styled.div`
   color: #4b4b4b;
   font-size: 16px;
-  font-family: "Montserrat";
   font-weight: 500;
   text-align: center;
 
@@ -264,28 +252,29 @@ const SocialIcon = styled.img.attrs(props => ({
 `;
 
 const Input = styled(AntdInput)`
-  border-radius: 5px;
-  color: #6a6a6a;
-  font-size: 16px;
-  font-family: "Montserrat";
-  font-weight: 600;
-  padding: 12px 20px;
-  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
-  outline: none;
-  width: 100%;
-  border: none;
-  margin: 15px 0;
-
-  @media (max-width: 1200px) {
+  && {
+    border-radius: 5px;
+    color: #6a6a6a;
+    font-size: 16px;
+    font-weight: 600;
     padding: 12px 20px;
-    font-size: 14px;
-  }
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+    outline: none;
+    width: 100%;
+    border: none;
+    margin: 15px 0;
 
-  @media (max-width: 980px) {
-    font-size: 12px;
-  }
-  @media (max-width: 560px) {
-    padding: 10px 15px;
+    @media (max-width: 1200px) {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      font-size: 12px;
+    }
+    @media (max-width: 560px) {
+      padding: 10px 15px;
+    }
   }
 `;
 
@@ -306,7 +295,6 @@ const CheckBoxContainer = styled.div`
 const FormCheckBox = styled(Checkbox)`
   color: #6a6a6a;
   font-size: 14px;
-  font-family: "Montserrat";
   font-weight: 600;
   margin: 0;
 
@@ -343,48 +331,6 @@ const FormCheckBox = styled(Checkbox)`
   }
 `;
 
-const Button = styled(AntdButton)`
-  background: linear-gradient(140deg, #0d52df, #562685);
-  border-radius: 10px;
-  filter: drop-shadow(0px 10px 10px rgba(13, 82, 223, 0.25));
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  font-family: "Montserrat";
-  font-weight: 800;
-  padding: 10px 60px;
-  outline: none;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
-
-  span {
-    transition: 0.5s ease;
-  }
-
-  i {
-    animation: ${showLoadingCircle} 0.5s ease;
-  }
-  &:hover {
-    background: linear-gradient(140deg, #0d52df, #562685) !important;
-    color: #fff !important;
-  }
-  &:focus {
-    background: linear-gradient(140deg, #0d52df, #562685) !important;
-    color: #fff !important;
-  }
-  &:disabled {
-    background: rgba(0, 0, 0, 0.3) !important;
-  }
-  @media (max-width: 1200px) {
-    font-size: 16px;
-  }
-  @media (max-width: 560px) {
-    font-size: 14px;
-    padding: 10px 0px;
-  }
-`;
-
 const TextContainer = styled.div`
   display: flex;
   width: 100%;
@@ -399,7 +345,6 @@ const TextContainer = styled.div`
 const Text = styled.p`
   color: #6a6a6a;
   font-size: 14px;
-  font-family: "Montserrat";
   font-weight: 500;
   margin: 0;
   cursor: pointer;
@@ -489,5 +434,5 @@ Form.ContentWrapper = ContentWrapper;
 Form.SocialBlock = SocialBlock;
 Form.Input = Input;
 Form.CheckBoxContainer = CheckBoxContainer;
-Form.Button = Button;
+
 Form.TextContainer = TextContainer;

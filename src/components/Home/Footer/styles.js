@@ -35,7 +35,6 @@ export const Row = styled(AntdRow)``;
 export const Col = styled(AntdCol)``;
 
 export const Form = styled(AntdForm)`
-  font-family: "Montserrat";
   padding: 60px 0;
 
   .ant-row {
@@ -45,17 +44,19 @@ export const Form = styled(AntdForm)`
   }
 `;
 const Input = styled(AntdInput)`
-  border: none;
-  border-radius: 15px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-  padding: 15px 20px;
-  font-weight: 500;
-  font-size: 20px;
-  @media (max-width: 1200px) {
-    font-size: 18px;
-  }
-  @media (max-width: 991px) {
-    font-size: 16px;
+  && {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    padding: 15px 20px;
+    font-weight: 500;
+    font-size: 20px;
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
+    @media (max-width: 991px) {
+      font-size: 16px;
+    }
   }
 `;
 const Button = styled(ButtonLink)`
@@ -154,7 +155,6 @@ export const StayUpdatedForm = styled.div`
 `;
 const StayUpdatedFormHeader = styled.p`
   margin: 0;
-  font-family: "Montserrat";
   font-size: 40px;
   color: #fff;
   font-weight: 600;
@@ -199,7 +199,6 @@ const StayUpdatedFormInput = styled(Input.Search)`
     }
   }
   input {
-    font-family: "Montserrat";
     font-weight: 500;
     font-size: 18px;
     border-radius: 50px;
@@ -335,7 +334,6 @@ const CopyrightCol = styled(Col)`
 const CopyrightText = styled.p`
   font-weight: 400;
   font-size: 16px;
-  font-family: "Montserrat";
   color: #fff;
   margin: 0;
 

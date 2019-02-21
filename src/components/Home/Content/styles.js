@@ -8,7 +8,6 @@ export const ContentWrapper = styled.div`
 `;
 
 export const ContentBlock = styled.div`
-  font-family: "Montserrat";
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -63,9 +62,7 @@ export const Col = styled(AntdCol)`
   text-align: center;
 `;
 
-export const ContentCard = styled.div`
-  font-family: "Montserrat";
-`;
+export const ContentCard = styled.div``;
 
 const CardImageWrapper = styled.div`
   @media (max-width: 767px) {
@@ -130,7 +127,6 @@ const PricingPlanHeader = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 80px 0;
-  font-family: "Montserrat";
   color: #fff;
 
   @media (max-width: 640px) {

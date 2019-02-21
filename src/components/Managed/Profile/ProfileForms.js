@@ -20,7 +20,6 @@ import ChangePasswordModal from "./ChangePasswordModal";
 import ChangeEmailModal from "./ChangeEmailModal";
 
 import {
-  Form,
   Title,
   FieldsContainer,
   InputGroup,
@@ -31,6 +30,7 @@ import {
   Option,
   ButtonGroup
 } from "./styles";
+import { Form } from "../styles";
 
 const ProfileForms = ({ form }) => {
   const { getFieldDecorator } = form;

@@ -9,17 +9,39 @@ import {
   Col as AntdCol,
   Tabs,
   Alert,
-  Badge as AntdBadge
+  Badge as AntdBadge,
+  Modal as AntdModal,
+  Form as AntdForm
 } from "antd";
 import { Link } from "react-router-dom";
-// import { ReactComponent as LogoIcon } from "./img/side-menu-logo.svg";
-// import { ReactComponent as MiniLogoIcon } from "./img/managed-mini-logo.svg";
 import { ReactComponent as LogoIcon } from "./img/logo-managed.svg";
 import { ReactComponent as MiniLogoIcon } from "./img/mini-logo-managed.svg";
 import { ReactComponent as CircleIcons } from "./img/circleLayers.svg";
 
 const { Header: AntdHeader, Content: AntdContent, Sider, Footer } = AntdLayout;
 const { TabPane: AntdTabPane } = Tabs;
+
+export const Modal = styled(AntdModal)`
+  font-size: 16px;
+
+  .ant-modal-footer,
+  .ant-modal-header {
+    border: none;
+  }
+  .ant-modal-footer button {
+    padding: 6px 20px;
+  }
+`;
+export const Form = styled(AntdForm)`
+  .ant-form-explain {
+    font-size: 12px;
+  }
+`;
+Form.Item = styled(Form.Item)`
+  :not(:last-child) {
+    margin: 0 20px 20px 0 !important;
+  }
+`;
 
 const logoShow = keyframes`
 from{
@@ -38,8 +60,10 @@ export const Layout = styled(AntdLayout)`
   -webkit-overflow-scrolling: touch;
 `;
 export const StyledSide = styled(Sider)`
-  background: linear-gradient(140deg, #1f5ad1, rgba(23, 56, 122, 0.8));
-  box-shadow: 5px 0px 25px rgba(0, 0, 0, 0.1);
+  && {
+    background: linear-gradient(140deg, #1f5ad1, rgba(23, 56, 122, 0.8));
+    box-shadow: 5px 0px 25px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 export const Content = styled(AntdContent)`
@@ -47,38 +71,41 @@ export const Content = styled(AntdContent)`
   min-width: 200px;
 `;
 export const Menu = styled(AntdMenu)`
-  position: relative;
-  background: none !important;
+  && {
+    position: relative;
+    background: none;
 
-  .ant-menu-item {
-    font-size: 20px;
-    font-family: "Montserrat";
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 10px !important;
-    padding: 0 29px !important;
-  }
+    .ant-menu-item {
+      font-size: 20px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 10px;
+      padding: 0 29px;
+    }
 
-  .ant-menu-item-selected {
-    background: linear-gradient(
-      140deg,
-      rgba(142, 52, 211, 0.9),
-      rgba(29, 94, 223, 0.7)
-    );
+    .ant-menu-item-selected {
+      background: linear-gradient(
+        140deg,
+        rgba(142, 52, 211, 0.9),
+        rgba(29, 94, 223, 0.7)
+      );
+    }
   }
 `;
 
 export const Header = styled(AntdHeader)`
-  background: #fff !important;
-  padding: 0;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
-  padding: 0 20px 0 0 !important;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-  min-width: 200px;
+  && {
+    background: #fff;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 75px;
+    padding: 0 20px 0 0;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+  }
 `;
 
 export const Logo = props => (
@@ -146,7 +173,6 @@ const ShortProfileBtn = styled(AntdIcon)`
 `;
 
 const Name = styled.p`
-  font-family: "Montserrat";
   font-weight: 400;
   color: #707070;
   font-size: 16px;
@@ -193,43 +219,44 @@ export const BtnContainer = styled.div`
 `;
 
 export const Search = styled(AntdInput.Search)`
-  width: 300px;
-  margin: 0 40px;
+  && {
+    width: 300px;
+    margin: 0 40px;
 
-  @media (max-width: 690px) {
-    width: auto;
-    min-width: 120px;
-    margin: 0;
-    display: none;
-  }
+    @media (max-width: 690px) {
+      width: auto;
+      min-width: 120px;
+      margin: 0;
+      display: none;
+    }
 
-  input {
-    border: none;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-    padding: 12px 20px;
-    font-family: Montserrat;
-    font-weight: 400;
-    font-size: 14px;
-    border-radius: 5px !important;
-  }
-  span {
-    height: 100%;
-
-    button {
-      height: 100% !important;
-      background-color: #fff;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    input {
       border: none;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      padding: 12px 20px;
+      font-weight: 400;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+    span {
+      height: 100%;
 
-      border-radius: 0 5px 5px 0 !important;
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
-      i {
-        font-size: 20px !important;
-        color: #707070;
-        position: relative;
-        top: 2px;
+      button {
+        height: 100% !important;
+        background-color: #fff;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        border: none;
+
+        border-radius: 0 5px 5px 0;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+        i {
+          font-size: 20px;
+          color: #707070;
+          position: relative;
+          top: 2px;
+        }
       }
     }
   }
@@ -399,7 +426,6 @@ export const TabPane = styled(AntdTabPane)`
 
 export const ShortProfileContainer = styled.div`
   font-size: 14px;
-  font-family: "Montserrat";
   font-weight: 400;
   min-width: 200px;
 `;
@@ -431,7 +457,6 @@ const ProfileItemText = styled.span`
 const ProfileItemLink = styled(ProfileItemText)``;
 export const StyledAlert = styled(Alert)`
   font-size: 14px;
-  font-family: "Montserrat";
   font-weight: 400;
 
   @media (max-width: 560px) {
@@ -455,7 +480,6 @@ export const StyledAlert = styled(Alert)`
 export const StyledFooter = styled(Footer)`
   text-align: center;
   font-size: 14px;
-  font-family: "Montserrat";
   text-transform: uppercase;
   font-weight: 400;
 

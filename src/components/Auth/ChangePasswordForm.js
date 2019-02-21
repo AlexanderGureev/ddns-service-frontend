@@ -9,7 +9,8 @@ import {
   FormWrapper,
   LeftPartForm,
   RightPartForm,
-  Form
+  Form,
+  Button
 } from "./styles";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 
@@ -83,9 +84,9 @@ const ChangePasswordForm = ({ form, location, history }) => {
                 <Form.Input placeholder="Confirm password" type="password" />
               </DecoratedFormItem>
 
-              <Form.Button htmlType="submit" loading={loading}>
+              <Button htmlType="submit" loading={loading}>
                 Change password
-              </Form.Button>
+              </Button>
               <Form.TextContainer>
                 <Form.TextContainer.Text>Sign in</Form.TextContainer.Text>
                 <Form.TextContainer.Text>

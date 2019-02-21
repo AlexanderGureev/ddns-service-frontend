@@ -1,4 +1,3 @@
-import "antd/dist/antd.css";
 import React, { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { StoreProvider } from "easy-peasy";
@@ -8,6 +7,8 @@ import Preloader from "./components/Common/Preloader";
 import PrivateRoute from "./components/Common/PrivateRoute";
 import NoMatch from "./components/Common/NoMatch";
 import ErrorBoundary from "./components/Common/ErrorBoundary";
+
+import "./index.css";
 
 const Home = lazy(() => import("./components/Home"));
 const Auth = lazy(() => import("./components/Auth"));

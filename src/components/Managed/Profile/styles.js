@@ -1,39 +1,16 @@
 import {
-  Modal as AntdModal,
-  Form as AntdForm,
   Input as AntdInput,
-  Button as AntdButton,
   Icon as AntdIcon,
   Select as AntdSelect,
   Upload,
   Avatar as AvaBox,
   Tooltip as AntdTooltip
 } from "antd";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import uploadIcon from "./img/upload.svg";
+import { Button as StyledButton } from "../../Common/styles";
 
-export const Modal = styled(AntdModal)`
-  font-family: "Montserrat";
-  font-size: 16px;
-  font-weight: 400;
-
-  .ant-modal-footer,
-  .ant-modal-header {
-    border: none;
-  }
-`;
-export const Form = styled(AntdForm)`
-  .ant-form-item-label,
-  .ant-form-explain,
-  .ant-form-item-control-wrapper {
-    font-family: "Montserrat";
-  }
-  .ant-form-explain {
-    font-size: 12px;
-  }
-`;
 export const FormLink = styled.p`
-  font-family: "Montserrat";
   font-weight: 500;
   font-size: 12px;
   color: #2c69cd;
@@ -51,7 +28,6 @@ export const { Option } = AntdSelect;
 
 export const Input = styled(AntdInput)`
   input {
-    font-family: "Montserrat";
     font-size: 16px;
     padding: 8px 20px 8px 40px !important;
 
@@ -61,7 +37,6 @@ export const Input = styled(AntdInput)`
   }
 `;
 export const Select = styled(AntdSelect)`
-  font-family: "Montserrat";
   font-size: 16px;
   line-height: 0 !important;
   position: relative;
@@ -101,70 +76,39 @@ export const Select = styled(AntdSelect)`
 export const Icon = styled(AntdIcon)`
   font-size: 20px;
 `;
-Form.Item = styled(Form.Item)`
-  :not(:last-child) {
-    margin: 0 20px 20px 0 !important;
-  }
-`;
-const showLoadingCircle = keyframes`
-  from{
-    opacity: 0;
-  }
-  to {
-    opacity: 1
-  }
-`;
 
-export const Button = styled(AntdButton)`
-  background: ${props =>
-    props.primary ? "linear-gradient(140deg, #0d52df, #562685)" : "#fff"};
-  border-radius: 10px;
-  filter: ${props =>
-    props.primary
-      ? "drop-shadow(0px 10px 10px rgba(13, 82, 223, 0.25))"
-      : "none"};
-  color: ${props => (props.primary ? "#fff" : "rgba(0,0,0, .3)")};
-  border: ${props => (props.primary ? "none" : "1px solid rgba(0,0,0, .2)")};
-  font-size: 16px;
-  font-family: "Montserrat";
-  font-weight: 700;
-  padding: 10px 70px;
-  outline: none;
-  cursor: pointer;
-  margin-top: 10px;
-
-  span {
-    transition: 0.5s ease;
-  }
-
-  i {
-    animation: ${showLoadingCircle} 0.5s ease;
-  }
-  &:hover,
-  &:focus {
+export const Button = styled(StyledButton)`
+  && {
     background: ${props =>
+      props.primary ? "linear-gradient(140deg, #0d52df, #562685)" : "#fff"};
+    border-radius: 10px;
+    filter: ${props =>
       props.primary
-        ? "linear-gradient(140deg, #0d52df, #562685) !important"
-        : "rgba(0,0,0, .1)"};
-    color: ${props => (props.primary ? "#fff !important" : "rgba(0,0,0, .3)")};
-    border-color: ${props => (props.primary ? "none" : "rgba(0,0,0, .2)")};
-  }
-  &:disabled {
-    background: rgba(0, 0, 0, 0.3) !important;
-  }
-
-  @media (max-width: 680px) {
-    font-size: 14px;
-    padding: 10px 50px;
-  }
-  @media (max-width: 560px) {
-    font-size: 12px;
-    padding: 10px 40px;
+        ? "drop-shadow(0px 10px 10px rgba(13, 82, 223, 0.25))"
+        : "none"};
+    color: ${props => (props.primary ? "#fff" : "rgba(0,0,0, .3)")};
+    border: ${props => (props.primary ? "none" : "1px solid rgba(0,0,0, .2)")};
+    :first-child {
+      margin-right: 20px;
+    }
+    &:hover,
+    &:focus {
+      background: ${props =>
+        props.primary
+          ? "linear-gradient(140deg, #0d52df, #562685)"
+          : "rgba(0,0,0, .1)"};
+      color: ${props => (props.primary ? "#fff " : "rgba(0,0,0, .3)")};
+      border-color: ${props => (props.primary ? "none" : "rgba(0,0,0, .2)")};
+    }
+    @media (max-width: 460px) {
+      :first-child {
+        margin: 10px 0 0 0;
+      }
+    }
   }
 `;
 
 export const Title = styled.div`
-  font-family: "Montserrat";
   font-weight: 600;
   font-size: 20px;
   color: #434343;
@@ -244,7 +188,6 @@ export const ProfileHeaderWrapper = styled.div`
   }
 `;
 export const Dragger = styled(Upload.Dragger)`
-  font-family: "Montserrat";
   font-size: 16px;
   font-weight: 400;
 `;
@@ -263,45 +206,47 @@ Dragger.Icon = DraggerIcon;
 Dragger.Text = DraggerText;
 
 export const Avatar = styled(AvaBox)`
-  width: 100px;
-  height: 100px;
-  position: relative;
-  border-radius: 5px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  background: #fff;
-  cursor: pointer;
-  ::before {
+  && {
+    width: 100px;
+    height: 100px;
+    position: relative;
     border-radius: 5px;
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transition: 0.3s ease;
-  }
-  ::after {
-    content: "";
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    left: 38px;
-    top: 38px;
-    opacity: 0;
-    transition: 0.3s ease;
-    background: url(${uploadIcon});
-    background-size: cover;
-  }
-  :hover::after,
-  :hover::before {
-    opacity: 1;
-  }
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    cursor: pointer;
+    ::before {
+      border-radius: 5px;
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transition: 0.3s ease;
+    }
+    ::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      left: 38px;
+      top: 38px;
+      opacity: 0;
+      transition: 0.3s ease;
+      background: url(${uploadIcon});
+      background-size: cover;
+    }
+    :hover::after,
+    :hover::before {
+      opacity: 1;
+    }
 
-  @media (max-width: 1100px) {
-    margin: 0;
+    @media (max-width: 1100px) {
+      margin: 0;
+    }
   }
 `;
 
@@ -319,7 +264,6 @@ export const AccountInfo = styled.div`
   }
 `;
 const Name = styled.div`
-  font-family: "Montserrat";
   font-size: 20px;
   font-weight: 500;
   position: relative;
@@ -368,7 +312,6 @@ AccountInfo.Email = Email;
 AccountInfo.AccountType = AccountType;
 
 export const AccountStatistics = styled.div`
-  font-family: "Montserrat";
   display: flex;
   align-items: center;
   flex-grow: 1;

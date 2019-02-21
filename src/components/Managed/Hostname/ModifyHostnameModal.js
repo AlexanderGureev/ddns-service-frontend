@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Input } from "antd";
-import { FormLink } from "./styles";
+import { Form as AntdForm, Input } from "antd";
 import { Modal, Form } from "../styles";
-import { DecoratedFormItem } from "../../Auth/DecoratedFormItem";
+import { StyledLink } from "./styles";
 
-const ChangeEmailModal = ({ form }) => {
+const ModifyHostnameModal = ({ form }) => {
   const [visible, setVisible] = useState(false);
   const onClose = () => {
     setVisible(false);
@@ -25,27 +24,26 @@ const ChangeEmailModal = ({ form }) => {
     <>
       <Modal
         visible={visible}
-        title="Change email"
-        okText="Change"
+        title="Modify a Hostname"
+        okText="Save"
         onCancel={onClose}
         onOk={handleSubmit}
       >
         <Form layout="vertical">
-          <DecoratedFormItem type="email" form={form} label="New Email">
+          <Form.Item label="Hostname">
             <Input type="text" />
-          </DecoratedFormItem>
-          <DecoratedFormItem
-            type="confirmEmail"
-            form={form}
-            label="Confirm Email"
-          >
+          </Form.Item>
+          <Form.Item label="Domain">
             <Input type="text" />
-          </DecoratedFormItem>
+          </Form.Item>
+          <Form.Item label="Type">
+            <Input type="text" />
+          </Form.Item>
         </Form>
       </Modal>
-      <FormLink onClick={onOpen}>Change email</FormLink>
+      <StyledLink onClick={onOpen}>Modify</StyledLink>
     </>
   );
 };
 
-export default Form.create({})(ChangeEmailModal);
+export default AntdForm.create({})(ModifyHostnameModal);

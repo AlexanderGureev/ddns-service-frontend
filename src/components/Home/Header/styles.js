@@ -6,7 +6,6 @@ import React from "react";
 import { Drawer } from "antd";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import StyledButton, { ButtonLink } from "../Common/Button";
-// import { ReactComponent as HeaderLogo } from "./img/logo.svg";
 import { ReactComponent as HeaderLogo1 } from "./img/logo_new.svg";
 import { ReactComponent as MenuBg } from "./img/side-menu-bg.svg";
 
@@ -70,9 +69,7 @@ Logo.Icon = LogoIcon;
 export const HeaderContent = styled.div`
   width: 600px;
   margin-top: 200px;
-  font-family: "Montserrat";
   color: #012052;
-
   line-height: 1.4;
   @media (max-width: 1400px) {
     width: 500px;
@@ -171,7 +168,6 @@ HeaderContent.Caption = HeaderCaption;
 HeaderContent.Button = HeaderButton;
 
 export const Menu = styled.div`
-  font-family: "Montserrat";
   font-weight: 400;
   color: #fff;
 
@@ -276,7 +272,6 @@ const CollapseMenu = styled(Drawer)`
       display: block;
       text-align: center;
       font-size: 18px;
-      font-family: "Montserrat";
       font-weight: 400;
       color: #fff;
       cursor: pointer;

@@ -4,12 +4,12 @@ import { useStore, useAction } from "easy-peasy";
 import { LoopingRhombusesSpinner } from "react-epic-spinners";
 import { ReactComponent as UploadFormIcon } from "./img/upload_ava.svg";
 import {
-  Modal,
   ProfileHeaderWrapper,
   Dragger,
   LoadingContainer,
   Avatar
 } from "./styles";
+import { Modal } from "../styles";
 import AccountInfo from "./AccountInfo";
 import AccountStatistics from "./AccountStatistics";
 

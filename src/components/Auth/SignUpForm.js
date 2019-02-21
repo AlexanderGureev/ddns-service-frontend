@@ -12,7 +12,8 @@ import {
   FormWrapper,
   LeftPartForm,
   RightPartForm,
-  Form
+  Form,
+  Button
 } from "./styles";
 
 const SignUpForm = ({ parallaxLayer, form, location: { state = {} } }) => {
@@ -148,9 +149,9 @@ const SignUpForm = ({ parallaxLayer, form, location: { state = {} } }) => {
                 </DecoratedFormItem>
               </Form.ContentWrapper>
 
-              <Form.Button htmlType="submit" loading={loading}>
+              <Button htmlType="submit" loading={loading}>
                 Sign up
-              </Form.Button>
+              </Button>
 
               <Form.TextContainer>
                 <Form.TextContainer.Text onClick={goToNextForm}>

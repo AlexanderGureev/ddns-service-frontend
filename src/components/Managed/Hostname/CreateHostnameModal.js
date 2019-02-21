@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Input } from "antd";
-import { FormLink } from "./styles";
+import { Button } from "../../Common/styles";
 import { Modal, Form } from "../styles";
-import { DecoratedFormItem } from "../../Auth/DecoratedFormItem";
 
-const ChangeEmailModal = ({ form }) => {
+const CreateHostnameModal = ({ form }) => {
   const [visible, setVisible] = useState(false);
   const onClose = () => {
     setVisible(false);
@@ -25,27 +24,26 @@ const ChangeEmailModal = ({ form }) => {
     <>
       <Modal
         visible={visible}
-        title="Change email"
-        okText="Change"
+        title="Create a Hostname"
+        okText="Create Hostname"
         onCancel={onClose}
         onOk={handleSubmit}
       >
         <Form layout="vertical">
-          <DecoratedFormItem type="email" form={form} label="New Email">
+          <Form.Item label="Hostname">
             <Input type="text" />
-          </DecoratedFormItem>
-          <DecoratedFormItem
-            type="confirmEmail"
-            form={form}
-            label="Confirm Email"
-          >
+          </Form.Item>
+          <Form.Item label="Domain">
             <Input type="text" />
-          </DecoratedFormItem>
+          </Form.Item>
+          <Form.Item label="Type">
+            <Input type="text" />
+          </Form.Item>
         </Form>
       </Modal>
-      <FormLink onClick={onOpen}>Change email</FormLink>
+      <Button onClick={onOpen}>Create Hostname</Button>
     </>
   );
 };
 
-export default Form.create({})(ChangeEmailModal);
+export default Form.create({})(CreateHostnameModal);

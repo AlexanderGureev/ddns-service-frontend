@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Form as AntdForm, Input } from "antd";
-import { Modal, Form, FormLink } from "./styles";
+import { Input } from "antd";
+import { FormLink } from "./styles";
 import { DecoratedFormItem } from "../../Auth/DecoratedFormItem";
+import { Modal, Form } from "../styles";
 
 const ChangePasswordModal = ({ form }) => {
   const [visible, setVisible] = useState(false);
@@ -56,4 +57,4 @@ const ChangePasswordModal = ({ form }) => {
   );
 };
 
-export default AntdForm.create({})(ChangePasswordModal);
+export default Form.create({})(ChangePasswordModal);

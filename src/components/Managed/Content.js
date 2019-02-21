@@ -5,6 +5,7 @@ import MainPage from "./MainPage";
 import ProfilePage from "./Profile";
 import NoMatch from "../Common/NoMatch";
 import ConfirmEmail from "./ConfirmEmail";
+import HostnamePage from "./Hostname";
 
 const Content = props => {
   const {
@@ -16,6 +17,7 @@ const Content = props => {
       <ConfirmEmail {...props} />
       <Switch>
         <Route path={url} exact component={MainPage} />
+        <Route path={`${url}/hostnames`} component={HostnamePage} />
         <Route path={`${url}/account`} component={ProfilePage} />
         <Route path={`${url}/verify`} component={MainPage} />
         <Route component={NoMatch} disableLink />

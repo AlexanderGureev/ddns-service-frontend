@@ -9,7 +9,8 @@ import {
   FormWrapper,
   LeftPartForm,
   RightPartForm,
-  Form
+  Form,
+  Button
 } from "./styles";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 
@@ -77,9 +78,9 @@ const ResetPasswordForm = props => {
                 <Form.Input placeholder="Email" type="text" />
               </DecoratedFormItem>
 
-              <Form.Button htmlType="submit" loading={loading}>
+              <Button htmlType="submit" loading={loading}>
                 Reset password
-              </Form.Button>
+              </Button>
 
               <Form.TextContainer>
                 <Form.TextContainer.Text onClick={() => goToNextForm(1)}>

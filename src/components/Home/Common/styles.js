@@ -21,7 +21,6 @@ export const Circle = styled.div`
 `;
 
 export const Button = styled(animated.div)`
-  font-family: "Montserrat";
   font-weight: 400;
   color: #fff;
   font-size: 20px;
@@ -40,6 +39,9 @@ export const Button = styled(animated.div)`
   a {
     color: #fff;
     display: block;
+  }
+  a:hover {
+    color: #fff;
   }
 `;
 export const ButtonLink = styled(Button)`

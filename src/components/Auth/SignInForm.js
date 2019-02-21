@@ -11,7 +11,8 @@ import {
   FormWrapper,
   LeftPartForm,
   RightPartForm,
-  Form
+  Form,
+  Button
 } from "./styles";
 
 const SignInForm = ({ parallaxLayer, form, location: { state = {} } }) => {
@@ -72,9 +73,9 @@ const SignInForm = ({ parallaxLayer, form, location: { state = {} } }) => {
                 <Form.Input placeholder="Password" type="password" />
               </DecoratedFormItem>
 
-              <Form.Button htmlType="submit" loading={loading}>
+              <Button htmlType="submit" loading={loading}>
                 Sign in
-              </Form.Button>
+              </Button>
               <Form.TextContainer>
                 <Form.TextContainer.Text
                   onClick={() => goToNextForm(invert ? 1 : 0)}
