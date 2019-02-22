@@ -1,7 +1,6 @@
 import React from "react";
 import { useMedia } from "react-use";
 import { ReactComponent as notifIcon } from "./img/notif-icon.svg";
-import { ReactComponent as shopIcon } from "./img/shop-icon.svg";
 import { ReactComponent as langIcon } from "./img/lang-icon.svg";
 import {
   Header as StyledHeader,
@@ -11,6 +10,7 @@ import {
   Badge
 } from "./styles";
 import ShortProfile from "./ShortProfile";
+import ShoppingCart from "./ShoppingCart";
 
 const Header = ({
   collapsed,
@@ -41,9 +41,7 @@ const Header = ({
               </Badge>
             </BtnContainer>
             <BtnContainer>
-              <Badge count={0} showZero>
-                <Icon component={shopIcon} />
-              </Badge>
+              <ShoppingCart />
             </BtnContainer>
             <BtnContainer>
               <Icon component={langIcon} />

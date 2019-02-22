@@ -22,8 +22,10 @@ export const BigCard = ({ colorA, colorB, title, footer, children }) => (
       {title}
     </StyledCard.Title>
     {children}
-    <StyledCard.Footer>
-      <StyledCard.Button>{footer}</StyledCard.Button>
-    </StyledCard.Footer>
+    {footer && (
+      <StyledCard.Footer>
+        <StyledCard.Button>{footer}</StyledCard.Button>
+      </StyledCard.Footer>
+    )}
   </StyledCard>
 );

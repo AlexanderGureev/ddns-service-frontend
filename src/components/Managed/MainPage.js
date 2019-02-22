@@ -42,16 +42,11 @@ const MainPage = props => (
     </Row>
 
     <Row gutter={32}>
-      <Col xs={{ span: 24 }} lg={{ span: 14 }}>
+      <Col xs={{ span: 24 }} lg={{ span: 16 }}>
         <Tabs />
       </Col>
-      <Col xs={{ span: 24 }} lg={{ span: 10 }}>
-        <BigCard
-          colorA="#2B8FA7"
-          colorB="#0585EB"
-          title="Account Overview"
-          footer="Upgrade to Enhanced"
-        >
+      <Col xs={{ span: 24 }} lg={{ span: 8 }}>
+        <BigCard colorA="#2B8FA7" colorB="#0585EB" title="Account Overview">
           <StyledCard.Content center gutter>
             <StyledCard.Content.SmallText>
               Last Login IP

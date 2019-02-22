@@ -1,1 +1,0 @@
-# ddns-service-frontend

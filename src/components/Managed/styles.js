@@ -11,7 +11,8 @@ import {
   Alert,
   Badge as AntdBadge,
   Modal as AntdModal,
-  Form as AntdForm
+  Form as AntdForm,
+  Button as AntdBtn
 } from "antd";
 import { Link } from "react-router-dom";
 import { ReactComponent as LogoIcon } from "./img/logo-managed.svg";
@@ -263,7 +264,7 @@ export const Search = styled(AntdInput.Search)`
 `;
 
 export const Card = styled.div`
-  padding: 20px 40px;
+  padding: 30px 40px;
   background: linear-gradient(
     135deg,
     ${props => props.colorA},
@@ -510,6 +511,50 @@ ShortProfile.Name = Name;
 Header.Container = Container;
 Content.Wrapper = ContentWrapper;
 
-Menu.Item.Text = MenuText;
-Menu.Item.Icon = Icon;
-Menu.Item.Link = MenuLink;
+Menu.Text = MenuText;
+Menu.Icon = Icon;
+Menu.Link = MenuLink;
+
+export const CartContainer = styled.div`
+  background: #fff;
+  border-radius: 5px;
+  width: 350px;
+  height: 250px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+`;
+export const CartBody = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+`;
+export const NoContent = styled.div`
+  text-align: center;
+`;
+export const CartTitle = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b3b3b;
+  text-transform: uppercase;
+  margin: 0;
+`;
+export const CartCaption = styled.p`
+  font-size: 14px;
+  color: #222;
+  margin: 0;
+`;
+export const CartButton = styled(AntdBtn)`
+  && {
+    background: linear-gradient(135deg, #60f282, #0382a0);
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 10px 15px rgba(96, 242, 130, 0.15);
+    padding: 10px 20px;
+    margin-top: 20px;
+  }
+`;
