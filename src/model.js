@@ -32,8 +32,7 @@ const sessionEffects = {
         if (!cachedState) {
           return dispatch.session.authorizeUserAction();
         }
-        dispatch.session.changeAuthStatusAction(true);
-        dispatch.session.updateProfileAction(cachedState);
+        dispatch.session.setState({ ...cachedState, isAuth: true });
       } catch (error) {
         console.log(error);
       }
@@ -102,6 +101,35 @@ const sessionEffects = {
     } catch (error) {
       throw new Error(error.message);
     }
+  }),
+  addToCartAction: effect((dispatch, payload, getState, { cache }) => {
+    try {
+      dispatch.session.setState({ cart: [payload] });
+      const { profile, cart } = getState().session;
+      cache.saveState({ profile, cart });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }),
+  removeItemFromCartAction: effect((dispatch, payload, getState, { cache }) => {
+    try {
+      const { cart, profile } = getState().session;
+      const filteredCard = cart.filter(({ id }) => id !== payload);
+      dispatch.session.setState({ cart: filteredCard });
+      cache.saveState({ profile, cart: filteredCard });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }),
+  updateItemInCartAction: effect((dispatch, payload, getState, { cache }) => {
+    try {
+      console.log("update state");
+      dispatch.session.setState({ cart: [payload] });
+      const { profile, cart } = getState().session;
+      cache.saveState({ profile, cart });
+    } catch (error) {
+      console.log(error.message);
+    }
   })
 };
 
@@ -118,6 +146,7 @@ const model = {
     },
     apiToken: "",
     isAuth: false,
+    cart: [],
     setState: (state, payload) => ({ ...state, ...payload }),
     updateProfileAction: (state, payload) => ({
       ...state,

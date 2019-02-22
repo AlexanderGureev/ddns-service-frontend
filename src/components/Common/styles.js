@@ -113,7 +113,6 @@ export const Button = styled(AntdButton)`
     font-weight: 800;
     padding: 10px 60px;
     outline: none;
-    cursor: pointer;
 
     span {
       transition: 0.5s ease;

@@ -2,6 +2,7 @@ import React from "react";
 import { useMedia } from "react-use";
 import { ReactComponent as notifIcon } from "./img/notif-icon.svg";
 import { ReactComponent as langIcon } from "./img/lang-icon.svg";
+import { ReactComponent as shopIcon } from "./img/shop-icon.svg";
 import {
   Header as StyledHeader,
   BtnContainer,
@@ -41,7 +42,9 @@ const Header = ({
               </Badge>
             </BtnContainer>
             <BtnContainer>
-              <ShoppingCart />
+              <ShoppingCart>
+                <Icon component={shopIcon} />
+              </ShoppingCart>
             </BtnContainer>
             <BtnContainer>
               <Icon component={langIcon} />

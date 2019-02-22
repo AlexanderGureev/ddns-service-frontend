@@ -12,7 +12,8 @@ import {
   Badge as AntdBadge,
   Modal as AntdModal,
   Form as AntdForm,
-  Button as AntdBtn
+  Button as AntdBtn,
+  InputNumber
 } from "antd";
 import { Link } from "react-router-dom";
 import { ReactComponent as LogoIcon } from "./img/logo-managed.svg";
@@ -54,11 +55,13 @@ to {
 `;
 
 export const Layout = styled(AntdLayout)`
-  height: 100vh;
-  min-height: 700px;
-  z-index: 10;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  && {
+    height: 100vh;
+    min-height: 700px;
+    z-index: 10;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
 `;
 export const StyledSide = styled(Sider)`
   && {
@@ -518,7 +521,7 @@ Menu.Link = MenuLink;
 export const CartContainer = styled.div`
   background: #fff;
   border-radius: 5px;
-  width: 350px;
+
   height: 250px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   position: relative;
@@ -528,21 +531,23 @@ export const CartBody = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 30px 30px;
+  position: relative;
 `;
 export const NoContent = styled.div`
+  padding-top: 50px;
   text-align: center;
 `;
-export const CartTitle = styled.p`
+export const NoContentCartTitle = styled.p`
   font-size: 18px;
   font-weight: 700;
   color: #3b3b3b;
   text-transform: uppercase;
   margin: 0;
 `;
-export const CartCaption = styled.p`
+export const NoContentCartCaption = styled.p`
   font-size: 14px;
   color: #222;
   margin: 0;
@@ -555,6 +560,70 @@ export const CartButton = styled(AntdBtn)`
     font-weight: 500;
     box-shadow: 0 10px 15px rgba(96, 242, 130, 0.15);
     padding: 10px 20px;
-    margin-top: 20px;
   }
 `;
+
+export const CartContent = styled.div`
+  width: 100%;
+`;
+
+export const CartTitle = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+`;
+export const CartItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > span {
+    margin-right: 25px;
+  }
+`;
+const CartItemLabel = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+`;
+const CartItemName = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  position: relative;
+  white-space: nowrap;
+  display: block;
+`;
+const CartItemPrice = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  display: block;
+
+  ::after {
+    content: "$";
+    position: relative;
+  }
+`;
+const CartItemInput = styled(InputNumber)`
+  width: 60px !important;
+  font-size: 16px;
+  font-weight: 500;
+  display: block !important;
+  position: relative;
+`;
+const RemoveBtn = styled(Icon)`
+  padding: 0 5px;
+  svg {
+    width: 20px;
+    position: relative;
+    top: -2px;
+  }
+  cursor: pointer;
+`;
+
+CartItem.Name = CartItemName;
+CartItem.Price = CartItemPrice;
+CartItem.Input = CartItemInput;
+CartItem.Btn = RemoveBtn;
+CartItem.Label = CartItemLabel;

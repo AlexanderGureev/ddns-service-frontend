@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { Button as StyledBtn } from "../../Common/styles";
 
 export const PricingContainer = styled.div`
   padding: 30px 20px;
@@ -157,25 +158,36 @@ const Item = styled.li`
   }
 `;
 
-export const Button = styled.div`
-  background: linear-gradient(135deg, #5780f2, #cc5df3);
-  text-transform: uppercase;
-  padding: 12px 60px;
-  white-space: nowrap;
-  color: #fff;
-  font-weight: 500;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 18px;
-  box-shadow: 0 15px 20px rgba(45, 64, 228, 0.15);
+export const Button = styled(StyledBtn)`
+  && {
+    background: linear-gradient(135deg, #5780f2, #cc5df3);
+    text-transform: uppercase;
 
-  @media (max-width: 890px) {
-    padding: 10px 40px;
-    font-size: 16px;
-  }
-  @media (max-width: 460px) {
-    font-size: 14px;
-    padding: 10px 20px;
+    font-size: 18px;
+    box-shadow: ${props =>
+      props.disabled
+        ? "0 15px 20px rgba(0,0,0,.1)"
+        : "0 15px 20px rgba(45, 64, 228, 0.15)"};
+    max-width: 260px;
+
+    :hover,
+    :focus {
+      background: ${props =>
+        props.disabled
+          ? "rgba(0,0,0, .3)"
+          : "linear-gradient(135deg, #5780f2, #cc5df3)"};
+      box-shadow: ${props =>
+        props.disabled
+          ? "0 15px 20px rgba(0,0,0,.1)"
+          : "0 15px 20px rgba(45, 64, 228, 0.15)"};
+    }
+
+    @media (max-width: 890px) {
+      font-size: 16px;
+    }
+    @media (max-width: 460px) {
+      font-size: 14px;
+    }
   }
 `;
 
