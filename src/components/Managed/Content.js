@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 import { Content as StyledContent } from "./styles";
-import MainPage from "./MainPage";
-import ProfilePage from "./Profile";
+
 import NoMatch from "../Common/NoMatch";
 import ConfirmEmail from "./ConfirmEmail";
-import HostnamePage from "./Hostname";
-import PricingPage from "./Pricing";
+
+const MainPage = lazy(() => import("./MainPage"));
+const ProfilePage = lazy(() => import("./Profile"));
+const PricingPage = lazy(() => import("./Pricing"));
+const HostnamePage = lazy(() => import("./Hostname"));
 
 const Content = props => {
   const {
@@ -16,14 +18,32 @@ const Content = props => {
   return (
     <StyledContent>
       <ConfirmEmail {...props} />
-      <Switch>
-        <Route path={url} exact component={MainPage} />
-        <Route path={`${url}/hostnames`} component={HostnamePage} />
-        <Route path={`${url}/pricing`} component={PricingPage} />
-        <Route path={`${url}/account`} component={ProfilePage} />
-        <Route path={`${url}/verify`} component={MainPage} />
-        <Route component={NoMatch} disableLink />
-      </Switch>
+      <Suspense fallback={<span>Loading page...</span>}>
+        <Switch>
+          <Route
+            path={url}
+            exact
+            render={routeProps => <MainPage {...routeProps} />}
+          />
+          <Route
+            path={`${url}/hostnames`}
+            render={routeProps => <HostnamePage {...routeProps} />}
+          />
+          <Route
+            path={`${url}/pricing`}
+            render={routeProps => <PricingPage {...routeProps} />}
+          />
+          <Route
+            path={`${url}/account`}
+            render={routeProps => <ProfilePage {...routeProps} />}
+          />
+          <Route
+            path={`${url}/verify`}
+            render={routeProps => <MainPage {...routeProps} />}
+          />
+          <Route component={NoMatch} disableLink />
+        </Switch>
+      </Suspense>
       {/* <Footer /> */}
     </StyledContent>
   );

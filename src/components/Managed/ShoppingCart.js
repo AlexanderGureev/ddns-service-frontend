@@ -84,7 +84,7 @@ const Content = props => {
         ) : (
           <NoContent>
             <Title>Your cart is empty</Title>
-            <Caption>Add a service to continue</Caption>
+            <Caption>Add a product to continue</Caption>
           </NoContent>
         )}
         <Button disabled={!cart.length}>Continue to checkout</Button>

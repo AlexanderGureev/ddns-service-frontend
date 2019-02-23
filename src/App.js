@@ -22,8 +22,8 @@ const App = () => {
 
   return (
     <StoreProvider store={store}>
-      <Router>
-        <ErrorBoundary>
+      <ErrorBoundary>
+        <Router>
           <Suspense fallback={<Preloader>Loading page...</Preloader>}>
             <Switch>
               <Route exact path="/" render={props => <Home {...props} />} />
@@ -36,8 +36,8 @@ const App = () => {
               <Route component={NoMatch} />
             </Switch>
           </Suspense>
-        </ErrorBoundary>
-      </Router>
+        </Router>
+      </ErrorBoundary>
     </StoreProvider>
   );
 };
