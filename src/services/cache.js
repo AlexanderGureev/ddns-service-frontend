@@ -1,19 +1,26 @@
 class Cache {
-  loadState = () => {
+  loadState = (...keys) => {
     try {
-      const cachedState = localStorage.getItem("state");
-      if (!cachedState) return undefined;
+      const storage = keys.reduce((acc, key) => {
+        const item = localStorage.getItem(key);
+        return !item
+          ? acc
+          : {
+              [key]: JSON.parse(item),
+              ...acc
+            };
+      }, {});
 
-      return JSON.parse(cachedState);
+      return storage;
     } catch (error) {
       return undefined;
     }
   };
 
-  saveState = state => {
+  saveState = (key, state) => {
     try {
       const packedState = JSON.stringify(state);
-      localStorage.setItem("state", packedState);
+      localStorage.setItem(key, packedState);
     } catch (error) {
       return false;
     }

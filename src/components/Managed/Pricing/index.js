@@ -82,6 +82,7 @@ const PricingPage = () => {
                     {item}
                   </PriceCard.DescriptionList.Item>
                 ))}
+                <PriceCard.Link>More...</PriceCard.Link>
               </PriceCard.DescriptionList>
               <Button onClick={() => handleClick(id)} disabled={free}>
                 {free

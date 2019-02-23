@@ -3,7 +3,7 @@ import React from "react";
 import { Button as StyledBtn } from "../../Common/styles";
 
 export const PricingContainer = styled.div`
-  padding: 30px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -191,9 +191,22 @@ export const Button = styled(StyledBtn)`
   }
 `;
 
+const PriceCardLink = styled.span`
+  text-align: center;
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2c69cd;
+  cursor: pointer;
+  transition: 0.3s ease;
+  :hover {
+    color: #3f4349;
+  }
+`;
 DescriptionList.Item = Item;
 PriceCard.Icon = Icon;
 PriceCard.Price = Price;
 PriceCard.PlanName = PlanName;
 PriceCard.DescriptionList = DescriptionList;
 PriceCard.Container = PriceCardContainer;
+PriceCard.Link = PriceCardLink;

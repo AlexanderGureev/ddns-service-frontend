@@ -28,11 +28,15 @@ const sessionEffects = {
   createOrRecoverySessionAction: effect(
     async (dispatch, payload, _, { cache }) => {
       try {
-        const cachedState = cache.loadState();
-        if (!cachedState) {
+        const { profile, cart = [] } = cache.loadState("profile", "cart");
+        if (!profile) {
           return dispatch.session.authorizeUserAction();
         }
-        dispatch.session.setState({ ...cachedState, isAuth: true });
+        dispatch.session.setState({
+          profile: { ...profile },
+          cart: [...cart],
+          isAuth: true
+        });
       } catch (error) {
         console.log(error);
       }
@@ -43,7 +47,7 @@ const sessionEffects = {
       try {
         const avatarPath = await api.updateAvatarApi(payload);
         dispatch.session.updateProfileAction(avatarPath);
-        cache.saveState(getState().session.profile);
+        cache.saveState("profile", getState().session.profile);
       } catch (error) {
         throw new Error(error.message);
       }
@@ -59,7 +63,7 @@ const sessionEffects = {
             apiToken: payload || ""
           });
           dispatch.session.updateProfileAction(data);
-          cache.saveState(getState().session.profile);
+          cache.saveState("profile", getState().session.profile);
         }
       } catch (error) {
         console.log(error);
@@ -80,7 +84,7 @@ const sessionEffects = {
       try {
         const response = await api.confirmEmailApi(payload);
         dispatch.session.updateProfileAction(response);
-        cache.saveState(getState().session.profile);
+        cache.saveState("profile", getState().session.profile);
       } catch (error) {
         console.log(error.message);
         throw new Error(error.message);
@@ -105,28 +109,24 @@ const sessionEffects = {
   addToCartAction: effect((dispatch, payload, getState, { cache }) => {
     try {
       dispatch.session.setState({ cart: [payload] });
-      const { profile, cart } = getState().session;
-      cache.saveState({ profile, cart });
+      cache.saveState("cart", getState().session.cart);
     } catch (error) {
       console.log(error.message);
     }
   }),
   removeItemFromCartAction: effect((dispatch, payload, getState, { cache }) => {
     try {
-      const { cart, profile } = getState().session;
+      const { cart } = getState().session;
       const filteredCard = cart.filter(({ id }) => id !== payload);
-      dispatch.session.setState({ cart: filteredCard });
-      cache.saveState({ profile, cart: filteredCard });
+      cache.saveState("cart", filteredCard);
     } catch (error) {
       console.log(error.message);
     }
   }),
   updateItemInCartAction: effect((dispatch, payload, getState, { cache }) => {
     try {
-      console.log("update state");
       dispatch.session.setState({ cart: [payload] });
-      const { profile, cart } = getState().session;
-      cache.saveState({ profile, cart });
+      cache.saveState("cart", getState().session.cart);
     } catch (error) {
       console.log(error.message);
     }
