@@ -1,5 +1,5 @@
 import React from "react";
-import { useSpring, animated } from "react-spring/hooks";
+import { useSpring, animated } from "react-spring";
 import { PreloaderContainer } from "./styles";
 
 const trans = (x, y) => `translate3d(${x / 25}px,${y / 25}px,0)`;

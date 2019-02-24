@@ -3,7 +3,6 @@ import { Popover } from "antd";
 import { useStore, useAction } from "easy-peasy";
 import { withRouter } from "react-router-dom";
 import { ReactComponent as MenuIcon } from "./img/down-arrow.svg";
-import avaIcon from "./img/ava.jpg";
 import ShortProfilePopover from "./ShortProfilePopover";
 import { ShortProfile as StyledShortProfile } from "./styles";
 

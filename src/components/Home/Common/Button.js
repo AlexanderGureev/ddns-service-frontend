@@ -1,4 +1,4 @@
-import { useSpring } from "react-spring/hooks";
+import { useSpring } from "react-spring";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "antd";

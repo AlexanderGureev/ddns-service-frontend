@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
+
 import { Content as StyledContent } from "./styles";
 
 import NoMatch from "../Common/NoMatch";
@@ -44,7 +45,6 @@ const Content = props => {
           <Route component={NoMatch} disableLink />
         </Switch>
       </Suspense>
-      {/* <Footer /> */}
     </StyledContent>
   );
 };

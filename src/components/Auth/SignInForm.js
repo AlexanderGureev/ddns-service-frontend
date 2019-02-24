@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ParallaxLayer } from "react-spring/addons";
+import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, message as messageBlock } from "antd";
 import { useAction } from "easy-peasy";

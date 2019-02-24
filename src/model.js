@@ -118,6 +118,7 @@ const sessionEffects = {
     try {
       const { cart } = getState().session;
       const filteredCard = cart.filter(({ id }) => id !== payload);
+      dispatch.session.setState({ cart: filteredCard });
       cache.saveState("cart", filteredCard);
     } catch (error) {
       console.log(error.message);

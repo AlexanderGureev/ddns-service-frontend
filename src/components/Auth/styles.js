@@ -1,6 +1,6 @@
 import { Checkbox, Form as AntdForm, Input as AntdInput } from "antd";
 import styled from "styled-components";
-import { ParallaxLayer } from "react-spring/addons";
+import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { Link } from "react-router-dom";
 import { Button as StyledButton } from "../Common/styles";
 

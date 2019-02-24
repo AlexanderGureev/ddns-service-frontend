@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { Parallax } from "react-spring/addons";
+import { Parallax } from "react-spring/renderprops-addons";
 import { useStore } from "easy-peasy";
 import { Redirect } from "react-router-dom";
 import { StyledParallaxLayer, ParallaxPositioningLayer } from "./styles";

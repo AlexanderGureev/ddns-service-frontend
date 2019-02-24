@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { animated } from "react-spring/hooks";
+import { animated } from "react-spring";
 
 const showLoadingCircle = keyframes`
   from{

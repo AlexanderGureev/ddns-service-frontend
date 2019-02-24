@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { useSpring, animated } from "react-spring/hooks";
+import { useSpring, animated } from "react-spring";
 import Button from "./Button";
 
 const calc = (x, y) => [

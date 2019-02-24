@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Parallax } from "react-spring/addons";
+import { Parallax } from "react-spring/renderprops-addons";
 import { StyledParallaxLayer, ParallaxPositioningLayer } from "./styles";
 import layerBg from "./img/layer-bg.svg";
 import ChangePasswordForm from "./ChangePasswordForm";
