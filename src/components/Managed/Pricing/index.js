@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import uniqueId from "lodash/uniqueId";
 import { useActions, useStore } from "easy-peasy";
 import { notification } from "antd";

@@ -178,12 +178,12 @@ const StayUpdatedFormButton = styled(StyledButton)`
 `;
 const StayUpdatedFormInput = styled(Input.Search)`
   && {
-    text-align: center;
+    text-align: center !important;
     margin: 30px 0;
     padding: 0 !important;
 
     span {
-      right: 10px !important;
+      right: -10px !important;
     }
     button {
       border: none;
@@ -191,6 +191,7 @@ const StayUpdatedFormInput = styled(Input.Search)`
       width: 45px !important;
       height: 45px !important;
       padding: 3px 0 0 0;
+      z-index: 100 !important;
       background: linear-gradient(135deg, #11013c, #053a80);
       &:hover {
         background: linear-gradient(135deg, #11013c, #053a80);
@@ -204,7 +205,7 @@ const StayUpdatedFormInput = styled(Input.Search)`
     input {
       font-weight: 500;
       font-size: 18px;
-      border-radius: 50px;
+      border-radius: 50px !important;
       text-align: center;
       padding: 15px 65px 15px 55px !important;
 
@@ -231,6 +232,14 @@ const StayUpdatedFormInput = styled(Input.Search)`
       font-size: 25px;
       @media (max-width: 460px) {
         font-size: 20px;
+      }
+    }
+    .ant-input-group-addon {
+      background: none;
+      position: relative;
+      right: 45px !important;
+      @media (max-width: 460px) {
+        right: 30px !important;
       }
     }
   }

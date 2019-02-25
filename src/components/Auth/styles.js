@@ -94,21 +94,29 @@ export const Form = styled(AntdForm)`
     flex-direction: column;
     position: relative;
 
-    .ant-btn.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) {
-      padding: 10px 60px !important;
-    }
-
     .ant-input-group-wrapper {
-      margin: 15px 0;
-
+      padding: 0;
       input {
         margin: 0;
+        padding: 12px 20px;
+        border: none;
+        color: #6a6a6a;
+        font-size: 16px;
+        font-weight: 600;
+        @media (max-width: 1200px) {
+          font-size: 14px;
+        }
+        @media (max-width: 980px) {
+          font-size: 12px;
+        }
+        @media (max-width: 560px) {
+          padding: 10px 15px;
+        }
       }
 
       .ant-input-group-addon {
         border: none;
         background-color: #e2e2e2;
-        filter: drop-shadow(5px 10px 10px rgba(0, 0, 0, 0.2));
 
         .ant-select {
           width: 170px !important;
@@ -262,7 +270,6 @@ const Input = styled(AntdInput)`
     margin: 15px 0;
 
     @media (max-width: 1200px) {
-      padding: 12px 20px;
       font-size: 14px;
     }
 
@@ -319,8 +326,8 @@ const FormCheckBox = styled(Checkbox)`
         : "0px 0px 0px 4px rgba(0, 0, 0, 0.1)"};
 
     &::after {
-      left: 5.57142857px;
-      top: 2.14285714px;
+      left: 4.2px;
+      top: 7px;
     }
   }
   .ant-checkbox-checked:after {

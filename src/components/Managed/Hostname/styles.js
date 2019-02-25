@@ -16,7 +16,7 @@ export const Button = styled(AntdButton)`
   }
 `;
 export const Input = styled(AntdInput)`
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
   display: block;
 `;
 export const Table = styled(AntdTable)`
@@ -52,4 +52,5 @@ export const SearchContainer = styled.div`
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  text-align: center;
 `;
