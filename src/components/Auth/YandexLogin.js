@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { useAction } from "easy-peasy";
+import { useActions } from "easy-peasy";
 import yandexIcon from "./img/soc-yandex.svg";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
@@ -16,7 +16,7 @@ const YandexLogin = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(false);
-  const { socialAuthorizeUserAction } = useAction(dispatch => dispatch.session);
+  const { socialAuthorizeUserAction } = useActions(actions => actions.session);
 
   const provider = "yandex";
   const loadingIndicator = useRef(() => {});
@@ -77,7 +77,13 @@ const YandexLogin = ({
     console.log(error.message || error);
   };
 
-  return <Form.SocialBlock.Icon src={yandexIcon} onClick={onButtonClick} />;
+  return (
+    <Form.SocialBlock.Icon
+      src={yandexIcon}
+      onClick={onButtonClick}
+      alt="yandex oauth"
+    />
+  );
 };
 
 export default YandexLogin;

@@ -1,38 +1,43 @@
-import { effect } from "easy-peasy";
+import { thunk } from "easy-peasy";
 
 const sessionEffects = {
-  registerUserAction: effect(async (dispatch, payload, _, { api }) => {
+  registerUserAction: thunk(async (dispatch, payload, { injections }) => {
     try {
-      const { key } = await api.registrationApi(payload);
-      dispatch.session.authorizeUserAction(key);
+      const { key } = await injections.api.registrationApi(payload);
+      dispatch.authorizeUserAction(key);
     } catch (error) {
       throw new Error(error.message);
     }
   }),
-  socialAuthorizeUserAction: effect(async (dispatch, payload, _, { api }) => {
-    try {
-      const { key } = await api.sendSocialCodeApi(payload);
-      dispatch.session.authorizeUserAction(key);
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }),
-  loginUserAction: effect(async (dispatch, payload, _, { api }) => {
-    try {
-      const { key } = await api.loginApi(payload);
-      dispatch.session.authorizeUserAction(key);
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  }),
-  createOrRecoverySessionAction: effect(
-    async (dispatch, payload, _, { cache }) => {
+  socialAuthorizeUserAction: thunk(
+    async (dispatch, payload, { injections }) => {
       try {
-        const { profile, cart = [] } = cache.loadState("profile", "cart");
+        const { key } = await injections.api.sendSocialCodeApi(payload);
+        dispatch.authorizeUserAction(key);
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    }
+  ),
+  loginUserAction: thunk(async (dispatch, payload, { injections }) => {
+    try {
+      const { key } = await injections.api.loginApi(payload);
+      dispatch.authorizeUserAction(key);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }),
+  createOrRecoverySessionAction: thunk(
+    async (dispatch, payload, { injections }) => {
+      try {
+        const { profile, cart = [] } = injections.cache.loadState(
+          "profile",
+          "cart"
+        );
         if (!profile) {
-          return dispatch.session.authorizeUserAction();
+          return dispatch.authorizeUserAction();
         }
-        dispatch.session.setState({
+        dispatch.setState({
           profile: { ...profile },
           cart: [...cart],
           isAuth: true
@@ -42,96 +47,106 @@ const sessionEffects = {
       }
     }
   ),
-  updateAvatarAction: effect(
-    async (dispatch, payload, getState, { api, cache }) => {
+  updateAvatarAction: thunk(
+    async (dispatch, payload, { injections, getState }) => {
       try {
-        const avatarPath = await api.updateAvatarApi(payload);
-        dispatch.session.updateProfileAction(avatarPath);
-        cache.saveState("profile", getState().session.profile);
+        const avatarPath = await injections.api.updateAvatarApi(payload);
+        dispatch.updateProfileAction(avatarPath);
+        injections.cache.saveState("profile", getState().session.profile);
       } catch (error) {
         throw new Error(error.message);
       }
     }
   ),
-  authorizeUserAction: effect(
-    async (dispatch, payload, getState, { api, cache }) => {
+  authorizeUserAction: thunk(
+    async (dispatch, payload, { injections, getState }) => {
       try {
-        const { status = false, data = {} } = await api.authStatusApi();
+        const {
+          status = false,
+          data = {}
+        } = await injections.api.authStatusApi();
         if (status) {
-          dispatch.session.setState({
+          dispatch.setState({
             isAuth: status,
             apiToken: payload || ""
           });
-          dispatch.session.updateProfileAction(data);
-          cache.saveState("profile", getState().session.profile);
+          dispatch.updateProfileAction(data);
+          injections.cache.saveState("profile", getState().session.profile);
         }
       } catch (error) {
         console.log(error);
       }
     }
   ),
-  logoutUserAction: effect(async (dispatch, payload, _, { api, cache }) => {
+  logoutUserAction: thunk(async (dispatch, payload, { injections }) => {
     try {
-      await api.logoutApi();
-      dispatch.session.setState({ isAuth: false, apiToken: "" });
-      cache.clearCache();
+      await injections.api.logoutApi();
+      dispatch.setState({
+        isAuth: false,
+        apiToken: ""
+      });
+      injections.cache.clearCache();
     } catch (error) {
       console.log(error.message);
     }
   }),
-  confirmEmailAction: effect(
-    async (dispatch, payload, getState, { api, cache }) => {
+  confirmEmailAction: thunk(
+    async (dispatch, payload, { injections, getState }) => {
       try {
-        const response = await api.confirmEmailApi(payload);
-        dispatch.session.updateProfileAction(response);
-        cache.saveState("profile", getState().session.profile);
+        const response = await injections.api.confirmEmailApi(payload);
+        dispatch.updateProfileAction(response);
+        injections.cache.saveState("profile", getState().session.profile);
       } catch (error) {
         console.log(error.message);
         throw new Error(error.message);
       }
     }
   ),
-  resetPasswordAction: effect(async (dispatch, payload, _, { api }) => {
+  resetPasswordAction: thunk(async (dispatch, payload, { injections }) => {
     try {
-      await api.resetPasswordApi(payload);
+      await injections.api.resetPasswordApi(payload);
     } catch (error) {
       throw new Error(error.message);
     }
   }),
-  changePasswordAction: effect(async (dispatch, payload, _, { api }) => {
+  changePasswordAction: thunk(async (dispatch, payload, { injections }) => {
     try {
-      await api.changePasswordApi(payload);
-      dispatch.session.authorizeUserAction();
+      await injections.api.changePasswordApi(payload);
+      dispatch.authorizeUserAction();
     } catch (error) {
       throw new Error(error.message);
     }
   }),
-  addToCartAction: effect((dispatch, payload, getState, { cache }) => {
+  addToCartAction: thunk((dispatch, payload, { injections, getState }) => {
     try {
-      dispatch.session.setState({ cart: [payload] });
-      cache.saveState("cart", getState().session.cart);
+      dispatch.setState({ cart: [payload] });
+      injections.cache.saveState("cart", getState().session.cart);
     } catch (error) {
       console.log(error.message);
     }
   }),
-  removeItemFromCartAction: effect((dispatch, payload, getState, { cache }) => {
-    try {
-      const { cart } = getState().session;
-      const filteredCard = cart.filter(({ id }) => id !== payload);
-      dispatch.session.setState({ cart: filteredCard });
-      cache.saveState("cart", filteredCard);
-    } catch (error) {
-      console.log(error.message);
+  removeItemFromCartAction: thunk(
+    (dispatch, payload, { injections, getState }) => {
+      try {
+        const { cart } = getState().session;
+        const filteredCard = cart.filter(({ id }) => id !== payload);
+        dispatch.setState({ cart: filteredCard });
+        injections.cache.saveState("cart", filteredCard);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-  }),
-  updateItemInCartAction: effect((dispatch, payload, getState, { cache }) => {
-    try {
-      dispatch.session.setState({ cart: [payload] });
-      cache.saveState("cart", getState().session.cart);
-    } catch (error) {
-      console.log(error.message);
+  ),
+  updateItemInCartAction: thunk(
+    (dispatch, payload, { injections, getState }) => {
+      try {
+        dispatch.setState({ cart: [payload] });
+        injections.cache.saveState("cart", getState().session.cart);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
-  })
+  )
 };
 
 const model = {

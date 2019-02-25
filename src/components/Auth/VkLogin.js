@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { useAction } from "easy-peasy";
+import { useActions } from "easy-peasy";
 import vkIcon from "./img/soc-vk.svg";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
@@ -16,7 +16,7 @@ const VKLogin = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(false);
-  const { socialAuthorizeUserAction } = useAction(dispatch => dispatch.session);
+  const { socialAuthorizeUserAction } = useActions(actions => actions.session);
 
   const provider = "vk";
   const loadingIndicator = useRef(() => {});
@@ -80,7 +80,13 @@ const VKLogin = ({
     console.log(error.message || error);
   };
 
-  return <Form.SocialBlock.Icon src={vkIcon} onClick={onButtonClick} />;
+  return (
+    <Form.SocialBlock.Icon
+      src={vkIcon}
+      onClick={onButtonClick}
+      alt="vk oauth"
+    />
+  );
 };
 
 export default VKLogin;

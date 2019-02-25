@@ -1,19 +1,41 @@
-import React from "react";
-import { Popover } from "antd";
-import { useStore, useAction } from "easy-peasy";
+import React, { useRef, useEffect } from "react";
+import { Dropdown } from "antd";
+import { useStore, useActions } from "easy-peasy";
 import { withRouter } from "react-router-dom";
 import { ReactComponent as MenuIcon } from "./img/down-arrow.svg";
 import ShortProfilePopover from "./ShortProfilePopover";
-import { ShortProfile as StyledShortProfile } from "./styles";
 
-const ShortProfile = ({ visible, handleVisibleChange, history }) => {
-  const { email = "none", firstName, lastName, avatarPath } = useStore(
+import { ShortProfile as StyledShortProfile } from "./styles";
+import MessageConstructor from "../Common/LoadingMessage";
+
+const loadingMessage = MessageConstructor();
+
+const ShortProfile = ({ history }) => {
+  const { firstName, lastName, avatarPath } = useStore(
     state => state.session.profile
   );
-  const { logoutUserAction } = useAction(dispatch => dispatch.session);
-  const logout = e => {
+  const { logoutUserAction } = useActions(actions => actions.session);
+  const loadingIndicator = useRef(null);
+  const setLoadingIndicator = () => {
+    loadingIndicator.current = loadingMessage.open("Logout...");
+  };
+  const clearLoadingIndicator = () => loadingIndicator.current();
+
+  useEffect(
+    () => {
+      if (loadingIndicator.current) clearLoadingIndicator();
+      return () => {
+        clearLoadingIndicator();
+      };
+    },
+    [loadingIndicator.current]
+  );
+
+  const logout = async e => {
     e.preventDefault();
-    logoutUserAction().then(() => history.push("/"));
+    setLoadingIndicator();
+    await logoutUserAction();
+    history.push("/");
   };
 
   return (
@@ -22,16 +44,13 @@ const ShortProfile = ({ visible, handleVisibleChange, history }) => {
         {`${firstName} ${lastName}`}
       </StyledShortProfile.Name>
       <StyledShortProfile.Avatar src={avatarPath} />
-      <Popover
-        content={<ShortProfilePopover logout={logout} />}
-        title={email}
-        trigger="click"
-        placement="bottomRight"
-        visible={visible}
-        onVisibleChange={handleVisibleChange}
+
+      <Dropdown
+        overlay={<ShortProfilePopover logout={logout} />}
+        trigger={["click"]}
       >
         <StyledShortProfile.Menu component={MenuIcon} />
-      </Popover>
+      </Dropdown>
     </StyledShortProfile>
   );
 };

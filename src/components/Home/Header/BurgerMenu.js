@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMedia } from "react-use";
 import backIcon from "./img/back.svg";
 import {
   CollapsedMenu as Menu,
@@ -8,19 +7,15 @@ import {
   CollapseMenuWrapper,
   CloseBtn
 } from "./styles";
+import menuBtn from "./img/menuBtn.svg";
 
 const BurgerMenu = props => {
   const [active, setActive] = useState(false);
   const toggleMenu = () => setActive(!active);
-  const isMedium = useMedia("(min-width: 970px)");
 
   return (
     <Menu>
-      <Button
-        color={isMedium ? "#083269" : "#fff"}
-        active={active}
-        onClick={toggleMenu}
-      />
+      <Button onClick={toggleMenu} src={menuBtn} name="menuBtn" />
       <CollapseMenuWrapper
         width={320}
         placement="left"

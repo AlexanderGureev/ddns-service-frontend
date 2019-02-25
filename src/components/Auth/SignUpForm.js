@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, Select, message as messageBlock } from "antd";
-import { useAction } from "easy-peasy";
+import { useActions } from "easy-peasy";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 import signUpFormBg from "./img/bg-form-signup.svg";
@@ -18,7 +18,7 @@ import {
 
 const SignUpForm = ({ parallaxLayer, form, location: { state = {} } }) => {
   const { invert = false, data = null } = state;
-  const { registerUserAction } = useAction(dispatch => dispatch.session);
+  const { registerUserAction } = useActions(actions => actions.session);
   const [loading, setLoading] = useState(false);
   const [checkedLater, setCheckedLater] = useState(false);
   const [checkedPolicy, setCheckedPolicy] = useState(false);

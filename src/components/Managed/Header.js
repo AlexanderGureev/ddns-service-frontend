@@ -13,12 +13,7 @@ import {
 import ShortProfile from "./ShortProfile";
 import ShoppingCart from "./ShoppingCart";
 
-const Header = ({
-  collapsed,
-  toggleSideMenu,
-  visible,
-  handleVisibleChange
-}) => {
+const Header = ({ collapsed, toggleSideMenu }) => {
   const isMediumSize = useMedia("(max-width: 1200px)");
 
   return (
@@ -51,10 +46,7 @@ const Header = ({
             </BtnContainer>
           </>
         )}
-        <ShortProfile
-          visible={visible}
-          handleVisibleChange={handleVisibleChange}
-        />
+        <ShortProfile />
       </StyledHeader.Container>
     </StyledHeader>
   );

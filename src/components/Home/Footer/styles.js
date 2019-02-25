@@ -35,7 +35,7 @@ export const Row = styled(AntdRow)``;
 export const Col = styled(AntdCol)``;
 
 export const Form = styled(AntdForm)`
-  padding: 60px 0;
+  padding: 40px 0 !important;
 
   .ant-row {
     @media (max-width: 991px) {
@@ -74,7 +74,9 @@ const Button = styled(ButtonLink)`
   }
 `;
 
-export const Select = styled(AntdSelect)`
+export const Select = styled(AntdSelect).attrs(props => ({
+  "aria-hidden": true
+}))`
   border: none;
   border-radius: 15px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
@@ -175,59 +177,61 @@ const StayUpdatedFormButton = styled(StyledButton)`
   border-radius: 15px;
 `;
 const StayUpdatedFormInput = styled(Input.Search)`
-  text-align: center;
-  margin: 30px 0;
-  padding: 0 !important;
-
-  span {
-    right: 10px !important;
-  }
-  button {
-    border: none;
-    border-radius: 50% !important;
-    width: 45px !important;
-    height: 45px !important;
-    padding: 3px 0 0 0;
-    background: linear-gradient(135deg, #11013c, #053a80);
-    &:hover {
-      background: linear-gradient(135deg, #11013c, #053a80);
-    }
-
-    @media (max-width: 460px) {
-      width: 35px !important;
-      height: 35px !important;
-    }
-  }
-  input {
-    font-weight: 500;
-    font-size: 18px;
-    border-radius: 50px;
+  && {
     text-align: center;
-    padding: 15px 65px 15px 55px !important;
+    margin: 30px 0;
+    padding: 0 !important;
 
-    @media (max-width: 1200px) {
+    span {
+      right: 10px !important;
+    }
+    button {
+      border: none;
+      border-radius: 50% !important;
+      width: 45px !important;
+      height: 45px !important;
+      padding: 3px 0 0 0;
+      background: linear-gradient(135deg, #11013c, #053a80);
+      &:hover {
+        background: linear-gradient(135deg, #11013c, #053a80);
+      }
+
+      @media (max-width: 460px) {
+        width: 35px !important;
+        height: 35px !important;
+      }
+    }
+    input {
+      font-weight: 500;
       font-size: 18px;
+      border-radius: 50px;
+      text-align: center;
+      padding: 15px 65px 15px 55px !important;
+
+      @media (max-width: 1200px) {
+        font-size: 18px;
+      }
+      @media (max-width: 991px) {
+        font-size: 16px;
+      }
+      @media (max-width: 460px) {
+        padding: 10px 65px 10px 55px !important;
+        font-size: 14px;
+      }
     }
-    @media (max-width: 991px) {
-      font-size: 16px;
+    .ant-input-prefix i {
+      position: absolute;
+      left: 5px;
+      top: -13px;
+      @media (max-width: 460px) {
+        top: -10px;
+      }
     }
-    @media (max-width: 460px) {
-      padding: 10px 65px 10px 55px !important;
-      font-size: 14px;
-    }
-  }
-  .ant-input-prefix i {
-    position: absolute;
-    left: 5px;
-    top: -13px;
-    @media (max-width: 460px) {
-      top: -10px;
-    }
-  }
-  i {
-    font-size: 25px;
-    @media (max-width: 460px) {
-      font-size: 20px;
+    i {
+      font-size: 25px;
+      @media (max-width: 460px) {
+        font-size: 20px;
+      }
     }
   }
 `;
@@ -306,7 +310,10 @@ export const SocialContainer = styled.div`
     padding-right: 10px;
   }
 `;
-const SocialIcon = styled.img.attrs(props => ({ src: props.src }))`
+const SocialIcon = styled.img.attrs(props => ({
+  src: props.src,
+  alt: props.alt
+}))`
   @media (max-width: 760px) {
     width: 30px;
     height: 15px;

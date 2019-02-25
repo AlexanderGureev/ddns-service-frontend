@@ -17,7 +17,7 @@ const Header = props => (
       <BurgerMenu />
       <Logo>
         <Logo.Icon />
-        <Logo.Link to="/" />
+        <Logo.Link to="/" name="logo" />
       </Logo>
       <TopMenu />
     </TopLine>
@@ -32,7 +32,7 @@ const Header = props => (
       <HeaderContent.Button to="/login">Get started</HeaderContent.Button>
     </HeaderContent>
     <ScrollBtn>
-      <ScrollBtn.Link href="#shortForm" />
+      <ScrollBtn.Link href="#shortForm" name="scrollDown" />
       <ScrollBtn.Icon src={downArrowIcon} />
     </ScrollBtn>
   </HeaderWrapper>

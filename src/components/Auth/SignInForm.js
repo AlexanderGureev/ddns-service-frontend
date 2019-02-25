@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, message as messageBlock } from "antd";
-import { useAction } from "easy-peasy";
+import { useActions } from "easy-peasy";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 import signInFormBg from "./img/bg-form-signin.svg";
@@ -17,7 +17,7 @@ import {
 
 const SignInForm = ({ parallaxLayer, form, location: { state = {} } }) => {
   const { invert = false } = state;
-  const { loginUserAction } = useAction(dispatch => dispatch.session);
+  const { loginUserAction } = useActions(actions => actions.session);
   const [loading, setLoading] = useState(false);
 
   const isLarge = useMedia("(min-width: 861px)");

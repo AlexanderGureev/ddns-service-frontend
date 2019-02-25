@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { Elastic } from "react-burgers";
 import React from "react";
 import { Drawer } from "antd";
 import AnchorLink from "react-anchor-link-smooth-scroll";
@@ -11,7 +10,7 @@ import { ReactComponent as MenuBg } from "./img/side-menu-bg.svg";
 
 export const HeaderWrapper = styled.div`
   height: 100vh;
-  min-height: 860px;
+  min-height: 900px;
   width: 100%;
   padding: 20px 100px 0 100px;
   background: url(${props => props.src}) no-repeat right top;
@@ -27,8 +26,9 @@ export const HeaderWrapper = styled.div`
     background-position: right center;
     padding: 50px 50px 0;
   }
-  @media (max-width: 460px) {
+  @media (max-width: 560px) {
     padding: 30px 30px 0;
+    min-height: 600px;
   }
 `;
 
@@ -55,7 +55,10 @@ const LogoIcon = styled(HeaderLogo1)`
   }
 `;
 
-const LogoLink = styled(Link)`
+const LogoLink = styled(Link).attrs(props => ({
+  name: props.name,
+  "aria-hidden": "true"
+}))`
   position: absolute;
   left: 0;
   top: 0;
@@ -95,7 +98,7 @@ const HeaderTitle = styled.p`
   @media (max-width: 1200px) {
     font-size: 38px;
   }
-  @media (max-width: 460px) {
+  @media (max-width: 560px) {
     font-size: 27px;
   }
 `;
@@ -107,7 +110,7 @@ const HeaderCaption = styled(HeaderTitle)`
   @media (max-width: 1400px) {
     font-size: 16px;
   }
-  @media (max-width: 460px) {
+  @media (max-width: 560px) {
     font-size: 14px;
   }
 `;
@@ -117,7 +120,7 @@ const HeaderButton = styled(ButtonLink)`
     padding: 15px 60px;
   }
   text-transform: uppercase;
-  @media (max-width: 460px) {
+  @media (max-width: 560px) {
     a {
       padding: 15px 40px;
     }
@@ -135,9 +138,10 @@ export const ScrollBtn = styled.div`
   box-shadow: 0 10px 20px rgba(0, 28, 118, 0.32);
   cursor: pointer;
 
-  @media (max-width: 460px) {
+  @media (max-width: 560px) {
     width: 50px;
     height: 50px;
+    bottom: -15%;
   }
 `;
 const ScrollBtnIcon = styled.div`
@@ -148,13 +152,16 @@ const ScrollBtnIcon = styled.div`
   height: 80%;
   background: url(${props => props.src}) no-repeat center center;
 
-  @media (max-width: 460px) {
+  @media (max-width: 560px) {
     left: 10px;
     width: 60%;
     height: 60%;
   }
 `;
-const AntdLink = styled(AnchorLink)`
+const AntdLink = styled(AnchorLink).attrs(props => ({
+  name: props.name,
+  "aria-hidden": "true"
+}))`
   width: 100%;
   height: 100%;
   z-index: 10;
@@ -235,8 +242,14 @@ Menu.Item = MenuItem;
 Menu.ButtonLink = MenuBtn;
 Menu.Button = MenuButton;
 
-export const Button = styled(Elastic)`
-  color: #083269;
+export const Button = styled.div.attrs(props => ({
+  name: props.name
+}))`
+  background: url(${props => props.src});
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-size: contain;
 `;
 
 const Background = styled(MenuBg)`

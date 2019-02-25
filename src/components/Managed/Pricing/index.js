@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import uniqueId from "lodash/uniqueId";
-import { useAction, useStore } from "easy-peasy";
+import { useActions, useStore } from "easy-peasy";
 import { notification } from "antd";
 import { Content as StyledContent } from "../styles";
 import { ReactComponent as CardFree } from "./img/card-free.svg";
@@ -44,7 +44,7 @@ const openNotification = () => {
 };
 
 const PricingPage = () => {
-  const { addToCartAction } = useAction(dispatch => dispatch.session);
+  const { addToCartAction } = useActions(actions => actions.session);
   const { cart } = useStore(state => state.session);
 
   const handleClick = id => {

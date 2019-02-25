@@ -2,7 +2,8 @@ const {
   override,
   fixBabelImports,
   addLessLoader,
-  addBabelPlugin
+  addBabelPlugin,
+  addBundleVisualizer
 } = require("customize-cra");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 
@@ -32,4 +33,5 @@ module.exports = override(
     }
   }),
   addImageMinPlugin
+  // addBundleVisualizer()
 );

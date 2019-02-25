@@ -76,6 +76,7 @@ export const Content = styled(AntdContent)`
 `;
 export const Menu = styled(AntdMenu)`
   && {
+    z-index: 12;
     position: relative;
     background: none;
 
@@ -432,6 +433,11 @@ export const ShortProfileContainer = styled.div`
   font-size: 14px;
   font-weight: 400;
   min-width: 200px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 20;
 `;
 
 const ProfileList = styled.ul`
@@ -441,12 +447,14 @@ const ProfileList = styled.ul`
 `;
 
 const ProfileItem = styled.li`
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: 0.3s ease;
+  && {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
 
-  &:hover {
-    background-color: #039dc53d;
+    &:hover {
+      background-color: #039dc53d;
+    }
   }
 `;
 

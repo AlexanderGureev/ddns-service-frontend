@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { useAction } from "easy-peasy";
+import { useActions } from "easy-peasy";
 import googleIcon from "./img/soc-google.svg";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
@@ -16,7 +16,7 @@ const GoogleLogin = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(false);
-  const { socialAuthorizeUserAction } = useAction(dispatch => dispatch.session);
+  const { socialAuthorizeUserAction } = useActions(actions => actions.session);
 
   const provider = "google";
   const loadingIndicator = useRef(() => {});
@@ -81,7 +81,13 @@ const GoogleLogin = ({
     console.log(error.message || error);
   };
 
-  return <Form.SocialBlock.Icon src={googleIcon} onClick={onButtonClick} />;
+  return (
+    <Form.SocialBlock.Icon
+      src={googleIcon}
+      onClick={onButtonClick}
+      alt="google oauth"
+    />
+  );
 };
 
 export default GoogleLogin;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useStore, useAction } from "easy-peasy";
+import { useStore, useActions } from "easy-peasy";
 import { StyledAlert } from "./styles";
 import MessageConstructor from "../Common/LoadingMessage";
 
@@ -25,7 +25,7 @@ const confirmEmail = async (location, confirmEmailAction) => {
 
 const ConfirmEmail = ({ location }) => {
   const { emailConfirm, provider } = useStore(state => state.session.profile);
-  const { confirmEmailAction } = useAction(dispatch => dispatch.session);
+  const { confirmEmailAction } = useActions(actions => actions.session);
 
   useEffect(() => {
     confirmEmail(location, confirmEmailAction);

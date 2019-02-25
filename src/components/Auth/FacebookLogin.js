@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { useAction } from "easy-peasy";
+import { useActions } from "easy-peasy";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
 import facebookIcon from "./img/soc-facebook.svg";
@@ -16,7 +16,7 @@ const FacebookLogin = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(false);
-  const { socialAuthorizeUserAction } = useAction(dispatch => dispatch.session);
+  const { socialAuthorizeUserAction } = useActions(actions => actions.session);
 
   const provider = "facebook";
   const loadingIndicator = useRef(() => {});
@@ -78,7 +78,13 @@ const FacebookLogin = ({
     console.log(error.message || error);
   };
 
-  return <Form.SocialBlock.Icon src={facebookIcon} onClick={onButtonClick} />;
+  return (
+    <Form.SocialBlock.Icon
+      src={facebookIcon}
+      onClick={onButtonClick}
+      alt="facebook oauth"
+    />
+  );
 };
 
 export default FacebookLogin;

@@ -227,27 +227,24 @@ const FooterSocial = styled(HeaderSocial)`
 `;
 
 const SocialIconBox = styled.div`
-  margin: 5px 0;
+  margin: 10px 0;
   display: flex;
   justify-content: center;
 `;
 
 const SocialIcon = styled.img.attrs(props => ({
-  src: props.src
+  src: props.src,
+  alt: props.alt
 }))`
   cursor: pointer;
   padding: 0 10px;
-  width: 75px;
-  height: 75px;
+  height: 60px;
 
   @media (max-width: 1200px) {
-    width: 65px;
-    height: 65px;
-  }
-
-  @media (max-width: 560px) {
-    width: 50px;
     height: 50px;
+  }
+  @media (max-width: 560px) {
+    height: 40px;
   }
 `;
 

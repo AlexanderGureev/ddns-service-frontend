@@ -7,10 +7,10 @@ import { SocialContainer } from "./styles";
 
 const SocialBar = () => (
   <SocialContainer>
-    <SocialContainer.Icon src={vkIcon} />
-    <SocialContainer.Icon src={fbIcon} />
-    <SocialContainer.Icon src={yandexIcon} />
-    <SocialContainer.Icon src={googleIcon} />
+    <SocialContainer.Icon src={vkIcon} alt="vk" />
+    <SocialContainer.Icon src={fbIcon} alt="facebook" />
+    <SocialContainer.Icon src={yandexIcon} alt="yandex" />
+    <SocialContainer.Icon src={googleIcon} alt="google" />
   </SocialContainer>
 );
 

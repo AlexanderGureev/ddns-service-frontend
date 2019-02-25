@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "antd";
-import { useStore, useAction } from "easy-peasy";
+import { useStore, useActions } from "easy-peasy";
 import debounce from "lodash/debounce";
 import { ReactComponent as DeleteIcon } from "./img/delete.svg";
 
@@ -49,7 +49,7 @@ const CartItemComponent = ({
       </CartItem.Label>
       <CartItem.Label>
         Total Price
-        <CartItem.Price>{totalPrice}</CartItem.Price>
+        <CartItem.Price>{totalPrice || 0}</CartItem.Price>
       </CartItem.Label>
       <CartItem.Btn component={DeleteIcon} onClick={() => onRemove(id)} />
     </CartItem>
@@ -57,8 +57,8 @@ const CartItemComponent = ({
 };
 const Content = props => {
   const { cart } = useStore(state => state.session);
-  const { removeItemFromCartAction, updateItemInCartAction } = useAction(
-    dispatch => dispatch.session
+  const { removeItemFromCartAction, updateItemInCartAction } = useActions(
+    actions => actions.session
   );
 
   const debouncedUpdateCart = debounce(updateItemInCartAction, 1000);
@@ -94,28 +94,14 @@ const Content = props => {
 };
 
 const ShoppingCart = ({ children, noBadge = false }) => {
-  const [visible, setVisible] = useState(false);
   const { cart } = useStore(state => state.session);
-
-  const handleVisibleChange = e => setVisible(!visible);
-
   return noBadge ? (
-    <Dropdown
-      overlay={<Content />}
-      onVisibleChange={handleVisibleChange}
-      trigger={["click"]}
-      visible={visible}
-    >
+    <Dropdown overlay={<Content />} trigger={["click"]}>
       {children}
     </Dropdown>
   ) : (
     <Badge count={cart.length} showZero>
-      <Dropdown
-        overlay={<Content />}
-        onVisibleChange={handleVisibleChange}
-        trigger={["click"]}
-        visible={visible}
-      >
+      <Dropdown overlay={<Content />} trigger={["click"]}>
         {children}
       </Dropdown>
     </Badge>
