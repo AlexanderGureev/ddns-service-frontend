@@ -19,7 +19,8 @@ const ShortProfile = ({ history }) => {
   const setLoadingIndicator = () => {
     loadingIndicator.current = loadingMessage.open("Logout...");
   };
-  const clearLoadingIndicator = () => loadingIndicator.current();
+  const clearLoadingIndicator = () =>
+    loadingIndicator.current && loadingIndicator.current();
 
   useEffect(
     () => {
