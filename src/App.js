@@ -8,8 +8,6 @@ import PrivateRoute from "./components/Common/PrivateRoute";
 import NoMatch from "./components/Common/NoMatch";
 import ErrorBoundary from "./components/Common/ErrorBoundary";
 
-import "./index.css";
-
 const Home = lazy(() => import("./components/Home"));
 const Auth = lazy(() => import("./components/Auth"));
 const Managed = lazy(() => import("./components/Managed"));

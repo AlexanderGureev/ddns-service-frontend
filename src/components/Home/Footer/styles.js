@@ -48,7 +48,7 @@ const Input = styled(AntdInput)`
     border: none;
     border-radius: 15px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
-    padding: 15px 20px;
+    padding: 16.5px 20px;
     font-weight: 500;
     font-size: 20px;
     @media (max-width: 1200px) {
@@ -56,6 +56,10 @@ const Input = styled(AntdInput)`
     }
     @media (max-width: 991px) {
       font-size: 16px;
+    }
+    @media (max-width: 560px) {
+      padding: 12.5px 20px;
+      font-size: 14px;
     }
   }
 `;
@@ -71,6 +75,11 @@ const Button = styled(ButtonLink)`
   }
   @media (max-width: 991px) {
     font-size: 16px;
+  }
+  @media (max-width: 560px) {
+    a {
+      padding: 11px 0;
+    }
   }
 `;
 
@@ -91,6 +100,10 @@ export const Select = styled(AntdSelect).attrs(props => ({
   @media (max-width: 991px) {
     font-size: 16px;
   }
+  @media (max-width: 560px) {
+    font-size: 14px;
+  }
+
   .ant-select-selection--single {
     height: auto !important;
   }
@@ -106,6 +119,10 @@ export const Select = styled(AntdSelect).attrs(props => ({
     :hover {
       border-color: #fff !important;
       box-shadow: none !important;
+    }
+
+    @media (max-width: 560px) {
+      padding: 8px 20px;
     }
   }
   .ant-select-selection__rendered {

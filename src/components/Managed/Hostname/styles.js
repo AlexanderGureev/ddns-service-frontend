@@ -21,7 +21,6 @@ export const Input = styled(AntdInput)`
 `;
 export const Table = styled(AntdTable)`
   width: 100%;
-  overflow-x: scroll;
   .ant-table-column-has-actions.ant-table-column-has-filters {
     min-width: 140px;
   }
@@ -38,6 +37,10 @@ export const Table = styled(AntdTable)`
       left: 6px !important;
       margin: 0 !important;
     }
+  }
+
+  @media (max-width: 960px) {
+    overflow-x: scroll;
   }
 `;
 export const HostnamesTableWrapper = styled.div`

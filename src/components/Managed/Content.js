@@ -1,9 +1,9 @@
 import React, { Suspense, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import { Content as StyledContent } from "./styles";
+import { Content as StyledContent, NoMathContent } from "./styles";
 
-import NoMatch from "../Common/NoMatch";
+import Loader from "./Loader";
 import ConfirmEmail from "./ConfirmEmail";
 
 const MainPage = lazy(() => import("./MainPage"));
@@ -11,15 +11,24 @@ const ProfilePage = lazy(() => import("./Profile"));
 const PricingPage = lazy(() => import("./Pricing"));
 const HostnamePage = lazy(() => import("./Hostname"));
 
+const validPath = [
+  "/managed",
+  "/managed/pricing",
+  "/managed/hostnames",
+  "/managed/account",
+  "/managed/verify"
+];
+
 const Content = props => {
   const {
-    match: { url }
+    match: { url },
+    location: { pathname }
   } = props;
 
   return (
     <StyledContent>
-      <ConfirmEmail {...props} />
-      <Suspense fallback={<span>Loading page...</span>}>
+      <Suspense fallback={<Loader />}>
+        {validPath.includes(pathname) && <ConfirmEmail {...props} />}
         <Switch>
           <Route
             path={url}
@@ -42,7 +51,7 @@ const Content = props => {
             path={`${url}/verify`}
             render={routeProps => <MainPage {...routeProps} />}
           />
-          <Route component={NoMatch} disableLink />
+          <Route component={NoMathContent} disableLink />
         </Switch>
       </Suspense>
     </StyledContent>

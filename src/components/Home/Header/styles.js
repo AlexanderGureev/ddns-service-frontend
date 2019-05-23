@@ -5,7 +5,7 @@ import React from "react";
 import { Drawer } from "antd";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import StyledButton, { ButtonLink } from "../Common/Button";
-import { ReactComponent as HeaderLogo1 } from "./img/logo_new.svg";
+import { ReactComponent as HeaderLogo } from "./img/logo_new.svg";
 import { ReactComponent as MenuBg } from "./img/side-menu-bg.svg";
 
 export const HeaderWrapper = styled.div`
@@ -13,17 +13,16 @@ export const HeaderWrapper = styled.div`
   min-height: 900px;
   width: 100%;
   padding: 20px 100px 0 100px;
-  background: url(${props => props.src}) no-repeat right top;
-  background-size: contain;
+  background: url(${props => props.src}) no-repeat;
+  background-position: 35% 100%;
   position: relative;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1400px) {
     padding: 20px 30px 0 100px;
   }
 
   @media (max-width: 970px) {
-    background-size: cover;
-    background-position: right center;
+    background-position: 90% 100%;
     padding: 50px 50px 0;
   }
   @media (max-width: 560px) {
@@ -40,7 +39,7 @@ export const TopLine = styled.div`
 export const Logo = styled.div`
   position: relative;
 `;
-const LogoIcon = styled(HeaderLogo1)`
+const LogoIcon = styled(HeaderLogo)`
   cursor: pointer;
 
   @media (max-width: 1200px) {
@@ -78,13 +77,15 @@ export const HeaderContent = styled.div`
     width: 500px;
   }
   @media (max-width: 1200px) {
-    width: 450px;
+    width: 380px;
   }
   @media (max-width: 970px) {
+    position: relative;
+    top: 50%;
+    margin-top: -195px;
     color: #fff;
     width: 100%;
     text-align: center;
-    margin: 150px auto 0;
   }
 `;
 const HeaderTitle = styled.p`
@@ -96,7 +97,7 @@ const HeaderTitle = styled.p`
     font-size: 42px;
   }
   @media (max-width: 1200px) {
-    font-size: 38px;
+    font-size: 32px;
   }
   @media (max-width: 560px) {
     font-size: 27px;
@@ -128,9 +129,14 @@ const HeaderButton = styled(ButtonLink)`
   }
 `;
 export const ScrollBtn = styled.div`
-  position: relative;
-  bottom: -25%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
   border-radius: 50%;
   width: 70px;
   height: 70px;
@@ -138,24 +144,21 @@ export const ScrollBtn = styled.div`
   box-shadow: 0 10px 20px rgba(0, 28, 118, 0.32);
   cursor: pointer;
 
-  @media (max-width: 560px) {
+  @media (max-width: 1060px) {
     width: 50px;
     height: 50px;
-    bottom: -15%;
   }
 `;
 const ScrollBtnIcon = styled.div`
   position: absolute;
-  left: 7px;
-  top: 8px;
-  width: 80%;
-  height: 80%;
+  width: 45px;
+  height: 45px;
   background: url(${props => props.src}) no-repeat center center;
+  background-size: contain;
 
-  @media (max-width: 560px) {
-    left: 10px;
-    width: 60%;
-    height: 60%;
+  @media (max-width: 1060px) {
+    width: 30px;
+    height: 30px;
   }
 `;
 const AntdLink = styled(AnchorLink).attrs(props => ({

@@ -137,6 +137,10 @@ export const Form = styled(AntdForm)`
       font-size: 12px;
       font-weight: 500;
       margin-top: -5px !important;
+
+      @media (max-width: 560px) {
+        font-size: 10px;
+      }
     }
     .ant-form-item-control {
       line-height: 1.7;
@@ -170,7 +174,7 @@ const FormHeader = styled.p`
   }
 
   @media (max-width: 375px) {
-    font-size: 14px;
+    font-size: 16px;
   }
 `;
 
@@ -245,13 +249,14 @@ const SocialIcon = styled.img.attrs(props => ({
   alt: props.alt
 }))`
   cursor: pointer;
-  padding: 0 10px;
   height: 60px;
+  padding: 0 10px;
 
   @media (max-width: 1200px) {
     height: 50px;
   }
   @media (max-width: 560px) {
+    padding: 0 5px;
     height: 40px;
   }
 `;

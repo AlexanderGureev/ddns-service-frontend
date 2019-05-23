@@ -1,4 +1,4 @@
-import { thunk } from "easy-peasy";
+import { thunk, action } from "easy-peasy";
 
 const sessionEffects = {
   registerUserAction: thunk(async (dispatch, payload, { injections }) => {
@@ -52,7 +52,7 @@ const sessionEffects = {
       try {
         const avatarPath = await injections.api.updateAvatarApi(payload);
         dispatch.updateProfileAction(avatarPath);
-        injections.cache.saveState("profile", getState().session.profile);
+        injections.cache.saveState("profile", getState().profile);
       } catch (error) {
         throw new Error(error.message);
       }
@@ -71,7 +71,7 @@ const sessionEffects = {
             apiToken: payload || ""
           });
           dispatch.updateProfileAction(data);
-          injections.cache.saveState("profile", getState().session.profile);
+          injections.cache.saveState("profile", getState().profile);
         }
       } catch (error) {
         console.log(error);
@@ -95,7 +95,7 @@ const sessionEffects = {
       try {
         const response = await injections.api.confirmEmailApi(payload);
         dispatch.updateProfileAction(response);
-        injections.cache.saveState("profile", getState().session.profile);
+        injections.cache.saveState("profile", getState().profile);
       } catch (error) {
         console.log(error.message);
         throw new Error(error.message);
@@ -120,7 +120,7 @@ const sessionEffects = {
   addToCartAction: thunk((dispatch, payload, { injections, getState }) => {
     try {
       dispatch.setState({ cart: [payload] });
-      injections.cache.saveState("cart", getState().session.cart);
+      injections.cache.saveState("cart", getState().cart);
     } catch (error) {
       console.log(error.message);
     }
@@ -128,7 +128,7 @@ const sessionEffects = {
   removeItemFromCartAction: thunk(
     (dispatch, payload, { injections, getState }) => {
       try {
-        const { cart } = getState().session;
+        const { cart } = getState();
         const filteredCard = cart.filter(({ id }) => id !== payload);
         dispatch.setState({ cart: filteredCard });
         injections.cache.saveState("cart", filteredCard);
@@ -141,7 +141,7 @@ const sessionEffects = {
     (dispatch, payload, { injections, getState }) => {
       try {
         dispatch.setState({ cart: [payload] });
-        injections.cache.saveState("cart", getState().session.cart);
+        injections.cache.saveState("cart", getState().cart);
       } catch (error) {
         console.log(error.message);
       }
@@ -163,12 +163,15 @@ const model = {
     apiToken: "",
     isAuth: false,
     cart: [],
-    setState: (state, payload) => ({ ...state, ...payload }),
-    updateProfileAction: (state, payload) => ({
+    setState: action((state, payload) => ({ ...state, ...payload })),
+    updateProfileAction: action((state, payload) => ({
       ...state,
       profile: { ...state.profile, ...payload }
-    }),
-    changeAuthStatusAction: (state, payload) => ({ ...state, isAuth: payload }),
+    })),
+    changeAuthStatusAction: action((state, payload) => ({
+      ...state,
+      isAuth: payload
+    })),
     ...sessionEffects
   }
 };

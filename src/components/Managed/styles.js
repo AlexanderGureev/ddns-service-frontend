@@ -16,6 +16,7 @@ import {
   InputNumber
 } from "antd";
 import { Link } from "react-router-dom";
+import NoMatch from "../Common/NoMatch";
 import { ReactComponent as LogoIcon } from "./img/logo-managed.svg";
 import { ReactComponent as MiniLogoIcon } from "./img/mini-logo-managed.svg";
 import { ReactComponent as CircleIcons } from "./img/circleLayers.svg";
@@ -73,6 +74,7 @@ export const StyledSide = styled(Sider)`
 export const Content = styled(AntdContent)`
   margin: 24px 16px 0;
   min-width: 200px;
+  position: relative;
 `;
 export const Menu = styled(AntdMenu)`
   && {
@@ -630,6 +632,16 @@ const RemoveBtn = styled(Icon)`
   cursor: pointer;
 `;
 
+export const LoaderContainer = styled.div`
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const NoMathContent = styled(NoMatch)`
+  height: 100%;
+`;
 CartItem.Name = CartItemName;
 CartItem.Price = CartItemPrice;
 CartItem.Input = CartItemInput;

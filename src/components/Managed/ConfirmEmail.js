@@ -23,7 +23,7 @@ const confirmEmail = async (location, confirmEmailAction) => {
   }
 };
 
-const ConfirmEmail = ({ location }) => {
+const ConfirmEmail = ({ location, ...rest }) => {
   const { emailConfirm, provider } = useStore(state => state.session.profile);
   const { confirmEmailAction } = useActions(actions => actions.session);
 

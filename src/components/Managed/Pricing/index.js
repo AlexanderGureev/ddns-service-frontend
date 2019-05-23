@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import uniqueId from "lodash/uniqueId";
 import { useActions, useStore } from "easy-peasy";
 import { notification } from "antd";
@@ -9,6 +9,7 @@ import { ReactComponent as CardUltimate } from "./img/card-ultimate.svg";
 import arrowCard from "./img/arrow-card.svg";
 import { PricingContainer, PriceCard, Button } from "./styles";
 
+notification.config({ top: 70 });
 const cardData = [
   {
     id: uniqueId(),
@@ -58,6 +59,13 @@ const PricingPage = () => {
     });
     !isAlredyAdded && openNotification();
   };
+
+  useEffect(
+    () => () => {
+      notification.destroy();
+    },
+    []
+  );
 
   return (
     <StyledContent.Wrapper>

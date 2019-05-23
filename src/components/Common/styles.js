@@ -4,11 +4,12 @@ import styled, { keyframes } from "styled-components";
 import loadingBg from "./img/loading-page.svg";
 
 export const PreloaderContainer = styled.div`
+  position: absolute;
   font-weight: 700;
   font-size: 50px;
   padding: 10px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   color: white;
   letter-spacing: 3px;
@@ -27,6 +28,11 @@ export const PreloaderContainer = styled.div`
   }
 `;
 
+export const AnimationContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+`;
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;

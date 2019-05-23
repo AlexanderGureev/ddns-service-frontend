@@ -8,8 +8,8 @@ import {
   HomeLink
 } from "./styles";
 
-const NoMatch = ({ location }, disableLink = false) => (
-  <Preloader>
+const NoMatch = ({ location, className }, disableLink = false) => (
+  <Preloader className={className}>
     <ContentWrapper>
       <StatusCode>404</StatusCode>
       <Text>
