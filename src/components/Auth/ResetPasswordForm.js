@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, message as messageBlock } from "antd";
-import { useActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import resetFormBg from "./img/bg-form-reset.svg";
 import {
   LayerContainer,
@@ -15,7 +15,7 @@ import {
 import { DecoratedFormItem } from "./DecoratedFormItem";
 
 const ResetPasswordForm = props => {
-  const { resetPasswordAction } = useActions(actions => actions.session);
+  const { resetPasswordAction } = useStoreActions(actions => actions.session);
   const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
   const isBig = useMedia("(min-width: 1500px)");

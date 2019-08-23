@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, message as messageBlock } from "antd";
-import { useActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import changeFormBg from "./img/bg-form-change.svg";
 import {
   LayerContainer,
@@ -29,7 +29,7 @@ const checkQueryParams = ({ search }) => {
   return { resetToken, userId };
 };
 const ChangePasswordForm = ({ form, location, history }) => {
-  const { changePasswordAction } = useActions(actions => actions.session);
+  const { changePasswordAction } = useStoreActions(actions => actions.session);
   const [loading, setLoading] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
   const isBig = useMedia("(min-width: 1500px)");

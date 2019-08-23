@@ -3,8 +3,8 @@ import Cookie from "js-cookie";
 
 axios.defaults.withCredentials = true;
 
-const API_URL = "https://accounts.best-service.online/v1/rest-auth";
-const API_URL_CSRF = "https://accounts.best-service.online/v1/csrf";
+const API_URL = "https://api.best-service.online/users/v1/rest-auth";
+const API_URL_CSRF = "https://api.best-service.online/v1/csrf";
 const API_URL_REGISTRATION = `${API_URL}/registration/`;
 const API_URL_LOGIN = `${API_URL}/login/`;
 const API_URL_LOGOUT = `${API_URL}/logout/`;

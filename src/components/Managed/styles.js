@@ -486,8 +486,8 @@ export const StyledAlert = styled(Alert)`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-right: 35%;
     display: block;
+    outline: none;
   }
 `;
 

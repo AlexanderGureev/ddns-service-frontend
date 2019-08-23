@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { useActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
 import facebookIcon from "./img/soc-facebook.svg";
@@ -16,7 +16,9 @@ const FacebookLogin = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(false);
-  const { socialAuthorizeUserAction } = useActions(actions => actions.session);
+  const { socialAuthorizeUserAction } = useStoreActions(
+    actions => actions.session
+  );
 
   const provider = "facebook";
   const loadingIndicator = useRef(() => {});
@@ -27,12 +29,9 @@ const FacebookLogin = ({
   };
   const clearLoadingIndicator = () => loadingIndicator.current();
 
-  useLayoutEffect(
-    () => {
-      loading ? setLoadingIndicator() : clearLoadingIndicator();
-    },
-    [loading]
-  );
+  useLayoutEffect(() => {
+    loading ? setLoadingIndicator() : clearLoadingIndicator();
+  }, [loading]);
 
   const onButtonClick = e => {
     e.preventDefault();

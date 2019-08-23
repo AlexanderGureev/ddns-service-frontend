@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, useRef } from "react";
-import { useActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import yandexIcon from "./img/soc-yandex.svg";
 import { Form } from "./styles";
 import SocialService from "../../services/social";
@@ -16,7 +16,9 @@ const YandexLogin = ({
   ...rest
 }) => {
   const [loading, setLoading] = useState(false);
-  const { socialAuthorizeUserAction } = useActions(actions => actions.session);
+  const { socialAuthorizeUserAction } = useStoreActions(
+    actions => actions.session
+  );
 
   const provider = "yandex";
   const loadingIndicator = useRef(() => {});
@@ -27,12 +29,9 @@ const YandexLogin = ({
   };
   const clearLoadingIndicator = () => loadingIndicator.current();
 
-  useLayoutEffect(
-    () => {
-      loading ? setLoadingIndicator() : clearLoadingIndicator();
-    },
-    [loading]
-  );
+  useLayoutEffect(() => {
+    loading ? setLoadingIndicator() : clearLoadingIndicator();
+  }, [loading]);
 
   const onButtonClick = e => {
     e.preventDefault();

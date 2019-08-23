@@ -1,4 +1,4 @@
-import api from "./api";
+import Api from "./api";
 
 export default class SocialService {
   constructor(requestCodeUrl) {
@@ -13,7 +13,7 @@ export default class SocialService {
 
   getRequestToken = async () => {
     try {
-      const token = await api.getCSRFTokenApi();
+      const token = await Api.getCSRFTokenApi();
       if (!token) throw new Error("Token request error.");
 
       return token;

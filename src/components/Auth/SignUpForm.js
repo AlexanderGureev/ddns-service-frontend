@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ParallaxLayer } from "react-spring/renderprops-addons";
 import { useMedia } from "react-use";
 import { Form as AntdForm, Select, message as messageBlock } from "antd";
-import { useActions } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import SocialBlock from "./SocialBlock";
 import { DecoratedFormItem } from "./DecoratedFormItem";
 import signUpFormBg from "./img/bg-form-signup.svg";
@@ -18,24 +18,21 @@ import {
 
 const SignUpForm = ({ parallaxLayer, form, location: { state = {} } }) => {
   const { invert = false, data = null } = state;
-  const { registerUserAction } = useActions(actions => actions.session);
+  const { registerUserAction } = useStoreActions(actions => actions.session);
   const [loading, setLoading] = useState(false);
   const [checkedLater, setCheckedLater] = useState(false);
   const [checkedPolicy, setCheckedPolicy] = useState(false);
   const isLarge = useMedia("(min-width: 861px)");
 
-  useEffect(
-    () => {
-      if (data && Object.values(state.data).length) {
-        form.setFields({
-          hostname: { value: state.data.hostname },
-          domain: { value: state.data.domain }
-        });
-        form.getFieldInstance("email").focus();
-      }
-    },
-    [state]
-  );
+  useEffect(() => {
+    if (data && Object.values(state.data).length) {
+      form.setFields({
+        hostname: { value: state.data.hostname },
+        domain: { value: state.data.domain }
+      });
+      form.getFieldInstance("email").focus();
+    }
+  }, [state]);
 
   const showMessage = (text, type = "success") => {
     const fn = {

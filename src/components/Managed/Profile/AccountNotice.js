@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useStore } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { StyledAlert } from "../styles";
 
 const AccountNotice = ({ location }) => {
-  const { username } = useStore(state => state.session.profile);
+  const { username } = useStoreState(state => state.session.profile);
 
   useEffect(() => {}, []);
 

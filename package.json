@@ -37,6 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "babel-loader": "8.0.4",
     "babel-plugin-import": "^1.11.0",
     "babel-plugin-styled-components": "^1.10.0",
     "eslint-config-airbnb": "^17.1.0",

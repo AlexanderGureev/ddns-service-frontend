@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Parallax } from "react-spring/renderprops-addons";
-import { useStore } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { Redirect } from "react-router-dom";
 import { StyledParallaxLayer, ParallaxPositioningLayer } from "./styles";
 import layerBg from "./img/layer-bg.svg";
@@ -13,15 +13,12 @@ import isConfirmEmailRoute from "../Common/isConfirmEmailRoute";
 
 const Auth = props => {
   const { invert = false } = props.location.state || {};
-  const { isAuth } = useStore(state => state.session);
+  const { isAuth } = useStoreState(state => state.session);
   const parallaxLayer = useRef();
 
-  useEffect(
-    () => {
-      isConfirmEmailRoute(props.location.state || {}, isAuth);
-    },
-    [isAuth, props.location.state]
-  );
+  useEffect(() => {
+    isConfirmEmailRoute(props.location.state || {}, isAuth);
+  }, [isAuth, props.location.state]);
 
   if (isAuth)
     return (

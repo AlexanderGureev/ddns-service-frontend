@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import { Menu } from "./styles";
 
 const TopMenu = props => {
-  const { isAuth } = useStore(state => state.session);
-  const { logoutUserAction } = useActions(actions => actions.session);
+  const { isAuth } = useStoreState(state => state.session);
+  const { logoutUserAction } = useStoreActions(actions => actions.session);
   const [loading, setLoading] = useState(false);
 
   const logout = async e => {

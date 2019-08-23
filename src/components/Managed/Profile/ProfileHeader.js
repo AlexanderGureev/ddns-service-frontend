@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { message } from "antd";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import { LoopingRhombusesSpinner } from "react-epic-spinners";
 import { ReactComponent as UploadFormIcon } from "./img/upload_ava.svg";
 import {
@@ -27,8 +27,8 @@ function beforeUpload(file) {
 }
 
 const ProfileHeader = () => {
-  const { profile } = useStore(state => state.session);
-  const { updateAvatarAction } = useActions(actions => actions.session);
+  const { profile } = useStoreState(state => state.session);
+  const { updateAvatarAction } = useStoreActions(actions => actions.session);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const changeAvatar = () => setVisible(true);

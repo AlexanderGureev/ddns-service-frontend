@@ -1,5 +1,5 @@
 import React from "react";
-import { useStore } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 import { Route, Redirect } from "react-router-dom";
 
 const isConfirmEmailRoute = ({ pathname = "", search = "" }, isAuth) => {
@@ -11,7 +11,7 @@ const isConfirmEmailRoute = ({ pathname = "", search = "" }, isAuth) => {
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuth } = useStore(state => state.session);
+  const { isAuth } = useStoreState(state => state.session);
   const isConfirmLink = isConfirmEmailRoute(rest.location, isAuth);
   const state = {
     pathname: rest.location.pathname,

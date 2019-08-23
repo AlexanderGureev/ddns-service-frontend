@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "antd";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import debounce from "lodash/debounce";
 import { ReactComponent as DeleteIcon } from "./img/delete.svg";
 
@@ -56,8 +56,8 @@ const CartItemComponent = ({
   );
 };
 const Content = props => {
-  const { cart } = useStore(state => state.session);
-  const { removeItemFromCartAction, updateItemInCartAction } = useActions(
+  const { cart } = useStoreState(state => state.session);
+  const { removeItemFromCartAction, updateItemInCartAction } = useStoreActions(
     actions => actions.session
   );
 
@@ -94,7 +94,7 @@ const Content = props => {
 };
 
 const ShoppingCart = ({ children, noBadge = false }) => {
-  const { cart } = useStore(state => state.session);
+  const { cart } = useStoreState(state => state.session);
   return noBadge ? (
     <Dropdown overlay={<Content />} trigger={["click"]}>
       {children}

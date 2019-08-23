@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { Dropdown } from "antd";
-import { useStore, useActions } from "easy-peasy";
+import { useStoreState, useStoreActions } from "easy-peasy";
 import { withRouter } from "react-router-dom";
 import { ReactComponent as MenuIcon } from "./img/down-arrow.svg";
 import ShortProfilePopover from "./ShortProfilePopover";
@@ -11,10 +11,10 @@ import MessageConstructor from "../Common/LoadingMessage";
 const loadingMessage = MessageConstructor();
 
 const ShortProfile = ({ history }) => {
-  const { firstName, lastName, avatarPath } = useStore(
+  const { firstName, lastName, avatarPath } = useStoreState(
     state => state.session.profile
   );
-  const { logoutUserAction } = useActions(actions => actions.session);
+  const { logoutUserAction } = useStoreActions(actions => actions.session);
   const loadingIndicator = useRef(null);
   const setLoadingIndicator = () => {
     loadingIndicator.current = loadingMessage.open("Logout...");
@@ -22,15 +22,12 @@ const ShortProfile = ({ history }) => {
   const clearLoadingIndicator = () =>
     loadingIndicator.current && loadingIndicator.current();
 
-  useEffect(
-    () => {
-      if (loadingIndicator.current) clearLoadingIndicator();
-      return () => {
-        clearLoadingIndicator();
-      };
-    },
-    [loadingIndicator.current]
-  );
+  useEffect(() => {
+    if (loadingIndicator.current) clearLoadingIndicator();
+    return () => {
+      clearLoadingIndicator();
+    };
+  }, [loadingIndicator.current]);
 
   const logout = async e => {
     e.preventDefault();
