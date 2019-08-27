@@ -2,7 +2,7 @@
 A platform for managing ddns service, registration and domain management.  
 
 ### Demo
-https://best-service.herokuapp.com  
+https://best-service.online/
 
 ### Desktop version
 
