@@ -30,7 +30,7 @@ const App = () => {
                 path="/reset/password"
                 render={props => <ChangePassword {...props} />}
               />
-              <PrivateRoute path="/managed" component={Managed} />
+              <Route path="/managed" component={Managed} />
               <Route component={NoMatch} />
             </Switch>
           </Suspense>
