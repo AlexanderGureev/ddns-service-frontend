@@ -120,6 +120,9 @@ export const Button = styled(AntdButton)`
     padding: 10px 60px;
     outline: none;
 
+    &.ant-btn-loading:not(.ant-btn-circle):not(.ant-btn-circle-outline):not(.ant-btn-icon-only) {
+      padding: 10px 60px;
+    }
     span {
       transition: 0.5s ease;
     }

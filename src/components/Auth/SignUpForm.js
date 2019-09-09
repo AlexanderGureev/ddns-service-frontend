@@ -58,13 +58,14 @@ const SignUpForm = ({ parallaxLayer, form, location: { state = {} } }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    form.validateFields((err, values) => {
-      if (!err) {
-        registerUser(values);
-      }
-      const [invalidField] = Object.keys(err);
-      form.getFieldInstance(invalidField).focus();
-    });
+    setLoading(true);
+    // form.validateFields((err, values) => {
+    //   if (!err) {
+    //     registerUser(values);
+    //   }
+    //   const [invalidField] = Object.keys(err);
+    //   form.getFieldInstance(invalidField).focus();
+    // });
   };
 
   const goToNextForm = () => {
