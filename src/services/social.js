@@ -6,7 +6,7 @@ export default class SocialService {
   }
 
   getHeaders = () => {
-    const headers = Object.assign({}, this.props.customHeaders || {});
+    const headers = { ...(this.props.customHeaders || {}) };
     headers["Content-Type"] = "application/json";
     return headers;
   };
@@ -48,17 +48,16 @@ export default class SocialService {
 
   polling = (popup, success, failure) => {
     const polling = setInterval(() => {
+      const closeDialog = () => {
+        clearInterval(polling);
+        popup.close();
+      };
       try {
         if (popup.location.href !== "about:blank") {
           if (!popup || popup.closed || popup.closed === undefined) {
             clearInterval(polling);
             failure("Popup has been closed by user");
           }
-
-          const closeDialog = () => {
-            clearInterval(polling);
-            popup.close();
-          };
 
           if (popup.location.href) {
             // const query = new URLSearchParams(popup.location.hash.slice(1));
@@ -83,8 +82,9 @@ export default class SocialService {
           );
         }
       } catch (error) {
+        closeDialog();
         console.log(error.message);
       }
-    }, 500);
+    }, 300);
   };
 }
